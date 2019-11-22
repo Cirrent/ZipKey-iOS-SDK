@@ -16,6 +16,9 @@ Please note that "debug" versions suppose to work on real devices AND the emulat
 So please do not forget to change DEBUG_CONFIGURATION_NAME & RELEASE_CONFIGURATION_NAME to those that are used in your project!
 
 ## CHANGELOG
+### 1.2.34
+#### Fixed
+- a bug when Xcode 11.2.1 couldn't load the SDK.
 ### 1.2.33
 #### Added
 - `boolean isProviderKnownNetwork` and `String jwt` to the `DeviceInfoCallback.onDevicesFound(List<Device> nearbyDevices)` method.
