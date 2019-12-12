@@ -1,10 +1,8 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.1.2 effective-4.2 (swiftlang-1100.0.278 clang-1100.0.33.9)
+// swift-compiler-version: Apple Swift version 5.1.3 effective-4.2 (swiftlang-1100.0.282.1 clang-1100.0.33.15)
 // swift-module-flags: -target arm64-apple-ios9.0 -enable-objc-interop -enable-library-evolution -swift-version 4.2 -enforce-exclusivity=checked -O -module-name CirrentSDK
 import Alamofire
 import SystemConfiguration.CaptiveNetwork
-@_exported import CirrentSDK
-import CirrentSDK
 @_exported import CirrentSDK
 import CirrentSDK
 @_exported import CirrentSDK
@@ -479,8 +477,8 @@ extension NSMutableDictionary {
   public func setProgressView(customProgressView: CirrentSDK.CirrentProgressView?) -> CirrentSDK.CirrentService
   public func setDeviceStatusTimings(deviceStatusDelay: Swift.Int, deviceStatusMaxRequestCount: Swift.Int) -> CirrentSDK.CirrentService
   public func setActionCheckerTimings(actionCheckerDelay: Swift.Int, actionCheckerMaxRequestCount: Swift.Int) -> CirrentSDK.CirrentService
+  public func gatherEnvironment(appId: Swift.String, delegate: CirrentSDK.GatherEnvironmentCallback? = nil)
   public func findDevices(searchToken: Swift.String, uptime: Swift.Int? = nil, deviceType: Swift.Int? = nil, deviceId: Swift.String? = nil, dubKey: Swift.String? = nil, page: Swift.Int? = nil, demoDevices: Swift.Bool? = nil, delegate: CirrentSDK.DeviceInfoCallback, exceptionHandler: @escaping (Swift.String, Swift.String) -> () = commonErrorHandler)
-  public func gatherEnvironment(appId: Swift.String)
   public func resetDevice(deviceId: Swift.String, manageToken: Swift.String, delegate: CirrentSDK.ResetDeviceCallback, exceptionHandler: @escaping (Swift.String, Swift.String) -> () = commonErrorHandler)
   public func isDeviceBound() -> Swift.Bool
   public func bindDevice(localSetup: Swift.Bool, appId: Swift.String, bindToken: Swift.String, deviceId: Swift.String, delegate: CirrentSDK.BindDeviceCallback, exceptionHandler: @escaping (Swift.String, Swift.String) -> () = commonErrorHandler)
@@ -510,6 +508,9 @@ extension NSMutableDictionary {
 }
 public protocol CirrentDelegate {
   func onTokenExpired()
+}
+public protocol GatherEnvironmentCallback {
+  func onEnvironmentGathered(isEnvironmentCompletelyCollected: Swift.Bool)
 }
 public protocol DeviceInfoCallback : CirrentSDK.CirrentDelegate {
   func onWifiDisabled()
@@ -589,7 +590,7 @@ public protocol SoftApDeviceConnectionCallback {
   func onConnectionFailed()
 }
 public protocol SoftApDeviceInfoCallback {
-  func onDeviceInfoReceived(deviceId: Swift.String, candidateNetworks: [CirrentSDK.WiFiNetwork])
+  func onDeviceInfoReceived(identificationDeviceData: Swift.String, candidateNetworks: [CirrentSDK.WiFiNetwork])
 }
 public protocol SoftApCredentialsSenderCallback {
   func onCredentialsSent(credentialsId: Swift.String)
@@ -625,7 +626,7 @@ public protocol BluetoothDeviceConnectionCallback {
 public protocol BluetoothDeviceInfoCallback {
   func onFailedToGetDeviceInfo()
   func onConnectionIsNotEstablished()
-  func onInfoReceived(deviceId: Swift.String, candidateNetworks: [CirrentSDK.WiFiNetwork])
+  func onInfoReceived(identificationDeviceData: Swift.String, candidateNetworks: [CirrentSDK.WiFiNetwork])
 }
 public protocol BluetoothCredentialsSenderCallback {
   func onCredentialsSent(credentialsId: Swift.String)
