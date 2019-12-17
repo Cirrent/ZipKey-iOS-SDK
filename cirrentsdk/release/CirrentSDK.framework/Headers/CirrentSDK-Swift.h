@@ -207,8 +207,8 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 
 /// Object that implements EVReflectable and NSCoding. Use this object as your base class
 /// instead of NSObject and you wil automatically have support for all these protocols.
-SWIFT_CLASS("_TtC10CirrentSDK8EVObject")
-@interface EVObject : NSObject <NSCoding>
+SWIFT_CLASS("_TtC10CirrentSDK14CustomEVObject")
+@interface CustomEVObject : NSObject <NSCoding>
 /// Implementation of the setValue forUndefinedKey so that we can catch exceptions for when we use an optional Type like Int? in our object. Instead of using Int? you should use NSNumber?
 /// This method is in EVObject and not in NSObject extension because you would get the error: method conflicts with previous declaration with the same Objective-C selector
 /// \param value The value that you wanted to set
@@ -285,7 +285,7 @@ SWIFT_CLASS("_TtC10CirrentSDK8EVObject")
 
 
 SWIFT_CLASS("_TtC10CirrentSDK11BaseNetwork")
-@interface BaseNetwork : EVObject
+@interface BaseNetwork : CustomEVObject
 /// BSSID for the WiFi network
 @property (nonatomic, copy) NSString * _Nonnull bssid;
 /// <ul>
@@ -374,7 +374,7 @@ SWIFT_CLASS("_TtC10CirrentSDK16BluetoothService")
 
 /// Common error class
 SWIFT_CLASS("_TtC10CirrentSDK12CirrentError")
-@interface CirrentError : EVObject
+@interface CirrentError : CustomEVObject
 /// Unique code for each error
 @property (nonatomic, copy) NSString * _Nonnull code;
 /// Human-readable error message
@@ -391,12 +391,13 @@ SWIFT_CLASS("_TtC10CirrentSDK14CirrentService")
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
+
 @class ProviderKnownNetwork;
 @class UIImage;
 
 /// Information about a device
 SWIFT_CLASS("_TtC10CirrentSDK6Device")
-@interface Device : EVObject
+@interface Device : CustomEVObject
 /// Whether this device supports an Identify action
 @property (nonatomic) BOOL identifyingActionEnabled;
 /// Whether this device supports a User action
@@ -449,7 +450,7 @@ SWIFT_CLASS("_TtC10CirrentSDK6Device")
 
 /// Devices that are available for onboarding
 SWIFT_CLASS("_TtC10CirrentSDK9DeviceDto")
-@interface DeviceDto : EVObject
+@interface DeviceDto : CustomEVObject
 /// List of nearby devices
 @property (nonatomic, copy) NSArray<Device *> * _Nonnull devices;
 /// Json web token
@@ -491,7 +492,7 @@ SWIFT_CLASS("_TtC10CirrentSDK18DeviceKnownNetwork")
 
 /// Status of this device
 SWIFT_CLASS("_TtC10CirrentSDK16DeviceStatusInfo")
-@interface DeviceStatusInfo : EVObject
+@interface DeviceStatusInfo : CustomEVObject
 /// Whether this device is bound to a user account
 @property (nonatomic, copy) NSString * _Nonnull bound;
 /// The time at which this status was given by the device
@@ -504,7 +505,6 @@ SWIFT_CLASS("_TtC10CirrentSDK16DeviceStatusInfo")
 - (NSString * _Nonnull)getBound SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
-
 
 
 SWIFT_CLASS("_TtC10CirrentSDK17GatewayIpProvider")
@@ -539,7 +539,7 @@ SWIFT_CLASS("_TtC10CirrentSDK8NetUtils")
 
 /// Information about a private network
 SWIFT_CLASS("_TtC10CirrentSDK18PrivateNetworkInfo")
-@interface PrivateNetworkInfo : EVObject
+@interface PrivateNetworkInfo : CustomEVObject
 /// Priority of this network
 @property (nonatomic) NSInteger priority;
 /// Whether it is a hidden (non-broadcast) network
@@ -805,8 +805,8 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 
 /// Object that implements EVReflectable and NSCoding. Use this object as your base class
 /// instead of NSObject and you wil automatically have support for all these protocols.
-SWIFT_CLASS("_TtC10CirrentSDK8EVObject")
-@interface EVObject : NSObject <NSCoding>
+SWIFT_CLASS("_TtC10CirrentSDK14CustomEVObject")
+@interface CustomEVObject : NSObject <NSCoding>
 /// Implementation of the setValue forUndefinedKey so that we can catch exceptions for when we use an optional Type like Int? in our object. Instead of using Int? you should use NSNumber?
 /// This method is in EVObject and not in NSObject extension because you would get the error: method conflicts with previous declaration with the same Objective-C selector
 /// \param value The value that you wanted to set
@@ -883,7 +883,7 @@ SWIFT_CLASS("_TtC10CirrentSDK8EVObject")
 
 
 SWIFT_CLASS("_TtC10CirrentSDK11BaseNetwork")
-@interface BaseNetwork : EVObject
+@interface BaseNetwork : CustomEVObject
 /// BSSID for the WiFi network
 @property (nonatomic, copy) NSString * _Nonnull bssid;
 /// <ul>
@@ -972,7 +972,7 @@ SWIFT_CLASS("_TtC10CirrentSDK16BluetoothService")
 
 /// Common error class
 SWIFT_CLASS("_TtC10CirrentSDK12CirrentError")
-@interface CirrentError : EVObject
+@interface CirrentError : CustomEVObject
 /// Unique code for each error
 @property (nonatomic, copy) NSString * _Nonnull code;
 /// Human-readable error message
@@ -989,12 +989,13 @@ SWIFT_CLASS("_TtC10CirrentSDK14CirrentService")
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
+
 @class ProviderKnownNetwork;
 @class UIImage;
 
 /// Information about a device
 SWIFT_CLASS("_TtC10CirrentSDK6Device")
-@interface Device : EVObject
+@interface Device : CustomEVObject
 /// Whether this device supports an Identify action
 @property (nonatomic) BOOL identifyingActionEnabled;
 /// Whether this device supports a User action
@@ -1047,7 +1048,7 @@ SWIFT_CLASS("_TtC10CirrentSDK6Device")
 
 /// Devices that are available for onboarding
 SWIFT_CLASS("_TtC10CirrentSDK9DeviceDto")
-@interface DeviceDto : EVObject
+@interface DeviceDto : CustomEVObject
 /// List of nearby devices
 @property (nonatomic, copy) NSArray<Device *> * _Nonnull devices;
 /// Json web token
@@ -1089,7 +1090,7 @@ SWIFT_CLASS("_TtC10CirrentSDK18DeviceKnownNetwork")
 
 /// Status of this device
 SWIFT_CLASS("_TtC10CirrentSDK16DeviceStatusInfo")
-@interface DeviceStatusInfo : EVObject
+@interface DeviceStatusInfo : CustomEVObject
 /// Whether this device is bound to a user account
 @property (nonatomic, copy) NSString * _Nonnull bound;
 /// The time at which this status was given by the device
@@ -1102,7 +1103,6 @@ SWIFT_CLASS("_TtC10CirrentSDK16DeviceStatusInfo")
 - (NSString * _Nonnull)getBound SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
-
 
 
 SWIFT_CLASS("_TtC10CirrentSDK17GatewayIpProvider")
@@ -1137,7 +1137,7 @@ SWIFT_CLASS("_TtC10CirrentSDK8NetUtils")
 
 /// Information about a private network
 SWIFT_CLASS("_TtC10CirrentSDK18PrivateNetworkInfo")
-@interface PrivateNetworkInfo : EVObject
+@interface PrivateNetworkInfo : CustomEVObject
 /// Priority of this network
 @property (nonatomic) NSInteger priority;
 /// Whether it is a hidden (non-broadcast) network

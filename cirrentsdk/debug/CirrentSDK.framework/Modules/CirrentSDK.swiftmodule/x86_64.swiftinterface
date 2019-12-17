@@ -32,7 +32,7 @@ import SystemConfiguration
   @objc public var networkType: Swift.String
   @objc public var providerKnownNetwork: CirrentSDK.DeviceKnownNetwork.ProviderKnownNetwork
   override public func propertyMapping() -> [(keyInObject: Swift.String?, keyInResource: Swift.String?)]
-  @objc public class ProviderKnownNetwork : CirrentSDK.EVObject {
+  @objc public class ProviderKnownNetwork : CirrentSDK.CustomEVObject {
     @objc public var providerName: Swift.String
     @objc public var providerLogo: Swift.String? {
       @objc get
@@ -50,30 +50,30 @@ import SystemConfiguration
   @objc deinit
 }
 public typealias TraceRouteCompletionHandler = (Swift.String) -> Swift.Void
-@objc public class CirrentError : CirrentSDK.EVObject {
+@objc public class CirrentError : CirrentSDK.CustomEVObject {
   @objc public var code: Swift.String
   @objc public var message: Swift.String
   @objc public var statusCode: Swift.String
   @objc required dynamic public init()
   @objc deinit
 }
-final public class EVReflection {
-  final public class func fromDictionary(_ dictionary: Foundation.NSDictionary, anyobjectTypeString: Swift.String, conversionOptions: CirrentSDK.ConversionOptions = .DefaultDeserialize) -> ObjectiveC.NSObject?
+final public class CustomEVReflection {
+  final public class func fromDictionary(_ dictionary: Foundation.NSDictionary, anyobjectTypeString: Swift.String, conversionOptions: CirrentSDK.CustomConversionOptions = .DefaultDeserialize) -> ObjectiveC.NSObject?
   @discardableResult
-  final public class func setPropertiesfromDictionary<T>(_ dictionary: Foundation.NSDictionary, anyObject: T, conversionOptions: CirrentSDK.ConversionOptions = .DefaultDeserialize, forKeyPath: Swift.String? = nil) -> T where T : ObjectiveC.NSObject
+  final public class func setPropertiesfromDictionary<T>(_ dictionary: Foundation.NSDictionary, anyObject: T, conversionOptions: CirrentSDK.CustomConversionOptions = .DefaultDeserialize, forKeyPath: Swift.String? = nil) -> T where T : ObjectiveC.NSObject
   final public class func getValue(_ fromObject: ObjectiveC.NSObject, key: Swift.String) -> Any?
-  final public class func toDictionary(_ theObject: ObjectiveC.NSObject, conversionOptions: CirrentSDK.ConversionOptions = .DefaultSerialize, isCachable: Swift.Bool = false, parents: [ObjectiveC.NSObject] = []) -> (Foundation.NSDictionary, Foundation.NSDictionary)
+  final public class func toDictionary(_ theObject: ObjectiveC.NSObject, conversionOptions: CirrentSDK.CustomConversionOptions = .DefaultSerialize, isCachable: Swift.Bool = false, parents: [ObjectiveC.NSObject] = []) -> (Foundation.NSDictionary, Foundation.NSDictionary)
   final public class func dictionaryFromJson(_ json: Swift.String?) -> Foundation.NSDictionary
   final public class func dictionaryArrayFromJson(_ json: Swift.String?) -> [Foundation.NSDictionary]
-  final public class func arrayFromData<T>(_ theObject: ObjectiveC.NSObject? = nil, type: T, data: Foundation.Data?, conversionOptions: CirrentSDK.ConversionOptions = .DefaultDeserialize, forKeyPath: Swift.String? = nil) -> [T]
-  final public class func arrayFromJson<T>(type: T, json: Swift.String?, conversionOptions: CirrentSDK.ConversionOptions = .DefaultDeserialize, forKeyPath: Swift.String? = nil) -> [T]
-  final public class func toJsonString(_ theObject: ObjectiveC.NSObject, conversionOptions: CirrentSDK.ConversionOptions = .DefaultSerialize, prettyPrinted: Swift.Bool = false) -> Swift.String
-  final public class func toJsonData(_ theObject: ObjectiveC.NSObject, conversionOptions: CirrentSDK.ConversionOptions = .DefaultSerialize, prettyPrinted: Swift.Bool = false) -> Foundation.Data
-  final public class func logObject(_ theObject: CirrentSDK.EVReflectable, prettyPrinted: Swift.Bool = true)
-  final public class func description(_ theObject: CirrentSDK.EVReflectable, conversionOptions: CirrentSDK.ConversionOptions = .DefaultSerialize, prettyPrinted: Swift.Bool = true) -> Swift.String
+  final public class func arrayFromData<T>(_ theObject: ObjectiveC.NSObject? = nil, type: T, data: Foundation.Data?, conversionOptions: CirrentSDK.CustomConversionOptions = .DefaultDeserialize, forKeyPath: Swift.String? = nil) -> [T]
+  final public class func arrayFromJson<T>(type: T, json: Swift.String?, conversionOptions: CirrentSDK.CustomConversionOptions = .DefaultDeserialize, forKeyPath: Swift.String? = nil) -> [T]
+  final public class func toJsonString(_ theObject: ObjectiveC.NSObject, conversionOptions: CirrentSDK.CustomConversionOptions = .DefaultSerialize, prettyPrinted: Swift.Bool = false) -> Swift.String
+  final public class func toJsonData(_ theObject: ObjectiveC.NSObject, conversionOptions: CirrentSDK.CustomConversionOptions = .DefaultSerialize, prettyPrinted: Swift.Bool = false) -> Foundation.Data
+  final public class func logObject(_ theObject: CirrentSDK.CustomEVReflectable, prettyPrinted: Swift.Bool = true)
+  final public class func description(_ theObject: CirrentSDK.CustomEVReflectable, conversionOptions: CirrentSDK.CustomConversionOptions = .DefaultSerialize, prettyPrinted: Swift.Bool = true) -> Swift.String
   final public class func hashValue(_ theObject: ObjectiveC.NSObject) -> Swift.Int
-  final public class func encodeWithCoder(_ theObject: ObjectiveC.NSObject, aCoder: Foundation.NSCoder, conversionOptions: CirrentSDK.ConversionOptions = .DefaultNSCoding)
-  final public class func decodeObjectWithCoder(_ theObject: ObjectiveC.NSObject, aDecoder: Foundation.NSCoder, conversionOptions: CirrentSDK.ConversionOptions = .DefaultNSCoding)
+  final public class func encodeWithCoder(_ theObject: ObjectiveC.NSObject, aCoder: Foundation.NSCoder, conversionOptions: CirrentSDK.CustomConversionOptions = .DefaultNSCoding)
+  final public class func decodeObjectWithCoder(_ theObject: ObjectiveC.NSObject, aDecoder: Foundation.NSCoder, conversionOptions: CirrentSDK.CustomConversionOptions = .DefaultNSCoding)
   final public class func areEqual(_ lhs: ObjectiveC.NSObject, rhs: ObjectiveC.NSObject) -> Swift.Bool
   final public class func dictionariesAreEqual(_ lhsdict: Foundation.NSDictionary, rhsdict: Foundation.NSDictionary) -> Swift.Bool
   final public class func getCleanAppName(_ forObject: ObjectiveC.NSObject? = nil) -> Swift.String
@@ -87,28 +87,28 @@ final public class EVReflection {
   final public class func swiftClassFromString(_ className: Swift.String) -> ObjectiveC.NSObject?
   final public class func swiftStringFromClass(_ theObject: ObjectiveC.NSObject) -> Swift.String
   final public class func swiftStringFromClass(_ aClass: Swift.AnyClass) -> Swift.String
-  final public class func valueForAny(_ parentObject: Any? = nil, key: Swift.String? = nil, anyValue: Any, conversionOptions: CirrentSDK.ConversionOptions = .DefaultDeserialize, isCachable: Swift.Bool = false, parents: [ObjectiveC.NSObject] = []) -> (value: Swift.AnyObject, type: Swift.String, isObject: Swift.Bool)
+  final public class func valueForAny(_ parentObject: Any? = nil, key: Swift.String? = nil, anyValue: Any, conversionOptions: CirrentSDK.CustomConversionOptions = .DefaultDeserialize, isCachable: Swift.Bool = false, parents: [ObjectiveC.NSObject] = []) -> (value: Swift.AnyObject, type: Swift.String, isObject: Swift.Bool)
   final public class func convertToInternalSwiftRepresentation(type: Swift.String) -> Swift.String
   final public class func valueForAnyDetail(_ parentObject: Any? = nil, key: Swift.String? = nil, theValue: Any, valueType: Swift.String) -> (value: Swift.AnyObject, type: Swift.String, isObject: Swift.Bool)
-  public static func setObjectValue<T>(_ anyObject: T, key: Swift.String, theValue: Any?, typeInObject: Swift.String? = nil, valid: Swift.Bool, conversionOptions: CirrentSDK.ConversionOptions = .DefaultDeserialize, parents: [ObjectiveC.NSObject] = []) where T : ObjectiveC.NSObject
+  public static func setObjectValue<T>(_ anyObject: T, key: Swift.String, theValue: Any?, typeInObject: Swift.String? = nil, valid: Swift.Bool, conversionOptions: CirrentSDK.CustomConversionOptions = .DefaultDeserialize, parents: [ObjectiveC.NSObject] = []) where T : ObjectiveC.NSObject
   @objc deinit
 }
 extension Date {
   public init?(fromDateTimeString: Swift.String)
 }
 extension Array where Element : ObjectiveC.NSObject {
-  public init(json: Swift.String?, conversionOptions: CirrentSDK.ConversionOptions = .DefaultDeserialize, forKeyPath: Swift.String? = nil)
-  public init(data: Foundation.Data?, conversionOptions: CirrentSDK.ConversionOptions = .DefaultDeserialize, forKeyPath: Swift.String? = nil)
-  public init(dictionaryArray: [Foundation.NSDictionary], conversionOptions: CirrentSDK.ConversionOptions = .DefaultDeserialize)
-  public init(dictionary: Foundation.NSDictionary, forKeyPath: Swift.String, conversionOptions: CirrentSDK.ConversionOptions = .DefaultDeserialize)
+  public init(json: Swift.String?, conversionOptions: CirrentSDK.CustomConversionOptions = .DefaultDeserialize, forKeyPath: Swift.String? = nil)
+  public init(data: Foundation.Data?, conversionOptions: CirrentSDK.CustomConversionOptions = .DefaultDeserialize, forKeyPath: Swift.String? = nil)
+  public init(dictionaryArray: [Foundation.NSDictionary], conversionOptions: CirrentSDK.CustomConversionOptions = .DefaultDeserialize)
+  public init(dictionary: Foundation.NSDictionary, forKeyPath: Swift.String, conversionOptions: CirrentSDK.CustomConversionOptions = .DefaultDeserialize)
   public func getArrayTypeInstance<T>(_ arr: Swift.Array<T>) -> T where T : ObjectiveC.NSObject
   public func getTypeInstance<T>() -> T where T : ObjectiveC.NSObject
   public func getTypeAsString() -> Swift.String
 }
-extension Array where Element : CirrentSDK.EVReflectable {
-  public func toJsonString(_ conversionOptions: CirrentSDK.ConversionOptions = .DefaultSerialize, prettyPrinted: Swift.Bool = false) -> Swift.String
-  public func toJsonData(_ conversionOptions: CirrentSDK.ConversionOptions = .DefaultSerialize, prettyPrinted: Swift.Bool = false, encoding: Swift.String.Encoding = .utf8) -> Foundation.Data
-  public func toDictionaryArray(_ conversionOptions: CirrentSDK.ConversionOptions = .DefaultSerialize) -> Foundation.NSArray
+extension Array where Element : CirrentSDK.CustomEVReflectable {
+  public func toJsonString(_ conversionOptions: CirrentSDK.CustomConversionOptions = .DefaultSerialize, prettyPrinted: Swift.Bool = false) -> Swift.String
+  public func toJsonData(_ conversionOptions: CirrentSDK.CustomConversionOptions = .DefaultSerialize, prettyPrinted: Swift.Bool = false, encoding: Swift.String.Encoding = .utf8) -> Foundation.Data
+  public func toDictionaryArray(_ conversionOptions: CirrentSDK.CustomConversionOptions = .DefaultSerialize) -> Foundation.NSArray
 }
 extension Array where Element : Foundation.NSDictionary {
   public init(jsonArray: Swift.String)
@@ -123,30 +123,30 @@ extension NSArray {
   public func quintupleNestedArrayMap<T>(_ element: (Foundation.NSDictionary) -> T) -> [[[[[[T]]]]]]
   public func sextupleNestedArrayMap<T>(_ element: (Foundation.NSDictionary) -> T) -> [[[[[[[T]]]]]]]
 }
-public protocol EVGenericsKVC {
+public protocol CustomEVGenericsKVC {
   func setGenericValue(_ value: Swift.AnyObject!, forUndefinedKey key: Swift.String)
   func getGenericType() -> ObjectiveC.NSObject
 }
-public protocol EVRaw {
+public protocol CustomEVRaw {
   var anyRawValue: Any { get }
 }
-extension EVRaw where Self : Swift.RawRepresentable {
+extension CustomEVRaw where Self : Swift.RawRepresentable {
   public var anyRawValue: Any {
     get
   }
 }
-public protocol EVArrayConvertable {
+public protocol CustomEVArrayConvertable {
   func convertArray(_ key: Swift.String, array: Any) -> Foundation.NSArray
 }
-public protocol EVAssociated {
+public protocol CustomEVAssociated {
 }
-extension EVAssociated {
+extension CustomEVAssociated {
   public var associated: (label: Swift.String, value: Any?, values: [Any]) {
     get
   }
 }
 extension Dictionary {
-  public init<T>(associated: [T]?) where T : CirrentSDK.EVAssociated
+  public init<T>(associated: [T]?) where T : CirrentSDK.CustomEVAssociated
 }
 public enum LogEvent : Swift.String {
   case TOKEN_RECEIVED
@@ -189,32 +189,32 @@ public protocol CirrentProgressView {
   func showProgress()
   func stopProgress()
 }
-public struct PrintOptions : Swift.OptionSet, Swift.CustomStringConvertible {
+public struct CustomPrintOptions : Swift.OptionSet, Swift.CustomStringConvertible {
   public let rawValue: Swift.Int
   public init(rawValue: Swift.Int)
-  public static let None: CirrentSDK.PrintOptions
-  public static let UnknownKeypath: CirrentSDK.PrintOptions
-  public static let IncorrectKey: CirrentSDK.PrintOptions
-  public static let ShouldExtendNSObject: CirrentSDK.PrintOptions
-  public static let IsInvalidJson: CirrentSDK.PrintOptions
-  public static let MissingProtocol: CirrentSDK.PrintOptions
-  public static let MissingKey: CirrentSDK.PrintOptions
-  public static let InvalidType: CirrentSDK.PrintOptions
-  public static let InvalidValue: CirrentSDK.PrintOptions
-  public static let InvalidClass: CirrentSDK.PrintOptions
-  public static let EnumWithoutAssociatedValue: CirrentSDK.PrintOptions
-  public static let UseWorkaround: CirrentSDK.PrintOptions
-  public static var All: CirrentSDK.PrintOptions
-  public static var Active: CirrentSDK.PrintOptions
+  public static let None: CirrentSDK.CustomPrintOptions
+  public static let UnknownKeypath: CirrentSDK.CustomPrintOptions
+  public static let IncorrectKey: CirrentSDK.CustomPrintOptions
+  public static let ShouldExtendNSObject: CirrentSDK.CustomPrintOptions
+  public static let IsInvalidJson: CirrentSDK.CustomPrintOptions
+  public static let MissingProtocol: CirrentSDK.CustomPrintOptions
+  public static let MissingKey: CirrentSDK.CustomPrintOptions
+  public static let InvalidType: CirrentSDK.CustomPrintOptions
+  public static let InvalidValue: CirrentSDK.CustomPrintOptions
+  public static let InvalidClass: CirrentSDK.CustomPrintOptions
+  public static let EnumWithoutAssociatedValue: CirrentSDK.CustomPrintOptions
+  public static let UseWorkaround: CirrentSDK.CustomPrintOptions
+  public static var All: CirrentSDK.CustomPrintOptions
+  public static var Active: CirrentSDK.CustomPrintOptions
   public var description: Swift.String {
     get
   }
-  public typealias Element = CirrentSDK.PrintOptions
-  public typealias ArrayLiteralElement = CirrentSDK.PrintOptions
+  public typealias Element = CirrentSDK.CustomPrintOptions
+  public typealias ArrayLiteralElement = CirrentSDK.CustomPrintOptions
   public typealias RawValue = Swift.Int
 }
-public func evPrint(_ options: CirrentSDK.PrintOptions, _ value: Swift.String)
-@objc public class PrivateNetworkInfo : CirrentSDK.EVObject {
+public func evPrint(_ options: CirrentSDK.CustomPrintOptions, _ value: Swift.String)
+@objc public class PrivateNetworkInfo : CirrentSDK.CustomEVObject {
   @objc public var priority: Swift.Int
   @objc public var hidden: Swift.Bool
   @objc public var ssid: Swift.String
@@ -227,29 +227,29 @@ public func evPrint(_ options: CirrentSDK.PrintOptions, _ value: Swift.String)
   @objc required dynamic public init()
   @objc deinit
 }
-public protocol EVReflectable : AnyObject, ObjectiveC.NSObjectProtocol {
+public protocol CustomEVReflectable : AnyObject, ObjectiveC.NSObjectProtocol {
   func initValidation(_ dict: Foundation.NSDictionary)
   func propertyMapping() -> [(keyInObject: Swift.String?, keyInResource: Swift.String?)]
   func propertyConverters() -> [(key: Swift.String, decodeConverter: ((Any?) -> ()), encodeConverter: (() -> Any?))]
   func skipPropertyValue(_ value: Any, key: Swift.String) -> Swift.Bool
   func decodePropertyValue(value: Any, key: Swift.String) -> Any?
   func encodePropertyValue(value: Any, key: Swift.String) -> Any
-  func getType(_ dict: Foundation.NSDictionary) -> CirrentSDK.EVReflectable
-  func getSpecificType(_ dict: Foundation.NSDictionary) -> CirrentSDK.EVReflectable?
+  func getType(_ dict: Foundation.NSDictionary) -> CirrentSDK.CustomEVReflectable
+  func getSpecificType(_ dict: Foundation.NSDictionary) -> CirrentSDK.CustomEVReflectable?
   func customConverter() -> Swift.AnyObject?
-  var evReflectionStatuses: [(CirrentSDK.DeserializationStatus, Swift.String)] { get set }
+  var evReflectionStatuses: [(CirrentSDK.CustomDeserializationStatus, Swift.String)] { get set }
 }
-extension EVReflectable where Self : ObjectiveC.NSObject {
-  public var evReflectionStatuses: [(CirrentSDK.DeserializationStatus, Swift.String)] {
+extension CustomEVReflectable where Self : ObjectiveC.NSObject {
+  public var evReflectionStatuses: [(CirrentSDK.CustomDeserializationStatus, Swift.String)] {
     get
     set
   }
-  public init(dictionary: Foundation.NSDictionary, conversionOptions: CirrentSDK.ConversionOptions = .DefaultDeserialize, forKeyPath: Swift.String? = nil)
-  public init(json: Swift.String?, conversionOptions: CirrentSDK.ConversionOptions = .DefaultDeserialize, forKeyPath: Swift.String? = nil)
-  public init(data: Foundation.Data, conversionOptions: CirrentSDK.ConversionOptions = .DefaultDeserialize, forKeyPath: Swift.String? = nil)
-  public init(fileNameInTemp: Swift.String, conversionOptions: CirrentSDK.ConversionOptions = .DefaultNSCoding)
-  public init(fileNameInDocuments: Swift.String, conversionOptions: CirrentSDK.ConversionOptions = .DefaultNSCoding)
-  public init(usingValuesFrom: CirrentSDK.EVReflectable, conversionOptions: CirrentSDK.ConversionOptions = .None)
+  public init(dictionary: Foundation.NSDictionary, conversionOptions: CirrentSDK.CustomConversionOptions = .DefaultDeserialize, forKeyPath: Swift.String? = nil)
+  public init(json: Swift.String?, conversionOptions: CirrentSDK.CustomConversionOptions = .DefaultDeserialize, forKeyPath: Swift.String? = nil)
+  public init(data: Foundation.Data, conversionOptions: CirrentSDK.CustomConversionOptions = .DefaultDeserialize, forKeyPath: Swift.String? = nil)
+  public init(fileNameInTemp: Swift.String, conversionOptions: CirrentSDK.CustomConversionOptions = .DefaultNSCoding)
+  public init(fileNameInDocuments: Swift.String, conversionOptions: CirrentSDK.CustomConversionOptions = .DefaultNSCoding)
+  public init(usingValuesFrom: CirrentSDK.CustomEVReflectable, conversionOptions: CirrentSDK.CustomConversionOptions = .None)
   public var hashValue: Swift.Int {
     get
   }
@@ -257,9 +257,9 @@ extension EVReflectable where Self : ObjectiveC.NSObject {
     get
   }
 }
-extension EVReflectable {
-  public static func == (lhs: CirrentSDK.EVReflectable, rhs: CirrentSDK.EVReflectable) -> Swift.Bool
-  public static func != (lhs: CirrentSDK.EVReflectable, rhs: CirrentSDK.EVReflectable) -> Swift.Bool
+extension CustomEVReflectable {
+  public static func == (lhs: CirrentSDK.CustomEVReflectable, rhs: CirrentSDK.CustomEVReflectable) -> Swift.Bool
+  public static func != (lhs: CirrentSDK.CustomEVReflectable, rhs: CirrentSDK.CustomEVReflectable) -> Swift.Bool
   public func initValidation(_ dict: Foundation.NSDictionary)
   public func propertyMapping() -> [(keyInObject: Swift.String?, keyInResource: Swift.String?)]
   public func propertyConverters() -> [(key: Swift.String, decodeConverter: ((Any?) -> ()), encodeConverter: (() -> Any?))]
@@ -267,30 +267,30 @@ extension EVReflectable {
   public func decodePropertyValue(value: Any, key: Swift.String) -> Any?
   public func encodePropertyValue(value: Any, key: Swift.String) -> Any
   public func customConverter() -> Swift.AnyObject?
-  public func getType(_ dict: Foundation.NSDictionary) -> CirrentSDK.EVReflectable
-  public func getSpecificType(_ dict: Foundation.NSDictionary) -> CirrentSDK.EVReflectable?
+  public func getType(_ dict: Foundation.NSDictionary) -> CirrentSDK.CustomEVReflectable
+  public func getSpecificType(_ dict: Foundation.NSDictionary) -> CirrentSDK.CustomEVReflectable?
   @discardableResult
   public func saveToTemp(_ fileName: Swift.String) -> Swift.Bool
   @discardableResult
   public func saveToDocuments(_ fileName: Swift.String) -> Swift.Bool
-  public func toDictionary(_ conversionOptions: CirrentSDK.ConversionOptions = .DefaultSerialize) -> Foundation.NSDictionary
-  public func toJsonString(_ conversionOptions: CirrentSDK.ConversionOptions = .DefaultSerialize, prettyPrinted: Swift.Bool = false) -> Swift.String
-  public func toJsonData(_ conversionOptions: CirrentSDK.ConversionOptions = .DefaultSerialize, prettyPrinted: Swift.Bool = false) -> Foundation.Data
-  public static func arrayFromJson<T>(_ json: Swift.String?, conversionOptions: CirrentSDK.ConversionOptions = .DefaultDeserialize) -> [T] where T : ObjectiveC.NSObject
-  public func mapObjectTo<T>(_ conversionOptions: CirrentSDK.ConversionOptions = .DefaultDeserialize) -> T where T : ObjectiveC.NSObject
+  public func toDictionary(_ conversionOptions: CirrentSDK.CustomConversionOptions = .DefaultSerialize) -> Foundation.NSDictionary
+  public func toJsonString(_ conversionOptions: CirrentSDK.CustomConversionOptions = .DefaultSerialize, prettyPrinted: Swift.Bool = false) -> Swift.String
+  public func toJsonData(_ conversionOptions: CirrentSDK.CustomConversionOptions = .DefaultSerialize, prettyPrinted: Swift.Bool = false) -> Foundation.Data
+  public static func arrayFromJson<T>(_ json: Swift.String?, conversionOptions: CirrentSDK.CustomConversionOptions = .DefaultDeserialize) -> [T] where T : ObjectiveC.NSObject
+  public func mapObjectTo<T>(_ conversionOptions: CirrentSDK.CustomConversionOptions = .DefaultDeserialize) -> T where T : ObjectiveC.NSObject
   public func typeForKey(_ propertyName: Swift.String) -> Any.Type?
   public func convertDictionary(_ key: Swift.String, dict: Any) -> Foundation.NSDictionary
   public func initMayNotContainKeys(_ keys: [Swift.String], dict: Foundation.NSDictionary)
   public func initMustContainKeys(_ keys: [Swift.String], dict: Foundation.NSDictionary)
-  public func evReflectionStatus() -> CirrentSDK.DeserializationStatus
-  public func addStatusMessage(_ type: CirrentSDK.DeserializationStatus, message: Swift.String)
+  public func evReflectionStatus() -> CirrentSDK.CustomDeserializationStatus
+  public func addStatusMessage(_ type: CirrentSDK.CustomDeserializationStatus, message: Swift.String)
 }
-@objc public class DeviceDto : CirrentSDK.EVObject {
+@objc public class DeviceDto : CirrentSDK.CustomEVObject {
   @objc public var devices: [CirrentSDK.Device]
   @objc public var jwt: Swift.String
   @objc public var providerKnowNetwork: Swift.Bool
   override public func propertyMapping() -> [(keyInObject: Swift.String?, keyInResource: Swift.String?)]
-  @objc public class ProviderKnownNetwork : CirrentSDK.EVObject {
+  @objc public class ProviderKnownNetwork : CirrentSDK.CustomEVObject {
     @objc public var providerName: Swift.String
     @objc public var providerLogo: Swift.String
     @objc public var ssid: Swift.String
@@ -300,7 +300,7 @@ extension EVReflectable {
   @objc required dynamic public init()
   @objc deinit
 }
-@objc public class Device : CirrentSDK.EVObject {
+@objc public class Device : CirrentSDK.CustomEVObject {
   @objc public var identifyingActionEnabled: Swift.Bool
   @objc public var userActionEnabled: Swift.Bool
   @objc public var confirmedOwnerShip: Swift.Bool
@@ -340,12 +340,12 @@ extension EVReflectable {
   @objc required dynamic public init()
   @objc deinit
 }
-public protocol EVCustomReflectable {
-  static func constructWith(value: Any?) -> CirrentSDK.EVCustomReflectable?
-  func constructWith(value: Any?) -> CirrentSDK.EVCustomReflectable?
+public protocol CustomEVCustomReflectable {
+  static func constructWith(value: Any?) -> CirrentSDK.CustomEVCustomReflectable?
+  func constructWith(value: Any?) -> CirrentSDK.CustomEVCustomReflectable?
   func toCodableValue() -> Any
 }
-@objc @objcMembers open class EVObject : ObjectiveC.NSObject, Foundation.NSCoding, CirrentSDK.EVReflectable {
+@objc @objcMembers open class CustomEVObject : ObjectiveC.NSObject, Foundation.NSCoding, CirrentSDK.CustomEVReflectable {
   @objc override dynamic open func setValue(_ value: Any!, forUndefinedKey key: Swift.String)
   @objc override dynamic open func isEqual(_ object: Any?) -> Swift.Bool
   @objc override dynamic open var description: Swift.String {
@@ -363,14 +363,14 @@ public protocol EVCustomReflectable {
   @objc open func decodePropertyValue(value: Any, key: Swift.String) -> Any?
   @objc open func encodePropertyValue(value: Any, key: Swift.String) -> Any
   @objc open func skipPropertyValue(_ value: Any, key: Swift.String) -> Swift.Bool
-  open func getSpecificType(_ dict: Foundation.NSDictionary) -> CirrentSDK.EVReflectable?
+  open func getSpecificType(_ dict: Foundation.NSDictionary) -> CirrentSDK.CustomEVReflectable?
   @objc open func customConverter() -> Swift.AnyObject?
   @objc deinit
 }
 extension String : Alamofire.ParameterEncoding {
   public func encode(_ urlRequest: Alamofire.URLRequestConvertible, with parameters: Alamofire.Parameters?) throws -> Foundation.URLRequest
 }
-@objc public class DeviceStatusInfo : CirrentSDK.EVObject {
+@objc public class DeviceStatusInfo : CirrentSDK.CustomEVObject {
   @objc public var bound: Swift.String
   @objc public var timestamp: Swift.String
   @objc public var candidateNetworks: [CirrentSDK.WiFiNetwork]
@@ -380,44 +380,44 @@ extension String : Alamofire.ParameterEncoding {
   @objc required dynamic public init()
   @objc deinit
 }
-public struct ConversionOptions : Swift.OptionSet, Swift.CustomStringConvertible {
+public struct CustomConversionOptions : Swift.OptionSet, Swift.CustomStringConvertible {
   public let rawValue: Swift.Int
   public init(rawValue: Swift.Int)
-  public static let None: CirrentSDK.ConversionOptions
-  public static let PropertyConverter: CirrentSDK.ConversionOptions
-  public static let PropertyMapping: CirrentSDK.ConversionOptions
-  public static let SkipPropertyValue: CirrentSDK.ConversionOptions
-  public static let KeyCleanup: CirrentSDK.ConversionOptions
-  public static let Decoding: CirrentSDK.ConversionOptions
-  public static let Encoding: CirrentSDK.ConversionOptions
-  public static var All: CirrentSDK.ConversionOptions
-  public static var DefaultNSCoding: CirrentSDK.ConversionOptions
-  public static var DefaultComparing: CirrentSDK.ConversionOptions
-  public static var DefaultDeserialize: CirrentSDK.ConversionOptions
-  public static var DefaultSerialize: CirrentSDK.ConversionOptions
+  public static let None: CirrentSDK.CustomConversionOptions
+  public static let PropertyConverter: CirrentSDK.CustomConversionOptions
+  public static let PropertyMapping: CirrentSDK.CustomConversionOptions
+  public static let SkipPropertyValue: CirrentSDK.CustomConversionOptions
+  public static let KeyCleanup: CirrentSDK.CustomConversionOptions
+  public static let Decoding: CirrentSDK.CustomConversionOptions
+  public static let Encoding: CirrentSDK.CustomConversionOptions
+  public static var All: CirrentSDK.CustomConversionOptions
+  public static var DefaultNSCoding: CirrentSDK.CustomConversionOptions
+  public static var DefaultComparing: CirrentSDK.CustomConversionOptions
+  public static var DefaultDeserialize: CirrentSDK.CustomConversionOptions
+  public static var DefaultSerialize: CirrentSDK.CustomConversionOptions
   public var description: Swift.String {
     get
   }
-  public typealias Element = CirrentSDK.ConversionOptions
-  public typealias ArrayLiteralElement = CirrentSDK.ConversionOptions
+  public typealias Element = CirrentSDK.CustomConversionOptions
+  public typealias ArrayLiteralElement = CirrentSDK.CustomConversionOptions
   public typealias RawValue = Swift.Int
 }
-public struct DeserializationStatus : Swift.OptionSet, Swift.CustomStringConvertible {
+public struct CustomDeserializationStatus : Swift.OptionSet, Swift.CustomStringConvertible {
   public let rawValue: Swift.Int
   public init(rawValue: Swift.Int)
-  public static let None: CirrentSDK.DeserializationStatus
-  public static let IncorrectKey: CirrentSDK.DeserializationStatus
-  public static let MissingKey: CirrentSDK.DeserializationStatus
-  public static let InvalidType: CirrentSDK.DeserializationStatus
-  public static let InvalidValue: CirrentSDK.DeserializationStatus
-  public static let InvalidClass: CirrentSDK.DeserializationStatus
-  public static let MissingProtocol: CirrentSDK.DeserializationStatus
-  public static let Custom: CirrentSDK.DeserializationStatus
+  public static let None: CirrentSDK.CustomDeserializationStatus
+  public static let IncorrectKey: CirrentSDK.CustomDeserializationStatus
+  public static let MissingKey: CirrentSDK.CustomDeserializationStatus
+  public static let InvalidType: CirrentSDK.CustomDeserializationStatus
+  public static let InvalidValue: CirrentSDK.CustomDeserializationStatus
+  public static let InvalidClass: CirrentSDK.CustomDeserializationStatus
+  public static let MissingProtocol: CirrentSDK.CustomDeserializationStatus
+  public static let Custom: CirrentSDK.CustomDeserializationStatus
   public var description: Swift.String {
     get
   }
-  public typealias Element = CirrentSDK.DeserializationStatus
-  public typealias ArrayLiteralElement = CirrentSDK.DeserializationStatus
+  public typealias Element = CirrentSDK.CustomDeserializationStatus
+  public typealias ArrayLiteralElement = CirrentSDK.CustomDeserializationStatus
   public typealias RawValue = Swift.Int
 }
 public protocol Cancelable : ObjectiveC.NSObjectProtocol {
@@ -637,7 +637,7 @@ public protocol BluetoothCredentialsSenderCallback {
   func onNetworkJoiningFailed()
   func onIncorrectPriorityValueUsed()
 }
-@objc public class BaseNetwork : CirrentSDK.EVObject {
+@objc public class BaseNetwork : CirrentSDK.CustomEVObject {
   @objc public var bssid: Swift.String
   @objc public var hexSsid: Swift.String
   @objc public var ssid: Swift.String {

@@ -16,6 +16,9 @@ Please note that "debug" versions suppose to work on real devices AND the emulat
 So please do not forget to change DEBUG_CONFIGURATION_NAME & RELEASE_CONFIGURATION_NAME to those that are used in your project!
 
 ## CHANGELOG
+### 1.2.36
+#### Fixed
+- class name duplication issues.
 ### 1.2.35
 #### Added
 - optional `GatherEnvironmentCallback` delegate with a `onEnvironmentGathered(isEnvironmentCompletelyCollected: Bool)` function to the `CirrentService.gatherEnvironment()`.
