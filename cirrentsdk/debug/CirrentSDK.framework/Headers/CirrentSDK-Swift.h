@@ -567,6 +567,30 @@ SWIFT_CLASS("_TtC10CirrentSDK13SoftApService")
 
 
 
+SWIFT_CLASS("_TtC10CirrentSDK11StringArray")
+@interface StringArray : CustomEVObject
+@property (nonatomic, copy) NSArray<NSString *> * _Nonnull value;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+SWIFT_CLASS("_TtC10CirrentSDK11StringValue")
+@interface StringValue : CustomEVObject
+@property (nonatomic, copy) NSString * _Nonnull value;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+SWIFT_CLASS("_TtC10CirrentSDK16UserActionStatus")
+@interface UserActionStatus : CustomEVObject
+@property (nonatomic, copy) NSString * _Nonnull code;
+@property (nonatomic, copy) NSString * _Nonnull message;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+
+
 /// WiFi network
 SWIFT_CLASS("_TtC10CirrentSDK11WiFiNetwork")
 @interface WiFiNetwork : BaseNetwork
@@ -1159,6 +1183,30 @@ SWIFT_CLASS("_TtC10CirrentSDK18PrivateNetworkInfo")
 /// Service that sends credentials direcly to device over SoftAP
 SWIFT_CLASS("_TtC10CirrentSDK13SoftApService")
 @interface SoftApService : NSObject
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+
+
+SWIFT_CLASS("_TtC10CirrentSDK11StringArray")
+@interface StringArray : CustomEVObject
+@property (nonatomic, copy) NSArray<NSString *> * _Nonnull value;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+SWIFT_CLASS("_TtC10CirrentSDK11StringValue")
+@interface StringValue : CustomEVObject
+@property (nonatomic, copy) NSString * _Nonnull value;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+SWIFT_CLASS("_TtC10CirrentSDK16UserActionStatus")
+@interface UserActionStatus : CustomEVObject
+@property (nonatomic, copy) NSString * _Nonnull code;
+@property (nonatomic, copy) NSString * _Nonnull message;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 

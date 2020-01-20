@@ -8,8 +8,6 @@ import CirrentSDK
 @_exported import CirrentSDK
 import CirrentSDK
 @_exported import CirrentSDK
-import CirrentSDK
-@_exported import CirrentSDK
 import CoreBluetooth
 import CoreLocation
 import Foundation
@@ -122,6 +120,11 @@ extension NSArray {
   public func quadrupleNestedArrayMap<T>(_ element: (Foundation.NSDictionary) -> T) -> [[[[[T]]]]]
   public func quintupleNestedArrayMap<T>(_ element: (Foundation.NSDictionary) -> T) -> [[[[[[T]]]]]]
   public func sextupleNestedArrayMap<T>(_ element: (Foundation.NSDictionary) -> T) -> [[[[[[[T]]]]]]]
+}
+@objc public class StringValue : CirrentSDK.CustomEVObject {
+  @objc public var value: Swift.String
+  @objc required dynamic public init()
+  @objc deinit
 }
 public protocol CustomEVGenericsKVC {
   func setGenericValue(_ value: Swift.AnyObject!, forUndefinedKey key: Swift.String)
@@ -300,6 +303,11 @@ extension CustomEVReflectable {
   @objc required dynamic public init()
   @objc deinit
 }
+@objc public class StringArray : CirrentSDK.CustomEVObject {
+  @objc public var value: [Swift.String]
+  @objc required dynamic public init()
+  @objc deinit
+}
 @objc public class Device : CirrentSDK.CustomEVObject {
   @objc public var identifyingActionEnabled: Swift.Bool
   @objc public var userActionEnabled: Swift.Bool
@@ -337,6 +345,12 @@ extension CustomEVReflectable {
   @objc public func isUserActionEnabled() -> Swift.Bool
   @objc public func isIdentifyingActionEnabled() -> Swift.Bool
   @objc public func getProviderKnownNetwork() -> CirrentSDK.DeviceDto.ProviderKnownNetwork?
+  @objc required dynamic public init()
+  @objc deinit
+}
+@objc public class UserActionStatus : CirrentSDK.CustomEVObject {
+  @objc public var code: Swift.String
+  @objc public var message: Swift.String
   @objc required dynamic public init()
   @objc deinit
 }
@@ -447,6 +461,7 @@ extension NSMutableDictionary {
   @available(*, deprecated)
   public func getPrivateNetworkInfo(isHiddenNetwork: Swift.Bool, priority: Swift.Int, selectedNetworkName: Swift.String, preSharedKey: Swift.String, flags: Swift.String, scdPublicKey: Swift.String) -> Swift.String
   public func getGatewayIp(_ completion: @escaping (Swift.String) -> ())
+  public func getAccountAndDeviceId(_ identificationDeviceData: Swift.String) -> [Swift.Int : Swift.String]
   @objc deinit
 }
 @objc public class WiFiNetwork : CirrentSDK.BaseNetwork {
@@ -571,7 +586,7 @@ public protocol ProductActionCallback : CirrentSDK.CirrentDelegate {
   public func setSoftApDeviceStatusTimings(softApDeviceStatusDelay: Swift.Int, softApDeviceStatusMaxRequestCount: Swift.Int) -> CirrentSDK.SoftApService
   @available(iOS 11.0, *)
   public func connectToDeviceViaSoftAp(_ softApSsid: Swift.String, _ delegate: CirrentSDK.SoftApDeviceConnectionCallback)
-  public func getDeviceInfoViaSoftAp(delegate: CirrentSDK.SoftApDeviceInfoCallback, exceptionHandler: @escaping (Swift.String, Swift.String) -> () = commonErrorHandler)
+  public func getDeviceInfoViaSoftAp(userAccountId: Swift.String, delegate: CirrentSDK.SoftApDeviceInfoCallback, exceptionHandler: @escaping (Swift.String, Swift.String) -> () = commonErrorHandler)
   public func putPrivateCredentialsViaSoftAp(isHiddenNetwork: Swift.Bool, priority: Swift.Int, softApSsid: Swift.String, selectedNetwork: CirrentSDK.WiFiNetwork, preSharedKey: Swift.String, delegate: CirrentSDK.SoftApCredentialsSenderCallback, exceptionHandler: @escaping (Swift.String, Swift.String) -> () = commonErrorHandler)
   @available(*, deprecated, message: "This function doesn't support SSIDs with non-ascii characters.")
   public func putPrivateCredentialsViaSoftAp(isHiddenNetwork: Swift.Bool, priority: Swift.Int, softApSsid: Swift.String, wifiFlags: Swift.String, preSharedKey: Swift.String, selectedNetworkSsid: Swift.String, delegate: CirrentSDK.SoftApCredentialsSenderCallback, exceptionHandler: @escaping (Swift.String, Swift.String) -> () = commonErrorHandler)
@@ -591,7 +606,8 @@ public protocol SoftApDeviceConnectionCallback {
   func onConnectionFailed()
 }
 public protocol SoftApDeviceInfoCallback {
-  func onDeviceInfoReceived(identificationDeviceData: Swift.String, candidateNetworks: [CirrentSDK.WiFiNetwork])
+  func onDeviceInfoReceived(deviceId: Swift.String, candidateNetworks: [CirrentSDK.WiFiNetwork])
+  func onAccountIdMismatch()
 }
 public protocol SoftApCredentialsSenderCallback {
   func onCredentialsSent(credentialsId: Swift.String)
@@ -605,7 +621,7 @@ public protocol SoftApCredentialsSenderCallback {
   public func setProgressView(customProgressView: CirrentSDK.CirrentProgressView?) -> CirrentSDK.BluetoothService
   public func setBluetoothDeviceStatusTimings(bluetoothDeviceStatusDelay: Swift.Int, bluetoothDeviceStatusMaxRequestCount: Swift.Int) -> CirrentSDK.BluetoothService
   public func connectToDeviceViaBluetooth(blePrefix: Swift.String, delegate: CirrentSDK.BluetoothDeviceConnectionCallback)
-  public func getDeviceInfoViaBluetooth(delegate: CirrentSDK.BluetoothDeviceInfoCallback)
+  public func getDeviceInfoViaBluetooth(userAccountId: Swift.String, delegate: CirrentSDK.BluetoothDeviceInfoCallback)
   public func putPrivateCredentialsViaBluetooth(isHiddenNetwork: Swift.Bool, priority: Swift.Int, preSharedKey: Swift.String, selectedNetwork: CirrentSDK.WiFiNetwork, delegate: CirrentSDK.BluetoothCredentialsSenderCallback)
   @available(*, deprecated, message: "This function doesn't support SSIDs with non-ascii characters.")
   public func putPrivateCredentialsViaBluetooth(isHiddenNetwork: Swift.Bool, priority: Swift.Int, wifiFlags: Swift.String, preSharedKey: Swift.String, selectedNetworkSsid: Swift.String, delegate: CirrentSDK.BluetoothCredentialsSenderCallback)
@@ -627,7 +643,8 @@ public protocol BluetoothDeviceConnectionCallback {
 public protocol BluetoothDeviceInfoCallback {
   func onFailedToGetDeviceInfo()
   func onConnectionIsNotEstablished()
-  func onInfoReceived(identificationDeviceData: Swift.String, candidateNetworks: [CirrentSDK.WiFiNetwork])
+  func onInfoReceived(deviceId: Swift.String, candidateNetworks: [CirrentSDK.WiFiNetwork])
+  func onAccountIdMismatch()
 }
 public protocol BluetoothCredentialsSenderCallback {
   func onCredentialsSent(credentialsId: Swift.String)
