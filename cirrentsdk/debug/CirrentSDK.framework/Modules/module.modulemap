@@ -23,6 +23,13 @@ explicit module CirrentSDK.SimplePing {
   export *
 }
 
+explicit module CirrentSDK.NetworkUtils {
+  header "NetworkUtils.h"
+  export *
+}
+
+
+
 module CirrentSDK.Swift {
     header "CirrentSDK-Swift.h"
     requires objc

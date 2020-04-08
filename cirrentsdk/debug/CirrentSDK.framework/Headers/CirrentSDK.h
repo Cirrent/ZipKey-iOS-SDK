@@ -15,5 +15,6 @@ FOUNDATION_EXPORT double CirrentSDKVersionNumber;
 FOUNDATION_EXPORT const unsigned char CirrentSDKVersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like #import <CirrentSDK/PublicHeader.h>
-
+//#import <CirrentSDK/NetworkUtils.h>
+#import <CirrentSDK/GCDAsyncUdpSocket.h>
 

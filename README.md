@@ -16,6 +16,9 @@ Please note that "debug" versions suppose to work on real devices AND the emulat
 So please do not forget to change DEBUG_CONFIGURATION_NAME & RELEASE_CONFIGURATION_NAME to those that are used in your project!
 
 ## CHANGELOG
+### 1.3.1
+#### Added
+- Mobile Onboarding Analytics;
 ### 1.2.38
 #### Added
 - account id checking logic.
