@@ -16,6 +16,12 @@ Please note that "debug" versions suppose to work on real devices AND the emulat
 So please do not forget to change DEBUG_CONFIGURATION_NAME & RELEASE_CONFIGURATION_NAME to those that are used in your project!
 
 ## CHANGELOG
+### 1.3.3
+#### Added
+- `MobileAppIntelligence.createToken()` function which allows to generate ANALYTICS token;
+- an ability to set onboarding session timeout (default value = 15 mins);
+#### Changed
+- Mobile Onboarding Analytics renamed to Mobile App Intelligence;
 ### 1.3.1
 #### Added
 - Mobile Onboarding Analytics;

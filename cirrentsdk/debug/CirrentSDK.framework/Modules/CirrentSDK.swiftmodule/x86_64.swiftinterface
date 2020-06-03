@@ -1,5 +1,5 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.2 effective-4.2 (swiftlang-1103.0.32.1 clang-1103.0.32.29)
+// swift-compiler-version: Apple Swift version 5.2.4 effective-4.2 (swiftlang-1103.0.32.9 clang-1103.0.32.53)
 // swift-module-flags: -target x86_64-apple-ios9.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 4.2 -enforce-exclusivity=checked -O -module-name CirrentSDK
 import Alamofire
 import SystemConfiguration.CaptiveNetwork
@@ -592,20 +592,20 @@ extension UpnpServiceFinder : CirrentSDK.GCDAsyncUdpSocketDelegate {
   @objc dynamic public func udpSocket(_ sock: CirrentSDK.GCDAsyncUdpSocket, didReceive data: Foundation.Data, fromAddress address: Foundation.Data, withFilterContext filterContext: Any?)
   @objc dynamic public func udpSocketDidClose(_ sock: CirrentSDK.GCDAsyncUdpSocket, withError error: Swift.Error?)
 }
-@_hasMissingDesignatedInitializers public class OnboardingAnalytics {
-  public static func initialize(analyticsToken: Swift.String, delegate: CirrentSDK.MOACallback)
-  public static func startOnboarding(delegate: CirrentSDK.MOACallback)
-  public static func setOnboardingType(type: CirrentSDK.OnboardingType, delegate: CirrentSDK.MOACallback)
-  public static func setOnboardingType(customType: Swift.String, delegate: CirrentSDK.MOACallback)
-  public static func setOnboardingDeviceInfo(deviceId: Swift.String, additionalAttributes: [Swift.String : Swift.String]? = nil, delegate: CirrentSDK.MOACallback)
-  public static func enterStep(thisStepName: Swift.String, reason: Swift.String? = nil, delegate: CirrentSDK.MOACallback)
-  public static func endOnboarding(reason: Swift.String? = nil, delegate: CirrentSDK.MOACallback)
+@_hasMissingDesignatedInitializers public class MobileAppIntelligence {
+  public static func initialize(analyticsToken: Swift.String, delegate: CirrentSDK.MAICallback)
+  public static func startOnboarding(onboardingSessionTimeout: Swift.Int? = nil, delegate: CirrentSDK.MAICallback)
+  public static func setOnboardingType(type: CirrentSDK.OnboardingType, delegate: CirrentSDK.MAICallback)
+  public static func setOnboardingType(customType: Swift.String, delegate: CirrentSDK.MAICallback)
+  public static func setOnboardingDeviceInfo(deviceId: Swift.String, additionalAttributes: [Swift.String : Swift.String]? = nil, delegate: CirrentSDK.MAICallback)
+  public static func enterStep(thisStepName: Swift.String, reason: Swift.String? = nil, delegate: CirrentSDK.MAICallback)
+  public static func endOnboarding(reason: Swift.String? = nil, delegate: CirrentSDK.MAICallback)
   public static func createToken(expiresIn: Swift.Int, accountId: Swift.String, appId: Swift.String, appKey: Swift.String, appSecret: Swift.String) -> Swift.String
   public static func removeAllCollectedData()
   public static func cancelAllTasks()
   @objc deinit
 }
-@_hasMissingDesignatedInitializers public class OnboardingAnalyticsError {
+@_hasMissingDesignatedInitializers public class MAIError {
   public var httpErrorCode: Swift.Int {
     get
     set
@@ -642,9 +642,9 @@ public enum ErrorType {
   }
   public func hash(into hasher: inout Swift.Hasher)
 }
-public protocol MOACallback {
+public protocol MAICallback {
   func onTokenInvalid(retrier: CirrentSDK.Retrier)
-  func onFailed(error: CirrentSDK.OnboardingAnalyticsError)
+  func onFailed(error: CirrentSDK.MAIError)
 }
 @_hasMissingDesignatedInitializers public class SynchronizedArray<T> {
   public func append(newElement: T)
