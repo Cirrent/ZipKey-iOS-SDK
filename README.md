@@ -16,6 +16,9 @@ Please note that "debug" versions suppose to work on real devices AND the emulat
 So please do not forget to change DEBUG_CONFIGURATION_NAME & RELEASE_CONFIGURATION_NAME to those that are used in your project!
 
 ## CHANGELOG
+### 1.3.4
+#### Fixed
+- a bug where MAI requires initialization even after it has been performed.
 ### 1.3.3
 #### Added
 - `MobileAppIntelligence.createToken()` function which allows to generate ANALYTICS token;
