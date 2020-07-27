@@ -10,12 +10,15 @@ pod 'CirrentSDK-Debug_xcode10_1', :configuration => 'DEBUG_CONFIGURATION_NAME', 
 pod 'CirrentSDK-Release_xcode10_1', :configuration => 'RELEASE_CONFIGURATION_NAME', :git => 'https://github.com/Cirrent/ZipKey-iOS-SDK.git'
 ```
 
-Please note that "debug" versions suppose to work on real devices AND the emulator, and it's not intended to be sent to the AppStore.
-"Release" version works only with real devices and doesn't contain simulator architectures. Only release version can be set to the AppStore.
+Please note that "Debug" versions suppose to work on real devices AND the emulator, and it's not intended to be sent to the AppStore.
+"Release" version works only with real devices and doesn't contain simulator architectures. Only "Release" version can be sent to the AppStore.
 
 So please do not forget to change DEBUG_CONFIGURATION_NAME & RELEASE_CONFIGURATION_NAME to those that are used in your project!
 
 ## CHANGELOG
+### 1.3.5
+#### Added
+- `MobileAppIntelligence.setDebugMode(boolean enabled)` . This method gives an ability to see more log entries.
 ### 1.3.4
 #### Fixed
 - a bug where MAI requires initialization even after it has been performed.
