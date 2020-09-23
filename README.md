@@ -16,6 +16,11 @@ Please note that "Debug" versions suppose to work on real devices AND the emulat
 So please do not forget to change DEBUG_CONFIGURATION_NAME & RELEASE_CONFIGURATION_NAME to those that are used in your project!
 
 ## CHANGELOG
+### 1.3.7
+#### Fixed
+- fixed a bug where MAI doesn't print all required logs when debug mode is on.
+#### Added
+- an ability to restart "init" data collecting if location permission is granted.
 ### 1.3.5
 #### Added
 - `MobileAppIntelligence.setDebugMode(boolean enabled)` . This method gives an ability to see more log entries.
