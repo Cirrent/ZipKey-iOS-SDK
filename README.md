@@ -23,7 +23,7 @@ So please do not forget to change DEBUG_CONFIGURATION_NAME & RELEASE_CONFIGURATI
 - an ability to restart "init" data collecting if location permission is granted.
 ### 1.3.5
 #### Added
-- `MobileAppIntelligence.setDebugMode(boolean enabled)` . This method gives an ability to see more log entries.
+- `MobileAppIntelligence.setDebugMode(enabled: Bool)` . This method gives an ability to see more log entries.
 ### 1.3.4
 #### Fixed
 - a bug where MAI requires initialization even after it has been performed.
