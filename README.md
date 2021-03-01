@@ -16,6 +16,15 @@ Please note that "Debug" versions suppose to work on real devices AND the emulat
 So please do not forget to change DEBUG_CONFIGURATION_NAME & RELEASE_CONFIGURATION_NAME to those that are used in your project!
 
 ## CHANGELOG
+### 1.5.1
+#### Changed
+- API has been simplified:  `MobileAppIntelligence.initialize(analyticsToken: String, delegate: MAICallback)` signature has been changed to  `MobileAppIntelligence.initialize(token: String, onTokenInvalid: @escaping (_ retrier: Retrier) -> (), onError: ((_ error: MAIError) -> ())? = nil)`;  
+other functions don't require a delegate as a parameter.
+- BLE & Soft AP onboarding protocols have been changed;
+- ZipKey onboarding type has been completely removed;
+- improved stability.
+#### Fixed
+- fixed a bug where the app gets stuck during BLE onboarding if the CA doesn't provide a response
 ### 1.3.7
 #### Fixed
 - fixed a bug where MAI doesn't print all required logs when debug mode is on.

@@ -1,5 +1,5 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.3 effective-4.2 (swiftlang-1200.0.29.2 clang-1200.0.30.1)
+// swift-compiler-version: Apple Swift version 5.3.2 effective-4.2 (swiftlang-1200.0.45 clang-1200.0.32.28)
 // swift-module-flags: -target x86_64-apple-ios9.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 4.2 -enforce-exclusivity=checked -O -module-name CirrentSDK
 import Alamofire
 import SystemConfiguration.CaptiveNetwork
@@ -14,7 +14,6 @@ import CirrentSDK.NetworkUtils
 import CirrentSDK.RSAUtil
 import RxBluetoothKit
 import RxSwift
-import CirrentSDK.SimplePing
 import Swift
 import SystemConfiguration
 import UIKit
@@ -23,34 +22,12 @@ extension HMACAlgorithm : CirrentSDK.SignAlgorithm, CirrentSDK.VerifyAlgorithm {
 }
 @objc @_inheritsConvenienceInitializers public class DeviceKnownNetwork : CirrentSDK.BaseNetwork {
   @objc public var status: Swift.String
-  @objc public var credentialId: Swift.String
-  @objc public var roamingId: Swift.String
   @objc public var priority: Swift.Int
   @objc public var security: Swift.String
   @objc public var source: Swift.String
-  @objc public var statusReason: Swift.String
-  @objc public var timestamp: Swift.String
-  @objc public var networkType: Swift.String
-  @objc public var providerKnownNetwork: CirrentSDK.DeviceKnownNetwork.ProviderKnownNetwork
-  override public func propertyMapping() -> [(keyInObject: Swift.String?, keyInResource: Swift.String?)]
-  @objc @_inheritsConvenienceInitializers public class ProviderKnownNetwork : CirrentSDK.CustomEVObject {
-    @objc public var providerName: Swift.String
-    @objc public var providerLogo: Swift.String? {
-      @objc get
-      @objc set
-    }
-    @objc public var providerLogoView: UIKit.UIImage? {
-      @objc get
-      @objc set
-    }
-    override public func propertyMapping() -> [(keyInObject: Swift.String?, keyInResource: Swift.String?)]
-    @objc required dynamic public init()
-    @objc deinit
-  }
   @objc deinit
   @objc required dynamic public init()
 }
-public typealias TraceRouteCompletionHandler = (Swift.String) -> Swift.Void
 final public class HMACAlgorithm : CirrentSDK.Algorithm {
   final public let key: Foundation.Data
   final public let hash: CirrentSDK.HMACAlgorithm.Hash
@@ -181,43 +158,6 @@ extension Dictionary {
   @objc deinit
   @objc required dynamic public init()
 }
-public enum LogEvent : Swift.String {
-  case TOKEN_RECEIVED
-  case TOKEN_ERROR
-  case LOCATION
-  case LOCATION_ERROR
-  case LOCATION_DISABLED
-  case WIFI_SCAN
-  case WIFI_SCAN_ERROR
-  case DEVICES_RECEIVED
-  case DEVICE_SELECTED
-  case DEVICE_BOUND
-  case PROVIDER_CREDS
-  case USER_CREDS
-  case SEARCH_START
-  case STATUS
-  case STATUS_ERROR
-  case SOFTAP
-  case SOFTAP_ERROR
-  case SOFTAP_SCREEN
-  case SOFTAP_JOINED
-  case SOFTAP_DROP
-  case SOFTAP_LONG_DURATION
-  case BLE
-  case CREDS_TIMEOUT
-  case CLOUD_CONNECTION_ERROR
-  case FAILED_TO_JOIN_WITH_VALID_CREDS
-  case JOINED_FAILED
-  case MANUAL_WIFI_ENTRY
-  case SUCCESS
-  case EXIT
-  case DEBUG
-  public typealias RawValue = Swift.String
-  public init?(rawValue: Swift.String)
-  public var rawValue: Swift.String {
-    get
-  }
-}
 public protocol CirrentProgressView {
   func showProgress()
   func stopProgress()
@@ -269,7 +209,6 @@ extension SignAlgorithm {
   @objc public var ssid: Swift.String
   @objc public var hexSsid: Swift.String
   @objc public var security: Swift.String
-  @objc public var preSharedKey: Swift.String
   @objc public var encryptedPreSharedKey: Swift.String
   override public func propertyMapping() -> [(keyInObject: Swift.String?, keyInResource: Swift.String?)]
   @objc override public func skipPropertyValue(_ value: Any, key: Swift.String) -> Swift.Bool
@@ -394,21 +333,6 @@ extension ClaimSet {
   }
   @objc deinit
 }
-@objc @_inheritsConvenienceInitializers public class DeviceDto : CirrentSDK.CustomEVObject {
-  @objc public var devices: [CirrentSDK.Device]
-  @objc public var jwt: Swift.String
-  @objc public var providerKnowNetwork: Swift.Bool
-  override public func propertyMapping() -> [(keyInObject: Swift.String?, keyInResource: Swift.String?)]
-  @objc @_inheritsConvenienceInitializers public class ProviderKnownNetwork : CirrentSDK.CustomEVObject {
-    @objc public var providerName: Swift.String
-    @objc public var providerLogo: Swift.String
-    @objc public var ssid: Swift.String
-    @objc deinit
-    @objc required dynamic public init()
-  }
-  @objc deinit
-  @objc required dynamic public init()
-}
 @objc @_inheritsConvenienceInitializers public class RequestData : CirrentSDK.CustomEVObject {
   @objc override dynamic public func setValue(_ value: Any!, forUndefinedKey key: Swift.String)
   @objc deinit
@@ -433,46 +357,6 @@ extension ClaimSet {
   public func getValue(key: K) -> V?
   public func getFullDictionary() -> [K : V]
   @objc deinit
-}
-@objc @_inheritsConvenienceInitializers public class Device : CirrentSDK.CustomEVObject {
-  @objc public var identifyingActionEnabled: Swift.Bool
-  @objc public var userActionEnabled: Swift.Bool
-  @objc public var confirmedOwnerShip: Swift.Bool
-  @objc public var uptime: Swift.Double
-  @objc public var deviceId: Swift.String
-  @objc public var deviceType: Swift.String
-  @objc public var providerAttribution: Swift.String
-  @objc public var providerAttributionLogo: Swift.String
-  @objc public var providerAttributionLearnMoreURL: Swift.String
-  @objc public var friendlyName: Swift.String
-  @objc public var identifyingActionDescription: Swift.String
-  @objc public var userActionDescription: Swift.String
-  @objc public var providerKnownNetworkList: [CirrentSDK.DeviceDto.ProviderKnownNetwork]
-  @objc public var imageURL: Swift.String? {
-    @objc get
-    @objc set
-  }
-  @objc public var imageView: UIKit.UIImage? {
-    @objc get
-    @objc set
-  }
-  @objc public var imageViewDemo: UIKit.UIImage?
-  @objc public var brandImageUrl: Swift.String? {
-    @objc get
-    @objc set
-  }
-  @objc public var brandImageView: UIKit.UIImage? {
-    @objc get
-    @objc set
-  }
-  @objc public var brandName: Swift.String
-  @objc public var accountLogo: Swift.String
-  override public func propertyMapping() -> [(keyInObject: Swift.String?, keyInResource: Swift.String?)]
-  @objc public func isUserActionEnabled() -> Swift.Bool
-  @objc public func isIdentifyingActionEnabled() -> Swift.Bool
-  @objc public func getProviderKnownNetwork() -> CirrentSDK.DeviceDto.ProviderKnownNetwork?
-  @objc deinit
-  @objc required dynamic public init()
 }
 @objc @_inheritsConvenienceInitializers public class UserActionStatus : CirrentSDK.CustomEVObject {
   @objc public var code: Swift.String
@@ -595,13 +479,13 @@ extension UpnpServiceFinder : CirrentSDK.GCDAsyncUdpSocketDelegate {
 @_hasMissingDesignatedInitializers public class MobileAppIntelligence {
   public static func setDebugMode(enabled: Swift.Bool)
   public static func isDebugModeEnabled() -> Swift.Bool
-  public static func initialize(analyticsToken: Swift.String, delegate: CirrentSDK.MAICallback)
-  public static func startOnboarding(onboardingSessionTimeout: Swift.Int? = nil, delegate: CirrentSDK.MAICallback)
-  public static func setOnboardingType(type: CirrentSDK.OnboardingType, delegate: CirrentSDK.MAICallback)
-  public static func setOnboardingType(customType: Swift.String, delegate: CirrentSDK.MAICallback)
-  public static func setOnboardingDeviceInfo(deviceId: Swift.String, additionalAttributes: [Swift.String : Swift.String]? = nil, delegate: CirrentSDK.MAICallback)
-  public static func enterStep(thisStepName: Swift.String, reason: Swift.String? = nil, delegate: CirrentSDK.MAICallback)
-  public static func endOnboarding(reason: Swift.String? = nil, delegate: CirrentSDK.MAICallback)
+  public static func initialize(token: Swift.String, onTokenInvalid: @escaping (CirrentSDK.Retrier) -> (), onError: ((CirrentSDK.MAIError) -> ())? = nil)
+  public static func startOnboarding(onboardingSessionTimeout: Swift.Int? = nil)
+  public static func setOnboardingType(type: CirrentSDK.OnboardingType)
+  public static func setOnboardingType(customType: Swift.String)
+  public static func setOnboardingDeviceInfo(deviceId: Swift.String, additionalAttributes: [Swift.String : Swift.String]? = nil)
+  public static func enterStep(thisStepName: Swift.String, reason: Swift.String? = nil)
+  public static func endOnboarding(reason: Swift.String? = nil)
   public static func createToken(expiresIn: Swift.Int, accountId: Swift.String, appId: Swift.String, appKey: Swift.String, appSecret: Swift.String) -> Swift.String
   public static func removeAllCollectedData()
   public static func cancelAllTasks()
@@ -621,7 +505,6 @@ extension UpnpServiceFinder : CirrentSDK.GCDAsyncUdpSocketDelegate {
   @objc deinit
 }
 public enum OnboardingType : Swift.String {
-  case zipkey
   case softap
   case ble
   public typealias RawValue = Swift.String
@@ -633,7 +516,6 @@ public enum OnboardingType : Swift.String {
 public enum ErrorType {
   case init_data_collecting_is_active
   case lack_of_location_permission
-  case init_not_allowed_during_onboarding_process
   case request_failed
   case initialization_required
   case start_onboarding_required
@@ -644,10 +526,6 @@ public enum ErrorType {
     get
   }
   public func hash(into hasher: inout Swift.Hasher)
-}
-public protocol MAICallback {
-  func onTokenInvalid(retrier: CirrentSDK.Retrier)
-  func onFailed(error: CirrentSDK.MAIError)
 }
 @_hasMissingDesignatedInitializers public class SynchronizedArray<T> {
   public func append(newElement: T)
@@ -671,8 +549,6 @@ extension SynchronizedArray where T : Swift.Equatable {
   public func getCurrentBssid() -> Swift.String
   public func getCurrentSsid() -> Swift.String
   public func getPrivateNetworkInfo(isHiddenNetwork: Swift.Bool, priority: Swift.Int, selectedNetwork: CirrentSDK.WiFiNetwork, preSharedKey: Swift.String, scdPublicKey: Swift.String) -> Swift.String
-  @available(*, deprecated)
-  public func getPrivateNetworkInfo(isHiddenNetwork: Swift.Bool, priority: Swift.Int, selectedNetworkName: Swift.String, preSharedKey: Swift.String, flags: Swift.String, scdPublicKey: Swift.String) -> Swift.String
   public func getGatewayIp(_ completion: @escaping (Swift.String) -> ())
   public func getAccountAndDeviceId(_ identificationDeviceData: Swift.String) -> [Swift.Int : Swift.String]
   @objc deinit
@@ -698,109 +574,14 @@ public struct Collector : Swift.Hashable {
   @objc public var informationElement: Swift.String
   @objc public var timestamp: Swift.String
   @objc public func initialization(bssid: Swift.String, ssid: Swift.String)
+  @objc override dynamic public var debugDescription: Swift.String {
+    @objc get
+  }
+  @objc deinit
   @objc required dynamic public init()
-  @objc deinit
-}
-@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class LogService : ObjectiveC.NSObject {
-  public static let shared: CirrentSDK.LogService
-  public func debug(details: Swift.String)
-  public func addLog(event: CirrentSDK.LogEvent, details: Swift.String)
-  public func sendLogs(appId: Swift.String, token: Swift.String)
-  @objc deinit
 }
 @_hasMissingDesignatedInitializers public class StateCollector {
   @objc deinit
-}
-@objc @_inheritsConvenienceInitializers public class CirrentService : ObjectiveC.NSObject {
-  public static var shared: CirrentSDK.CirrentService {
-    get
-  }
-  public static let commonErrorHandler: (Swift.String, Swift.String) -> ()
-  public func setProgressView(customProgressView: CirrentSDK.CirrentProgressView?) -> CirrentSDK.CirrentService
-  public func setDeviceStatusTimings(deviceStatusDelay: Swift.Int, deviceStatusMaxRequestCount: Swift.Int) -> CirrentSDK.CirrentService
-  public func setActionCheckerTimings(actionCheckerDelay: Swift.Int, actionCheckerMaxRequestCount: Swift.Int) -> CirrentSDK.CirrentService
-  public func gatherEnvironment(appId: Swift.String, delegate: CirrentSDK.GatherEnvironmentCallback? = nil)
-  public func findDevices(searchToken: Swift.String, uptime: Swift.Int? = nil, deviceType: Swift.Int? = nil, deviceId: Swift.String? = nil, dubKey: Swift.String? = nil, page: Swift.Int? = nil, demoDevices: Swift.Bool? = nil, delegate: CirrentSDK.DeviceInfoCallback, exceptionHandler: @escaping (Swift.String, Swift.String) -> () = commonErrorHandler)
-  public func resetDevice(deviceId: Swift.String, manageToken: Swift.String, delegate: CirrentSDK.ResetDeviceCallback, exceptionHandler: @escaping (Swift.String, Swift.String) -> () = commonErrorHandler)
-  public func isDeviceBound() -> Swift.Bool
-  public func bindDevice(localSetup: Swift.Bool, appId: Swift.String, bindToken: Swift.String, deviceId: Swift.String, delegate: CirrentSDK.BindDeviceCallback, exceptionHandler: @escaping (Swift.String, Swift.String) -> () = commonErrorHandler)
-  public func getScdPublicKey(manageToken: Swift.String, deviceId: Swift.String, delegate: CirrentSDK.ScdPublicKeyCallback, exceptionHandler: @escaping (Swift.String, Swift.String) -> () = commonErrorHandler)
-  public func putProviderCredentials(deviceId: Swift.String, providerNetwork: CirrentSDK.DeviceDto.ProviderKnownNetwork, appId: Swift.String, manageToken: Swift.String, delegate: CirrentSDK.ProviderCredentialsSenderCallback, exceptionHandler: @escaping (Swift.String, Swift.String) -> () = commonErrorHandler)
-  public func putPrivateCredentials(isHiddenNetwork: Swift.Bool, priority: Swift.Int, appId: Swift.String, deviceId: Swift.String, manageToken: Swift.String, preSharedKey: Swift.String, selectedNetwork: CirrentSDK.WiFiNetwork, delegate: CirrentSDK.PrivateCredentialsSenderCallback, exceptionHandler: @escaping (Swift.String, Swift.String) -> () = commonErrorHandler)
-  @available(*, deprecated, message: "This function doesn't support SSIDs with non-ascii characters.")
-  public func putPrivateCredentials(isHiddenNetwork: Swift.Bool, priority: Swift.Int, appId: Swift.String, deviceId: Swift.String, manageToken: Swift.String, wifiFlags: Swift.String, preSharedKey: Swift.String, networkSsid: Swift.String, delegate: CirrentSDK.PrivateCredentialsSenderCallback, exceptionHandler: @escaping (Swift.String, Swift.String) -> () = commonErrorHandler)
-  public func pollDeviceJoiningStatus(manualCredentials: Swift.Bool, appId: Swift.String, deviceId: Swift.String, manageToken: Swift.String, providerNetwork: CirrentSDK.DeviceDto.ProviderKnownNetwork, credentialId: Swift.String, delegate: CirrentSDK.JoiningStatusCallback, exceptionHandler: @escaping (Swift.String, Swift.String) -> () = commonErrorHandler)
-  public func pollDeviceJoiningStatus(manualCredentials: Swift.Bool, appId: Swift.String, deviceId: Swift.String, manageToken: Swift.String, selectedNetwork: CirrentSDK.WiFiNetwork, credentialId: Swift.String, delegate: CirrentSDK.JoiningStatusCallback, exceptionHandler: @escaping (Swift.String, Swift.String) -> () = commonErrorHandler)
-  @available(*, deprecated, message: "This function doesn't support SSIDs with non-ascii characters.")
-  public func pollDeviceJoiningStatus(manualCredentials: Swift.Bool, appId: Swift.String, deviceId: Swift.String, manageToken: Swift.String, networkSsid: Swift.String, credentialId: Swift.String, delegate: CirrentSDK.JoiningStatusCallback, exceptionHandler: @escaping (Swift.String, Swift.String) -> () = commonErrorHandler)
-  public func getDeviceKnownNetworks(deviceId: Swift.String, manageToken: Swift.String, delegate: CirrentSDK.DeviceKnownNetworksCallback, exceptionHandler: @escaping (Swift.String, Swift.String) -> () = commonErrorHandler)
-  public func getDeviceKnownNetworks(deviceId: Swift.String, uptime: Swift.Int, manageToken: Swift.String, delegate: CirrentSDK.DeviceKnownNetworksCallback, exceptionHandler: @escaping (Swift.String, Swift.String) -> () = commonErrorHandler)
-  public func getCandidateNetworks(deviceId: Swift.String, manageToken: Swift.String, delegate: CirrentSDK.DeviceCandidateNetworksCallback, exceptionHandler: @escaping (Swift.String, Swift.String) -> () = commonErrorHandler)
-  public func getDeviceStatus(deviceId: Swift.String, manageToken: Swift.String, delegate: CirrentSDK.DeviceStatusCallback, exceptionHandler: @escaping (Swift.String, Swift.String) -> () = commonErrorHandler)
-  public func addNetwork(isHiddenNetwork: Swift.Bool, priority: Swift.Int, deviceId: Swift.String, manageToken: Swift.String, preSharedKey: Swift.String, selectedNetwork: CirrentSDK.WiFiNetwork, delegate: CirrentSDK.PrivateCredentialsSenderCallback, exceptionHandler: @escaping (Swift.String, Swift.String) -> () = commonErrorHandler)
-  @available(*, deprecated, message: "This function doesn't support SSIDs with non-ascii characters.")
-  public func addNetwork(isHiddenNetwork: Swift.Bool, priority: Swift.Int, deviceId: Swift.String, manageToken: Swift.String, wifiFlags: Swift.String, preSharedKey: Swift.String, networkSsid: Swift.String, delegate: CirrentSDK.PrivateCredentialsSenderCallback, exceptionHandler: @escaping (Swift.String, Swift.String) -> () = commonErrorHandler)
-  public func deleteNetwork(deviceId: Swift.String, manageToken: Swift.String, knownNetwork: CirrentSDK.DeviceKnownNetwork, delegate: CirrentSDK.DeleteNetworkCallback, exceptionHandler: @escaping (Swift.String, Swift.String) -> () = commonErrorHandler)
-  public func pollForUserAction(searchToken: Swift.String, deviceId: Swift.String, delegate: CirrentSDK.UserActionCallback, exceptionHandler: @escaping (Swift.String, Swift.String) -> () = commonErrorHandler)
-  public func identifyYourself(deviceId: Swift.String, searchToken: Swift.String, delegate: CirrentSDK.DeviceIdentificationCallback, exceptionHandler: @escaping (Swift.String, Swift.String) -> () = commonErrorHandler)
-  public func performAction(deviceId: Swift.String, action: Swift.String, manageToken: Swift.String, delegate: CirrentSDK.ProductActionCallback, exceptionHandler: @escaping (Swift.String, Swift.String) -> () = commonErrorHandler)
-  public func cancelAllTasks()
-  @objc deinit
-  @objc override dynamic public init()
-}
-public protocol CirrentDelegate {
-  func onTokenExpired()
-}
-public protocol GatherEnvironmentCallback {
-  func onEnvironmentGathered(isEnvironmentCompletelyCollected: Swift.Bool)
-}
-public protocol DeviceInfoCallback : CirrentSDK.CirrentDelegate {
-  func onWifiDisabled()
-  func onDevicesFound(isProviderKnownNetwork: Swift.Bool, devices: [CirrentSDK.Device], jwt: Swift.String)
-  func onEnvironmentGatheringNotInitialized()
-}
-public protocol ResetDeviceCallback : CirrentSDK.CirrentDelegate {
-  func onDeviceReset()
-}
-public protocol BindDeviceCallback {
-  func onDeviceBound()
-  func onFailure(error: CirrentSDK.CirrentError)
-}
-public protocol ScdPublicKeyCallback : CirrentSDK.CirrentDelegate {
-  func onScdPublicKeyReceived(scdPublicKey: Swift.String)
-}
-public protocol JoiningStatusCallback : CirrentSDK.CirrentDelegate {
-  func onNetworkJoined()
-  func onJoiningProcess()
-  func onNetworkJoiningFailed(_ isPending: Swift.Bool, _ credentialId: Swift.String)
-}
-public protocol PrivateCredentialsSenderCallback : CirrentSDK.CirrentDelegate {
-  func onCredentialsSent(credentialId: Swift.String)
-  func onIncorrectPriorityValueUsed()
-}
-public protocol ProviderCredentialsSenderCallback : CirrentSDK.CirrentDelegate {
-  func onCredentialsSent(credentialId: Swift.String)
-}
-public protocol DeviceStatusCallback : CirrentSDK.CirrentDelegate {
-  func onStatusReceived(deviceId: Swift.String, deviceStatusInfo: CirrentSDK.DeviceStatusInfo)
-}
-public protocol DeviceKnownNetworksCallback : CirrentSDK.DeviceStatusCallback {
-}
-public protocol DeviceCandidateNetworksCallback : CirrentSDK.DeviceStatusCallback {
-}
-public protocol DeleteNetworkCallback : CirrentSDK.CirrentDelegate {
-  func onNetworkDeleted()
-}
-public protocol UserActionCallback : CirrentSDK.CirrentDelegate {
-  func onUserActionReceived(message: Swift.String)
-  func onUserActionFailed()
-  func onUserActionPending()
-}
-public protocol DeviceIdentificationCallback : CirrentSDK.CirrentDelegate {
-  func onDeviceIdentificationActionSent()
-}
-public protocol ProductActionCallback : CirrentSDK.CirrentDelegate {
-  func onProductActionSent()
 }
 @objc @_inheritsConvenienceInitializers public class SoftApService : ObjectiveC.NSObject {
   public static var shared: CirrentSDK.SoftApService {
@@ -813,9 +594,8 @@ public protocol ProductActionCallback : CirrentSDK.CirrentDelegate {
   @available(iOS 11.0, *)
   public func connectToDeviceViaSoftAp(_ softApSsid: Swift.String, _ delegate: CirrentSDK.SoftApDeviceConnectionCallback)
   public func getDeviceInfoViaSoftAp(userAccountId: Swift.String, delegate: CirrentSDK.SoftApDeviceInfoCallback, exceptionHandler: @escaping (Swift.String, Swift.String) -> () = commonErrorHandler)
+  public func identifyYourself(delegate: CirrentSDK.SoftApIdentificationCallback, exceptionHandler: @escaping (Swift.String, Swift.String) -> () = commonErrorHandler)
   public func putPrivateCredentialsViaSoftAp(isHiddenNetwork: Swift.Bool, priority: Swift.Int, softApSsid: Swift.String, selectedNetwork: CirrentSDK.WiFiNetwork, preSharedKey: Swift.String, delegate: CirrentSDK.SoftApCredentialsSenderCallback, exceptionHandler: @escaping (Swift.String, Swift.String) -> () = commonErrorHandler)
-  @available(*, deprecated, message: "This function doesn't support SSIDs with non-ascii characters.")
-  public func putPrivateCredentialsViaSoftAp(isHiddenNetwork: Swift.Bool, priority: Swift.Int, softApSsid: Swift.String, wifiFlags: Swift.String, preSharedKey: Swift.String, selectedNetworkSsid: Swift.String, delegate: CirrentSDK.SoftApCredentialsSenderCallback, exceptionHandler: @escaping (Swift.String, Swift.String) -> () = commonErrorHandler)
   public func cancelAllTasks()
   public func leaveSoftApNetwork(softApSsid: Swift.String, disconnected: @escaping (Swift.Bool) -> ())
   @objc deinit
@@ -831,12 +611,14 @@ public protocol SoftApDeviceConnectionCallback {
   func onDeviceConnectedSuccessfully()
   func onConnectionFailed()
 }
+public protocol SoftApIdentificationCallback {
+  func onDeviceIdentificationActionSent()
+}
 public protocol SoftApDeviceInfoCallback {
-  func onDeviceInfoReceived(deviceId: Swift.String, candidateNetworks: [CirrentSDK.WiFiNetwork])
-  func onAccountIdMismatch()
+  func onDeviceInfoReceived(deviceInfo: CirrentSDK.DeviceInfo, candidateNetworks: [CirrentSDK.WiFiNetwork])
 }
 public protocol SoftApCredentialsSenderCallback {
-  func onCredentialsSent(credentialsId: Swift.String)
+  func onCredentialsSent()
   func onReturnedToNetworkWithInternet()
   func onFailedToReturnToNetworkWithInternet()
   func onNetworkJoiningFailed()
@@ -847,10 +629,9 @@ public protocol SoftApCredentialsSenderCallback {
   public func setProgressView(customProgressView: CirrentSDK.CirrentProgressView?) -> CirrentSDK.BluetoothService
   public func setBluetoothDeviceStatusTimings(bluetoothDeviceStatusDelay: Swift.Int, bluetoothDeviceStatusMaxRequestCount: Swift.Int) -> CirrentSDK.BluetoothService
   public func connectToDeviceViaBluetooth(blePrefix: Swift.String, delegate: CirrentSDK.BluetoothDeviceConnectionCallback)
-  public func getDeviceInfoViaBluetooth(userAccountId: Swift.String, delegate: CirrentSDK.BluetoothDeviceInfoCallback)
+  public func getDeviceInfoViaBluetooth(delegate: CirrentSDK.BluetoothDeviceInfoCallback)
+  public func identify(delegate: CirrentSDK.BluetoothIdentificationCallback)
   public func putPrivateCredentialsViaBluetooth(isHiddenNetwork: Swift.Bool, priority: Swift.Int, preSharedKey: Swift.String, selectedNetwork: CirrentSDK.WiFiNetwork, delegate: CirrentSDK.BluetoothCredentialsSenderCallback)
-  @available(*, deprecated, message: "This function doesn't support SSIDs with non-ascii characters.")
-  public func putPrivateCredentialsViaBluetooth(isHiddenNetwork: Swift.Bool, priority: Swift.Int, wifiFlags: Swift.String, preSharedKey: Swift.String, selectedNetworkSsid: Swift.String, delegate: CirrentSDK.BluetoothCredentialsSenderCallback)
   public func cancelAllTasks()
   @objc deinit
   @objc override dynamic public init()
@@ -861,19 +642,32 @@ extension BluetoothService {
   public func onNetworkJoiningFailed()
   public func onFailedToGetNetworkStatus()
 }
+extension BluetoothService : CirrentSDK.BluetoothDeviceInfoCallback {
+  public func onOperationTimeLimitExceeded()
+  public func onFailedToGetDeviceInfo()
+  public func onConnectionIsNotEstablished()
+  public func onInfoReceived(deviceInfo: CirrentSDK.DeviceInfo, candidateNetworks: [CirrentSDK.WiFiNetwork])
+}
 public protocol BluetoothDeviceConnectionCallback {
   func onBluetoothDisabled()
   func onDeviceConnectedSuccessfully()
   func onFailedToFindDevice()
 }
 public protocol BluetoothDeviceInfoCallback {
+  func onOperationTimeLimitExceeded()
   func onFailedToGetDeviceInfo()
   func onConnectionIsNotEstablished()
-  func onInfoReceived(deviceId: Swift.String, candidateNetworks: [CirrentSDK.WiFiNetwork])
-  func onAccountIdMismatch()
+  func onInfoReceived(deviceInfo: CirrentSDK.DeviceInfo, candidateNetworks: [CirrentSDK.WiFiNetwork])
+}
+public protocol BluetoothIdentificationCallback {
+  func onOperationTimeLimitExceeded()
+  func onFailed()
+  func onConnectionIsNotEstablished()
+  func onDeviceIdentificationActionSent()
 }
 public protocol BluetoothCredentialsSenderCallback {
-  func onCredentialsSent(credentialsId: Swift.String)
+  func onOperationTimeLimitExceeded()
+  func onCredentialsSent()
   func onConnectionIsNotEstablished()
   func onConnectedToPrivateNetwork()
   func onFailedToGetNetworkStatus()
@@ -934,14 +728,28 @@ public struct UpnpSearchRequest {
   @objc deinit
 }
 @_hasMissingDesignatedInitializers public class Retrier {
-  public func retry(analyticsToken: Swift.String)
+  public func retry(token: Swift.String)
   @objc deinit
+}
+@objc @_inheritsConvenienceInitializers public class DeviceInfo : CirrentSDK.CustomEVObject {
+  @objc public var deviceId: Swift.String
+  @objc public var accountId: Swift.String
+  @objc public var publicKey: Swift.String
+  @objc public var customString: Swift.String
+  override public func propertyMapping() -> [(keyInObject: Swift.String?, keyInResource: Swift.String?)]
+  @objc override dynamic public var debugDescription: Swift.String {
+    @objc get
+  }
+  @objc required dynamic public init()
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers public class WifiNetworkArray : CirrentSDK.CustomEVObject {
+  @objc public var value: [CirrentSDK.WiFiNetwork]
+  @objc deinit
+  @objc required dynamic public init()
 }
 extension CirrentSDK.HMACAlgorithm.Hash : Swift.Equatable {}
 extension CirrentSDK.HMACAlgorithm.Hash : Swift.Hashable {}
-extension CirrentSDK.LogEvent : Swift.Equatable {}
-extension CirrentSDK.LogEvent : Swift.Hashable {}
-extension CirrentSDK.LogEvent : Swift.RawRepresentable {}
 extension CirrentSDK.OnboardingType : Swift.Equatable {}
 extension CirrentSDK.OnboardingType : Swift.Hashable {}
 extension CirrentSDK.OnboardingType : Swift.RawRepresentable {}
