@@ -16,6 +16,14 @@ Please note that "Debug" versions suppose to work on real devices AND the emulat
 So please do not forget to change DEBUG_CONFIGURATION_NAME & RELEASE_CONFIGURATION_NAME to those that are used in your project!
 
 ## CHANGELOG
+### 1.5.3
+#### Changed
+- now to report step details you need to call `MobileAppIntelligence.enterStep(StepData)` method (you can create `StepData` object using `StepData.create()` method);
+- now to report end onboarding details you need to call `MobileAppIntelligence.endOnboarding(EndData)` method (you can create `EndData` object using `EndData.create()` method);
+- steps "outside" onboarding were allowed (now you can use `MobileAppIntelligence.enterStep(StepData)` right after MAI was initialized).
+#### Added
+- added an ability to report an onboarding type along with the `startOnboarding(OnboardingType)` method;
+- added an ability to add debug info to `StepData` and `EndData` objects using `StepData.addDebugInfo([:])` or `EndData.addDebugInfo([:])` methods.
 ### 1.5.1
 #### Changed
 - API has been simplified:  `MobileAppIntelligence.initialize(analyticsToken: String, delegate: MAICallback)` signature has been changed to  `MobileAppIntelligence.initialize(token: String, onTokenInvalid: @escaping (_ retrier: Retrier) -> (), onError: ((_ error: MAIError) -> ())? = nil)`;  

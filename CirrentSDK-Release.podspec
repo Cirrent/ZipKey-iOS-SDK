@@ -2,7 +2,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "CirrentSDK-Release"
-  s.version      = "1.5.1"
+  s.version      = "1.5.3"
   s.summary      = "The SDK streamlines the steps required to onboard a Wi-Fi enabled device onto the user's private network"
   s.homepage     = "https://cirrent.com/"
   s.license      = { :type => "Copyright", :text => "Copyright (c) 2021 Cirrent. All rights reserved." }
