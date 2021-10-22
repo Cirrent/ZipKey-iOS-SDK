@@ -16,6 +16,10 @@ Please note that "Debug" versions suppose to work on real devices AND the emulat
 So please do not forget to change DEBUG_CONFIGURATION_NAME & RELEASE_CONFIGURATION_NAME to those that are used in your project!
 
 ## CHANGELOG
+### 1.5.5
+#### Fixed
+- fixed a bug where MAI doesn't try to send data after token was updated;
+- fixed a bug where SDK doesn't build on XCode 13.
 ### 1.5.3
 #### Changed
 - now to report step details you need to call `MobileAppIntelligence.enterStep(StepData)` method (you can create `StepData` object using `StepData.create()` method);

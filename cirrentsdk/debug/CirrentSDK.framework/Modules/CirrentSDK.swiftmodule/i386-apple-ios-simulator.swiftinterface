@@ -1,5 +1,5 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.4 effective-4.2 (swiftlang-1205.0.26.9 clang-1205.0.19.55)
+// swift-compiler-version: Apple Swift version 5.5 effective-4.2 (swiftlang-1300.0.31.1 clang-1300.0.29.1)
 // swift-module-flags: -target i386-apple-ios9.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 4.2 -enforce-exclusivity=checked -O -module-name CirrentSDK
 import Alamofire
 import SystemConfiguration.CaptiveNetwork
@@ -12,12 +12,12 @@ import CirrentSDK.GCDAsyncUdpSocket
 import CirrentSDK.NetworkTool
 import CirrentSDK.NetworkUtils
 import CirrentSDK.RSAUtil
-import RxBluetoothKit
 import RxSwift
 import Swift
 import SystemConfiguration
 import UIKit
-extension HMACAlgorithm : CirrentSDK.SignAlgorithm, CirrentSDK.VerifyAlgorithm {
+import _Concurrency
+extension CirrentSDK.HMACAlgorithm : CirrentSDK.SignAlgorithm, CirrentSDK.VerifyAlgorithm {
   final public func sign(_ message: Foundation.Data) -> Foundation.Data
 }
 @objc @_inheritsConvenienceInitializers public class DeviceKnownNetwork : CirrentSDK.BaseNetwork {
@@ -94,10 +94,10 @@ final public class HMACAlgorithm : CirrentSDK.Algorithm {
   public static func setObjectValue<T>(_ anyObject: T, key: Swift.String, theValue: Any?, typeInObject: Swift.String? = nil, valid: Swift.Bool, conversionOptions: CirrentSDK.CustomConversionOptions = .DefaultDeserialize, parents: [ObjectiveC.NSObject] = []) where T : ObjectiveC.NSObject
   @objc deinit
 }
-extension Date {
+extension Foundation.Date {
   public init?(fromDateTimeString: Swift.String)
 }
-extension Array where Element : ObjectiveC.NSObject {
+extension Swift.Array where Element : ObjectiveC.NSObject {
   public init(json: Swift.String?, conversionOptions: CirrentSDK.CustomConversionOptions = .DefaultDeserialize, forKeyPath: Swift.String? = nil)
   public init(data: Foundation.Data?, conversionOptions: CirrentSDK.CustomConversionOptions = .DefaultDeserialize, forKeyPath: Swift.String? = nil)
   public init(dictionaryArray: [Foundation.NSDictionary], conversionOptions: CirrentSDK.CustomConversionOptions = .DefaultDeserialize)
@@ -106,17 +106,17 @@ extension Array where Element : ObjectiveC.NSObject {
   public func getTypeInstance<T>() -> T where T : ObjectiveC.NSObject
   public func getTypeAsString() -> Swift.String
 }
-extension Array where Element : CirrentSDK.CustomEVReflectable {
+extension Swift.Array where Element : CirrentSDK.CustomEVReflectable {
   public func toJsonString(_ conversionOptions: CirrentSDK.CustomConversionOptions = .DefaultSerialize, prettyPrinted: Swift.Bool = false) -> Swift.String
   public func toJsonData(_ conversionOptions: CirrentSDK.CustomConversionOptions = .DefaultSerialize, prettyPrinted: Swift.Bool = false, encoding: Swift.String.Encoding = .utf8) -> Foundation.Data
   public func toDictionaryArray(_ conversionOptions: CirrentSDK.CustomConversionOptions = .DefaultSerialize) -> Foundation.NSArray
 }
-extension Array where Element : Foundation.NSDictionary {
+extension Swift.Array where Element : Foundation.NSDictionary {
   public init(jsonArray: Swift.String)
   public init(dataArray: Foundation.Data)
   public func toJsonStringArray(prettyPrinted: Swift.Bool = false) -> Swift.String
 }
-extension NSArray {
+extension Foundation.NSArray {
   public func nestedArrayMap<T>(_ element: (Foundation.NSDictionary) -> T) -> [[T]]
   public func doubleNestedArrayMap<T>(_ element: (Foundation.NSDictionary) -> T) -> [[[T]]]
   public func tripleNestedArrayMap<T>(_ element: (Foundation.NSDictionary) -> T) -> [[[[T]]]]
@@ -136,7 +136,7 @@ public protocol CustomEVGenericsKVC {
 public protocol CustomEVRaw {
   var anyRawValue: Any { get }
 }
-extension CustomEVRaw where Self : Swift.RawRepresentable {
+extension CirrentSDK.CustomEVRaw where Self : Swift.RawRepresentable {
   public var anyRawValue: Any {
     get
   }
@@ -146,12 +146,12 @@ public protocol CustomEVArrayConvertable {
 }
 public protocol CustomEVAssociated {
 }
-extension CustomEVAssociated {
+extension CirrentSDK.CustomEVAssociated {
   public var associated: (label: Swift.String, value: Any?, values: [Any]) {
     get
   }
 }
-extension Dictionary {
+extension Swift.Dictionary {
   public init<T>(associated: [T]?) where T : CirrentSDK.CustomEVAssociated
 }
 @objc @_inheritsConvenienceInitializers public class BonjourService : CirrentSDK.CustomEVObject {
@@ -196,7 +196,7 @@ public protocol SignAlgorithm : CirrentSDK.Algorithm {
 public protocol VerifyAlgorithm : CirrentSDK.Algorithm {
   func verify(_ message: Foundation.Data, signature: Foundation.Data) -> Swift.Bool
 }
-extension SignAlgorithm {
+extension CirrentSDK.SignAlgorithm {
   public func verify(_ message: Foundation.Data, signature: Foundation.Data) -> Swift.Bool
 }
 @objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class PerformanceData : CirrentSDK.BaseData {
@@ -227,7 +227,7 @@ public protocol CustomEVReflectable : ObjectiveC.NSObjectProtocol {
   func customConverter() -> Swift.AnyObject?
   var evReflectionStatuses: [(CirrentSDK.CustomDeserializationStatus, Swift.String)] { get set }
 }
-extension CustomEVReflectable where Self : ObjectiveC.NSObject {
+extension CirrentSDK.CustomEVReflectable where Self : ObjectiveC.NSObject {
   public var evReflectionStatuses: [(CirrentSDK.CustomDeserializationStatus, Swift.String)] {
     get
     set
@@ -245,7 +245,7 @@ extension CustomEVReflectable where Self : ObjectiveC.NSObject {
     get
   }
 }
-extension CustomEVReflectable {
+extension CirrentSDK.CustomEVReflectable {
   public static func == (lhs: CirrentSDK.CustomEVReflectable, rhs: CirrentSDK.CustomEVReflectable) -> Swift.Bool
   public static func != (lhs: CirrentSDK.CustomEVReflectable, rhs: CirrentSDK.CustomEVReflectable) -> Swift.Bool
   public func initValidation(_ dict: Foundation.NSDictionary)
@@ -284,7 +284,7 @@ public struct ClaimSet {
     set
   }
 }
-extension ClaimSet {
+extension CirrentSDK.ClaimSet {
   public var issuer: Swift.String? {
     get
     set
@@ -391,7 +391,7 @@ public protocol CustomEVCustomReflectable {
   @objc open func customConverter() -> Swift.AnyObject?
   @objc deinit
 }
-extension String : Alamofire.ParameterEncoding {
+extension Swift.String : Alamofire.ParameterEncoding {
   public func encode(_ urlRequest: Alamofire.URLRequestConvertible, with parameters: Alamofire.Parameters?) throws -> Foundation.URLRequest
 }
 @objc @_inheritsConvenienceInitializers public class DeviceStatusInfo : CirrentSDK.CustomEVObject {
@@ -455,22 +455,22 @@ public enum AlgorithmNum : Swift.CustomStringConvertible {
     get
   }
 }
-extension NSMutableDictionary {
+extension Foundation.NSMutableDictionary {
   convenience public init(json: Swift.String)
   convenience public init(data: Foundation.Data)
 }
-extension NSDictionary {
+extension Foundation.NSDictionary {
   public func toJsonString(prettyPrinted: Swift.Bool = false) -> Swift.String
   public func toJsonData(prettyPrinted: Swift.Bool = false) -> Foundation.Data
 }
-extension NSMutableDictionary {
+extension Foundation.NSMutableDictionary {
   public func unionInPlace(dictionary: Foundation.NSDictionary)
   public func unionInPlace<S>(sequence: S) where S : Swift.Sequence, S.Element == (Foundation.NSMutableDictionary.Key, Foundation.NSMutableDictionary.Value)
 }
 @objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class UpnpServiceFinder : ObjectiveC.NSObject {
   @objc deinit
 }
-extension UpnpServiceFinder : CirrentSDK.GCDAsyncUdpSocketDelegate {
+extension CirrentSDK.UpnpServiceFinder : CirrentSDK.GCDAsyncUdpSocketDelegate {
   @objc dynamic public func udpSocket(_ sock: CirrentSDK.GCDAsyncUdpSocket, didNotConnect error: Swift.Error?)
   @objc dynamic public func udpSocket(_ sock: CirrentSDK.GCDAsyncUdpSocket, didNotSendDataWithTag tag: Swift.Int, dueToError error: Swift.Error?)
   @objc dynamic public func udpSocket(_ sock: CirrentSDK.GCDAsyncUdpSocket, didReceive data: Foundation.Data, fromAddress address: Foundation.Data, withFilterContext filterContext: Any?)
@@ -479,8 +479,10 @@ extension UpnpServiceFinder : CirrentSDK.GCDAsyncUdpSocketDelegate {
 @_hasMissingDesignatedInitializers public class MobileAppIntelligence {
   public static func setDebugMode(enabled: Swift.Bool)
   public static func isDebugModeEnabled() -> Swift.Bool
-  public static func initialize(token: Swift.String, onTokenInvalid: @escaping (CirrentSDK.Retrier) -> (), onError: ((CirrentSDK.MAIError) -> ())? = nil)
-  public static func startOnboarding(onboardingSessionTimeout: Swift.Int? = nil, type: CirrentSDK.OnboardingType? = nil, customType: Swift.String? = nil)
+  public static func initialize(token: Swift.String, onTokenInvalid: @escaping (_ retrier: CirrentSDK.Retrier) -> (), onError: ((_ error: CirrentSDK.MAIError) -> ())? = nil)
+  public static func startOnboarding(onboardingSessionTimeout: Swift.Int? = nil, type: CirrentSDK.OnboardingType? = nil)
+  public static func startOnboarding(onboardingSessionTimeout: Swift.Int, customType: Swift.String? = nil)
+  public static func startOnboarding(onboardingSessionTimeout: Swift.Int? = nil, customType: Swift.String)
   public static func setOnboardingType(type: CirrentSDK.OnboardingType)
   public static func setOnboardingType(customType: Swift.String)
   public static func setOnboardingDeviceInfo(deviceId: Swift.String, additionalAttributes: [Swift.String : Swift.String]? = nil)
@@ -538,7 +540,7 @@ public enum ErrorType {
   public func getFullArray() -> [T]
   @objc deinit
 }
-extension SynchronizedArray where T : Swift.Equatable {
+extension CirrentSDK.SynchronizedArray where T : Swift.Equatable {
   public func contains(_ element: T) -> Swift.Bool
 }
 @objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class NetUtils : ObjectiveC.NSObject {
@@ -588,21 +590,21 @@ public struct Collector : Swift.Hashable {
   public static var shared: CirrentSDK.SoftApService {
     get
   }
-  public static let commonErrorHandler: (Swift.String, Swift.String) -> ()
+  public static let commonErrorHandler: (_ code: Swift.String, _ message: Swift.String) -> ()
   public func setProgressView(customProgressView: CirrentSDK.CirrentProgressView?) -> CirrentSDK.SoftApService
   public func setSoftApPort(port: Swift.Int) -> CirrentSDK.SoftApService
   public func setSoftApDeviceStatusTimings(softApDeviceStatusDelay: Swift.Int, softApDeviceStatusMaxRequestCount: Swift.Int) -> CirrentSDK.SoftApService
   @available(iOS 11.0, *)
   public func connectToDeviceViaSoftAp(_ softApSsid: Swift.String, _ delegate: CirrentSDK.SoftApDeviceConnectionCallback)
-  public func getDeviceInfoViaSoftAp(userAccountId: Swift.String, delegate: CirrentSDK.SoftApDeviceInfoCallback, exceptionHandler: @escaping (Swift.String, Swift.String) -> () = commonErrorHandler)
-  public func identifyYourself(delegate: CirrentSDK.SoftApIdentificationCallback, exceptionHandler: @escaping (Swift.String, Swift.String) -> () = commonErrorHandler)
-  public func putPrivateCredentialsViaSoftAp(isHiddenNetwork: Swift.Bool, priority: Swift.Int, softApSsid: Swift.String, selectedNetwork: CirrentSDK.WiFiNetwork, preSharedKey: Swift.String, delegate: CirrentSDK.SoftApCredentialsSenderCallback, exceptionHandler: @escaping (Swift.String, Swift.String) -> () = commonErrorHandler)
+  public func getDeviceInfoViaSoftAp(userAccountId: Swift.String, delegate: CirrentSDK.SoftApDeviceInfoCallback, exceptionHandler: @escaping (_ code: Swift.String, _ message: Swift.String) -> () = commonErrorHandler)
+  public func identifyYourself(delegate: CirrentSDK.SoftApIdentificationCallback, exceptionHandler: @escaping (_ code: Swift.String, _ message: Swift.String) -> () = commonErrorHandler)
+  public func putPrivateCredentialsViaSoftAp(isHiddenNetwork: Swift.Bool, priority: Swift.Int, softApSsid: Swift.String, selectedNetwork: CirrentSDK.WiFiNetwork, preSharedKey: Swift.String, delegate: CirrentSDK.SoftApCredentialsSenderCallback, exceptionHandler: @escaping (_ code: Swift.String, _ message: Swift.String) -> () = commonErrorHandler)
   public func cancelAllTasks()
-  public func leaveSoftApNetwork(softApSsid: Swift.String, disconnected: @escaping (Swift.Bool) -> ())
+  public func leaveSoftApNetwork(softApSsid: Swift.String, disconnected: @escaping (_ isDisconnectedSuccessfully: Swift.Bool) -> ())
   @objc override dynamic public init()
   @objc deinit
 }
-extension SoftApService {
+extension CirrentSDK.SoftApService {
   public func onNetworkJoined(softApSsid: Swift.String)
   public func onJoiningProcess()
   public func onNetworkJoiningFailed()
@@ -637,13 +639,13 @@ public protocol SoftApCredentialsSenderCallback {
   @objc override dynamic public init()
   @objc deinit
 }
-extension BluetoothService {
+extension CirrentSDK.BluetoothService {
   public func onNetworkJoined()
   public func onJoiningProcess()
-  public func onNetworkJoiningFailed()
+  public func onNetworkJoiningFailed(errorMessage: Swift.String)
   public func onFailedToGetNetworkStatus()
 }
-extension BluetoothService : CirrentSDK.BluetoothDeviceInfoCallback {
+extension CirrentSDK.BluetoothService : CirrentSDK.BluetoothDeviceInfoCallback {
   public func onOperationTimeLimitExceeded()
   public func onFailedToGetDeviceInfo()
   public func onConnectionIsNotEstablished()
@@ -672,7 +674,7 @@ public protocol BluetoothCredentialsSenderCallback {
   func onConnectionIsNotEstablished()
   func onConnectedToPrivateNetwork()
   func onFailedToGetNetworkStatus()
-  func onNetworkJoiningFailed()
+  func onNetworkJoiningFailed(errorMessage: Swift.String)
   func onIncorrectPriorityValueUsed()
 }
 @objc @_inheritsConvenienceInitializers public class BaseNetwork : CirrentSDK.CustomEVObject {
@@ -705,7 +707,6 @@ public protocol BluetoothCredentialsSenderCallback {
   @objc deinit
 }
 @objc @_hasMissingDesignatedInitializers public class GatewayIpProvider : ObjectiveC.NSObject {
-  @objc override dynamic public init()
   @objc deinit
 }
 public struct UpnpSearchRequest {
@@ -770,6 +771,175 @@ public enum StepResult : Swift.String {
     get
   }
 }
+@_hasMissingDesignatedInitializers public class Characteristic {
+  final public let characteristic: CoreBluetooth.CBCharacteristic
+  final public let service: CirrentSDK.Service
+  public var value: Foundation.Data? {
+    get
+  }
+  public var uuid: CoreBluetooth.CBUUID {
+    get
+  }
+  public var isNotifying: Swift.Bool {
+    get
+  }
+  public var properties: CoreBluetooth.CBCharacteristicProperties {
+    get
+  }
+  public func writeValue(_ data: Foundation.Data, type: CoreBluetooth.CBCharacteristicWriteType) -> RxSwift.Single<CirrentSDK.Characteristic>
+  public func observeValueUpdateAndSetNotification() -> RxSwift.Observable<CirrentSDK.Characteristic>
+  @objc deinit
+}
+extension CirrentSDK.Characteristic : Swift.Equatable {
+}
+public func == (lhs: CirrentSDK.Characteristic, rhs: CirrentSDK.Characteristic) -> Swift.Bool
+public typealias DisconnectionReason = Swift.Error
+@_hasMissingDesignatedInitializers public class CentralManager : CirrentSDK.ManagerType {
+  final public let manager: CoreBluetooth.CBCentralManager
+  @available(*, deprecated, renamed: "CentralManager.manager")
+  public var centralManager: CoreBluetooth.CBCentralManager {
+    get
+  }
+  convenience public init(queue: Dispatch.DispatchQueue = .main, options: [Swift.String : Swift.AnyObject]? = nil, cbCentralManager: CoreBluetooth.CBCentralManager? = nil)
+  public func attach()
+  public var state: CirrentSDK.BluetoothState {
+    get
+  }
+  public func observeState() -> RxSwift.Observable<CirrentSDK.BluetoothState>
+  public func observeStateWithInitialValue() -> RxSwift.Observable<CirrentSDK.BluetoothState>
+  public func scanForPeripherals(withServices serviceUUIDs: [CoreBluetooth.CBUUID]?, options: [Swift.String : Any]? = nil) -> RxSwift.Observable<CirrentSDK.ScannedPeripheral>
+  public func establishConnection(_ peripheral: CirrentSDK.Peripheral, options: [Swift.String : Any]? = nil) -> RxSwift.Observable<CirrentSDK.Peripheral>
+  public typealias Manager = CoreBluetooth.CBCentralManager
+  @objc deinit
+}
+public enum BluetoothState : Swift.Int {
+  case unknown
+  case resetting
+  case unsupported
+  case unauthorized
+  case poweredOff
+  case poweredOn
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+public enum BluetoothError : Swift.Error {
+  case destroyed
+  case scanInProgress
+  case advertisingInProgress
+  case advertisingStartFailed(Swift.Error)
+  case bluetoothUnsupported
+  case bluetoothUnauthorized
+  case bluetoothPoweredOff
+  case bluetoothInUnknownState
+  case bluetoothResetting
+  case peripheralIsAlreadyObservingConnection(CirrentSDK.Peripheral)
+  @available(*, deprecated, renamed: "BluetoothError.peripheralIsAlreadyObservingConnection")
+  case peripheralIsConnectingOrAlreadyConnected(CirrentSDK.Peripheral)
+  case peripheralConnectionFailed(CirrentSDK.Peripheral, Swift.Error?)
+  case peripheralDisconnected(CirrentSDK.Peripheral, Swift.Error?)
+  case peripheralRSSIReadFailed(CirrentSDK.Peripheral, Swift.Error?)
+  case servicesDiscoveryFailed(CirrentSDK.Peripheral, Swift.Error?)
+  case includedServicesDiscoveryFailed(CirrentSDK.Peripheral, Swift.Error?)
+  case addingServiceFailed(CoreBluetooth.CBService, Swift.Error?)
+  case characteristicsDiscoveryFailed(CirrentSDK.Service, Swift.Error?)
+  case characteristicWriteFailed(CirrentSDK.Characteristic, Swift.Error?)
+  case characteristicReadFailed(CirrentSDK.Characteristic, Swift.Error?)
+  case characteristicNotifyChangeFailed(CirrentSDK.Characteristic, Swift.Error?)
+  case characteristicSetNotifyValueFailed(CirrentSDK.Characteristic, Swift.Error?)
+  case descriptorsDiscoveryFailed(CirrentSDK.Characteristic, Swift.Error?)
+  case openingL2CAPChannelFailed(CirrentSDK.Peripheral, Swift.Error?)
+  case publishingL2CAPChannelFailed(CoreBluetooth.CBL2CAPPSM, Swift.Error?)
+  case unknownWriteType
+}
+extension CirrentSDK.BluetoothError : Swift.CustomStringConvertible {
+  public var description: Swift.String {
+    get
+  }
+}
+extension CirrentSDK.BluetoothError : Swift.Equatable {
+}
+public func == (lhs: CirrentSDK.BluetoothError, rhs: CirrentSDK.BluetoothError) -> Swift.Bool
+@_hasMissingDesignatedInitializers public class RxBluetoothLog {
+  @objc deinit
+}
+public protocol ManagerType : AnyObject {
+  associatedtype Manager
+  var manager: Self.Manager { get }
+  var state: CirrentSDK.BluetoothState { get }
+  func observeState() -> RxSwift.Observable<CirrentSDK.BluetoothState>
+  func observeStateWithInitialValue() -> RxSwift.Observable<CirrentSDK.BluetoothState>
+}
+extension CirrentSDK.ManagerType {
+  public func ensure<T>(_ state: CirrentSDK.BluetoothState, observable: RxSwift.Observable<T>) -> RxSwift.Observable<T>
+}
+@_hasMissingDesignatedInitializers public class Service {
+  final public let service: CoreBluetooth.CBService
+  final public let peripheral: CirrentSDK.Peripheral
+  public var isPrimary: Swift.Bool {
+    get
+  }
+  public var uuid: CoreBluetooth.CBUUID {
+    get
+  }
+  public var includedServices: [CirrentSDK.Service]? {
+    get
+  }
+  public var characteristics: [CirrentSDK.Characteristic]? {
+    get
+  }
+  public func discoverCharacteristics(_ characteristicUUIDs: [CoreBluetooth.CBUUID]?) -> RxSwift.Single<[CirrentSDK.Characteristic]>
+  @objc deinit
+}
+extension CirrentSDK.Service : Swift.Equatable {
+}
+public func == (lhs: CirrentSDK.Service, rhs: CirrentSDK.Service) -> Swift.Bool
+@_hasMissingDesignatedInitializers public class Peripheral {
+  unowned final public let manager: CirrentSDK.CentralManager
+  final public let peripheral: CoreBluetooth.CBPeripheral
+  public var isConnected: Swift.Bool {
+    get
+  }
+  public var state: CoreBluetooth.CBPeripheralState {
+    get
+  }
+  public var name: Swift.String? {
+    get
+  }
+  public var identifier: Foundation.UUID {
+    get
+  }
+  public var services: [CirrentSDK.Service]? {
+    get
+  }
+  public var canSendWriteWithoutResponse: Swift.Bool {
+    get
+  }
+  public func establishConnection(options: [Swift.String : Any]? = nil) -> RxSwift.Observable<CirrentSDK.Peripheral>
+  public func discoverServices(_ serviceUUIDs: [CoreBluetooth.CBUUID]?) -> RxSwift.Single<[CirrentSDK.Service]>
+  public func discoverCharacteristics(_ characteristicUUIDs: [CoreBluetooth.CBUUID]?, for service: CirrentSDK.Service) -> RxSwift.Single<[CirrentSDK.Characteristic]>
+  public func observeWrite(for characteristic: CirrentSDK.Characteristic? = nil) -> RxSwift.Observable<CirrentSDK.Characteristic>
+  @available(macOS 10.12, iOS 9.0, *)
+  public func maximumWriteValueLength(for type: CoreBluetooth.CBCharacteristicWriteType) -> Swift.Int
+  public func writeValue(_ data: Foundation.Data, for characteristic: CirrentSDK.Characteristic, type: CoreBluetooth.CBCharacteristicWriteType, canSendWriteWithoutResponseCheckEnabled: Swift.Bool = true) -> RxSwift.Single<CirrentSDK.Characteristic>
+  public func observeValueUpdateAndSetNotification(for characteristic: CirrentSDK.Characteristic) -> RxSwift.Observable<CirrentSDK.Characteristic>
+  public func observeWriteWithoutResponseReadiness() -> RxSwift.Observable<Swift.Void>
+  @objc deinit
+}
+extension CirrentSDK.Peripheral : Swift.Equatable {
+}
+public func == (lhs: CirrentSDK.Peripheral, rhs: CirrentSDK.Peripheral) -> Swift.Bool
+@_hasMissingDesignatedInitializers public class ScannedPeripheral {
+  final public let peripheral: CirrentSDK.Peripheral
+  final public let advertisementData: [Swift.String : Any]
+  final public let rssi: Foundation.NSNumber
+  public var localName: Swift.String? {
+    get
+  }
+  @objc deinit
+}
 extension CirrentSDK.HMACAlgorithm.Hash : Swift.Equatable {}
 extension CirrentSDK.HMACAlgorithm.Hash : Swift.Hashable {}
 extension CirrentSDK.OnboardingType : Swift.Equatable {}
@@ -780,3 +950,6 @@ extension CirrentSDK.ErrorType : Swift.Hashable {}
 extension CirrentSDK.StepResult : Swift.Equatable {}
 extension CirrentSDK.StepResult : Swift.Hashable {}
 extension CirrentSDK.StepResult : Swift.RawRepresentable {}
+extension CirrentSDK.BluetoothState : Swift.Equatable {}
+extension CirrentSDK.BluetoothState : Swift.Hashable {}
+extension CirrentSDK.BluetoothState : Swift.RawRepresentable {}
