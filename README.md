@@ -37,6 +37,9 @@ other functions don't require a delegate as a parameter.
 - improved stability.
 #### Fixed
 - fixed a bug where the app gets stuck during BLE onboarding if the CA doesn't provide a response
+### 1.3.8
+#### Fixed
+- - fixed a bug where SDK doesn't build on XCode 13.
 ### 1.3.7
 #### Fixed
 - fixed a bug where MAI doesn't print all required logs when debug mode is on.

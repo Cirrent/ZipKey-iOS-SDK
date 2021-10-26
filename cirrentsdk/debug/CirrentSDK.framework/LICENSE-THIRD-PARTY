@@ -1,13 +1,13 @@
-CirrentSDK/EVReflection/CustomConversionOptions.swift
-CirrentSDK/EVReflection/CustomDeserializationStatus.swift
-CirrentSDK/EVReflection/EVArrayExtension.swift
-CirrentSDK/EVReflection/CustomEVCustomReflectable.swift
-CirrentSDK/EVReflection/EVDictionaryExtension.swift
-CirrentSDK/EVReflection/CustomEVObject.swift
-CirrentSDK/EVReflection/CustomEVReflectable.swift
-CirrentSDK/EVReflection/CustomEVReflection.swift
-CirrentSDK/EVReflection/EVWorkaroundHelpers.swift
-CirrentSDK/EVReflection/CustomPrintOptions.swift // todo
+CirrentSDK/CustomConversionOptions.swift
+CirrentSDK/CustomDeserializationStatus.swift
+CirrentSDK/CustomEVArrayExtension.swift
+CirrentSDK/CustomEVCustomReflectable.swift
+CirrentSDK/CustomEVDictionaryExtension.swift
+CirrentSDK/CustomEVObject.swift
+CirrentSDK/CustomEVReflectable.swift
+CirrentSDK/CustomEVReflection.swift
+CirrentSDK/CustomEVWorkaroundHelpers.swift
+CirrentSDK/CustomPrintOptions.swift
 ====================================================================
 MIT 3 License
 
@@ -70,35 +70,3 @@ SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
 CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
 OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-====================================================================
-CirrentSDK/RxBluetooth/Connector
-CirrentSDK/RxBluetooth/Characteristic
-CirrentSDK/RxBluetooth/CBCentralManagerDelegateWrapper
-CirrentSDK/RxBluetooth/CentralManager
-CirrentSDK/RxBluetooth/BluetoothState
-CirrentSDK/RxBluetooth/BluetoothError
-CirrentSDK/RxBluetooth/Boxes
-CirrentSDK/RxBluetooth/CBPeripheral+Uuid
-CirrentSDK/RxBluetooth/CBPeripheralDelegateWrapper
-CirrentSDK/RxBluetooth/CharacteristicNotificationManager
-CirrentSDK/RxBluetooth/PeripheralProvider
-CirrentSDK/RxBluetooth/ManagerType
-CirrentSDK/RxBluetooth/Service
-CirrentSDK/RxBluetooth/Peripheral
-CirrentSDK/RxBluetooth/Observable+Absorb
-CirrentSDK/RxBluetooth/UUIDIdentifiable
-CirrentSDK/RxBluetooth/ScannedPeripheral
-
-Copyright 2018 Polidea Sp. z o.o.
-
-   Licensed under the Apache License, Version 2.0 (the "License");
-   you may not use this file except in compliance with the License.
-   You may obtain a copy of the License at
-
-       http://www.apache.org/licenses/LICENSE-2.0
-
-   Unless required by applicable law or agreed to in writing, software
-   distributed under the License is distributed on an "AS IS" BASIS,
-   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-   See the License for the specific language governing permissions and
-   limitations under the License.
