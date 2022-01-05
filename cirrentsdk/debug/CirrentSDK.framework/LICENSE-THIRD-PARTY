@@ -1,13 +1,13 @@
-CirrentSDK/CustomConversionOptions.swift
-CirrentSDK/CustomDeserializationStatus.swift
-CirrentSDK/CustomEVArrayExtension.swift
-CirrentSDK/CustomEVCustomReflectable.swift
-CirrentSDK/CustomEVDictionaryExtension.swift
-CirrentSDK/CustomEVObject.swift
-CirrentSDK/CustomEVReflectable.swift
-CirrentSDK/CustomEVReflection.swift
-CirrentSDK/CustomEVWorkaroundHelpers.swift
-CirrentSDK/CustomPrintOptions.swift
+CirrentSDK/EVReflection/CustomConversionOptions.swift
+CirrentSDK/EVReflection/CustomDeserializationStatus.swift
+CirrentSDK/EVReflection/EVArrayExtension.swift
+CirrentSDK/EVReflection/CustomEVCustomReflectable.swift
+CirrentSDK/EVReflection/EVDictionaryExtension.swift
+CirrentSDK/EVReflection/CustomEVObject.swift
+CirrentSDK/EVReflection/CustomEVReflectable.swift
+CirrentSDK/EVReflection/CustomEVReflection.swift
+CirrentSDK/EVReflection/EVWorkaroundHelpers.swift
+CirrentSDK/EVReflection/CustomPrintOptions.swift
 ====================================================================
 MIT 3 License
 

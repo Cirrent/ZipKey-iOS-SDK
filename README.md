@@ -4,11 +4,6 @@ Add to the Podfile:
 pod 'CirrentSDK-Debug', :configuration => 'DEBUG_CONFIGURATION_NAME', :git => 'https://github.com/Cirrent/ZipKey-iOS-SDK.git'
 pod 'CirrentSDK-Release', :configuration => 'RELEASE_CONFIGURATION_NAME', :git => 'https://github.com/Cirrent/ZipKey-iOS-SDK.git'
 ```
-If you use XCode 10.1:
-```
-pod 'CirrentSDK-Debug_xcode10_1', :configuration => 'DEBUG_CONFIGURATION_NAME', :git => 'https://github.com/Cirrent/ZipKey-iOS-SDK.git'
-pod 'CirrentSDK-Release_xcode10_1', :configuration => 'RELEASE_CONFIGURATION_NAME', :git => 'https://github.com/Cirrent/ZipKey-iOS-SDK.git'
-```
 
 Please note that "Debug" versions suppose to work on real devices AND the emulator, and it's not intended to be sent to the AppStore.
 "Release" version works only with real devices and doesn't contain simulator architectures. Only "Release" version can be sent to the AppStore.
@@ -16,10 +11,11 @@ Please note that "Debug" versions suppose to work on real devices AND the emulat
 So please do not forget to change DEBUG_CONFIGURATION_NAME & RELEASE_CONFIGURATION_NAME to those that are used in your project!
 
 ## CHANGELOG
+### 1.5.9
+- CIRRENT™ Wi-Fi Onboarding API was simplified; 
+- bug fixes and improvements;
 ### 1.5.5
-#### Fixed
-- fixed a bug where MAI doesn't try to send data after token was updated;
-- fixed a bug where SDK doesn't build on XCode 13.
+- bug fixes and improvements;
 ### 1.5.3
 #### Changed
 - now to report step details you need to call `MobileAppIntelligence.enterStep(StepData)` method (you can create `StepData` object using `StepData.create()` method);
@@ -35,22 +31,17 @@ other functions don't require a delegate as a parameter.
 - BLE & Soft AP onboarding protocols have been changed;
 - ZipKey onboarding type has been completely removed;
 - improved stability.
-#### Fixed
-- fixed a bug where the app gets stuck during BLE onboarding if the CA doesn't provide a response
 ### 1.3.8
-#### Fixed
-- - fixed a bug where SDK doesn't build on XCode 13.
+- bug fixes and improvements;
 ### 1.3.7
-#### Fixed
-- fixed a bug where MAI doesn't print all required logs when debug mode is on.
+- bug fixes and improvements;
 #### Added
 - an ability to restart "init" data collecting if location permission is granted.
 ### 1.3.5
 #### Added
 - `MobileAppIntelligence.setDebugMode(enabled: Bool)` . This method gives an ability to see more log entries.
 ### 1.3.4
-#### Fixed
-- a bug where MAI requires initialization even after it has been performed.
+- bug fixes and improvements;
 ### 1.3.3
 #### Added
 - `MobileAppIntelligence.createToken()` function which allows to generate ANALYTICS token;
@@ -61,21 +52,17 @@ other functions don't require a delegate as a parameter.
 #### Added
 - Mobile Onboarding Analytics;
 ### 1.2.38
-#### Added
-- account id checking logic.
-#### Fixed
-- disconnection issues during Soft AP on-boarding process.
+- added account id checking logic.
+- bug fixes and improvements;
 ### 1.2.36
-#### Fixed
-- class name duplication issues.
+- bug fixes and improvements;
 ### 1.2.35
 #### Added
 - optional `GatherEnvironmentCallback` delegate with a `onEnvironmentGathered(isEnvironmentCompletelyCollected: Bool)` function to the `CirrentService.gatherEnvironment()`.
 #### Improved
 - `CirrentService.findDevice()`. The process of finding devices is now faster.
 ### 1.2.34
-#### Fixed
-- a bug when Xcode 11.2.1 couldn't load the SDK.
+- bug fixes and improvements;
 ### 1.2.33
 #### Added
 - `boolean isProviderKnownNetwork` and `String jwt` to the `DeviceInfoCallback.onDevicesFound(List<Device> nearbyDevices)` method.
