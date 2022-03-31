@@ -1,0 +1,36 @@
+
+framework module CirrentSDK {
+    umbrella header "CirrentSDK.h"
+    
+    export *
+    module * {
+        export *
+    }
+}
+
+explicit module CirrentSDK.NetworkTool {
+    header "NetworkTool.h"
+    export *
+}
+
+explicit module CirrentSDK.RSAUtil {
+    header "RSAUtil.h"
+    export *
+}
+
+explicit module CirrentSDK.SimplePing {
+  header "SimplePing.h"
+  export *
+}
+
+explicit module CirrentSDK.NetworkUtils {
+  header "NetworkUtils.h"
+  export *
+}
+
+
+
+module CirrentSDK.Swift {
+    header "CirrentSDK-Swift.h"
+    requires objc
+}

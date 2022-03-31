@@ -1,0 +1,2901 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.6 effective-4.2 (swiftlang-5.6.0.323.62 clang-1316.0.20.8)
+// swift-module-flags: -target arm64-apple-ios11.0 -enable-objc-interop -enable-library-evolution -swift-version 4.2 -enforce-exclusivity=checked -O -module-name CirrentSDK
+import SystemConfiguration.CaptiveNetwork
+@_exported import CirrentSDK
+import Combine
+import CommonCrypto
+import CoreBluetooth
+import CoreLocation
+import Dispatch
+import Foundation
+import CirrentSDK.GCDAsyncUdpSocket
+import MobileCoreServices
+import NetworkExtension
+import CirrentSDK.NetworkTool
+import CirrentSDK.NetworkUtils
+import CirrentSDK.RSAUtil
+import Swift
+import SystemConfiguration
+import UIKit
+import _Concurrency
+extension CirrentSDK.HMACAlgorithm : CirrentSDK.SignAlgorithm, CirrentSDK.VerifyAlgorithm {
+  final public func sign(_ message: Foundation.Data) -> Foundation.Data
+}
+@objc @_inheritsConvenienceInitializers public class DeviceKnownNetwork : CirrentSDK.BaseNetwork {
+  @objc public var status: Swift.String
+  @objc public var priority: Swift.Int
+  @objc public var security: Swift.String
+  @objc public var source: Swift.String
+  @objc required dynamic public init()
+  @objc deinit
+}
+final public class HMACAlgorithm : CirrentSDK.Algorithm {
+  final public let key: Foundation.Data
+  final public let hash: CirrentSDK.HMACAlgorithm.Hash
+  public enum Hash {
+    case sha256
+    case sha384
+    case sha512
+    public static func == (a: CirrentSDK.HMACAlgorithm.Hash, b: CirrentSDK.HMACAlgorithm.Hash) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+  public init(key: Foundation.Data, hash: CirrentSDK.HMACAlgorithm.Hash)
+  public init?(key: Swift.String, hash: CirrentSDK.HMACAlgorithm.Hash)
+  final public var name: Swift.String {
+    get
+  }
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers public class CirrentError : CirrentSDK.CustomEVObject {
+  @objc public var code: Swift.String
+  @objc public var message: Swift.String
+  @objc public var statusCode: Swift.String
+  @objc required dynamic public init()
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class DeviceData : CirrentSDK.BaseData {
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers final public class CustomEVReflection {
+  final public class func fromDictionary(_ dictionary: Foundation.NSDictionary, anyobjectTypeString: Swift.String, conversionOptions: CirrentSDK.CustomConversionOptions = .DefaultDeserialize) -> ObjectiveC.NSObject?
+  @discardableResult
+  final public class func setPropertiesfromDictionary<T>(_ dictionary: Foundation.NSDictionary, anyObject: T, conversionOptions: CirrentSDK.CustomConversionOptions = .DefaultDeserialize, forKeyPath: Swift.String? = nil) -> T where T : ObjectiveC.NSObject
+  final public class func getValue(_ fromObject: ObjectiveC.NSObject, key: Swift.String) -> Any?
+  final public class func toDictionary(_ theObject: ObjectiveC.NSObject, conversionOptions: CirrentSDK.CustomConversionOptions = .DefaultSerialize, isCachable: Swift.Bool = false, parents: [ObjectiveC.NSObject] = []) -> (Foundation.NSDictionary, Foundation.NSDictionary)
+  final public class func dictionaryFromJson(_ json: Swift.String?) -> Foundation.NSDictionary
+  final public class func dictionaryArrayFromJson(_ json: Swift.String?) -> [Foundation.NSDictionary]
+  final public class func arrayFromData<T>(_ theObject: ObjectiveC.NSObject? = nil, type: T, data: Foundation.Data?, conversionOptions: CirrentSDK.CustomConversionOptions = .DefaultDeserialize, forKeyPath: Swift.String? = nil) -> [T]
+  final public class func arrayFromJson<T>(type: T, json: Swift.String?, conversionOptions: CirrentSDK.CustomConversionOptions = .DefaultDeserialize, forKeyPath: Swift.String? = nil) -> [T]
+  final public class func toJsonString(_ theObject: ObjectiveC.NSObject, conversionOptions: CirrentSDK.CustomConversionOptions = .DefaultSerialize, prettyPrinted: Swift.Bool = false) -> Swift.String
+  final public class func toJsonData(_ theObject: ObjectiveC.NSObject, conversionOptions: CirrentSDK.CustomConversionOptions = .DefaultSerialize, prettyPrinted: Swift.Bool = false) -> Foundation.Data
+  final public class func logObject(_ theObject: CirrentSDK.CustomEVReflectable, prettyPrinted: Swift.Bool = true)
+  final public class func description(_ theObject: CirrentSDK.CustomEVReflectable, conversionOptions: CirrentSDK.CustomConversionOptions = .DefaultSerialize, prettyPrinted: Swift.Bool = true) -> Swift.String
+  final public class func hashValue(_ theObject: ObjectiveC.NSObject) -> Swift.Int
+  final public class func encodeWithCoder(_ theObject: ObjectiveC.NSObject, aCoder: Foundation.NSCoder, conversionOptions: CirrentSDK.CustomConversionOptions = .DefaultNSCoding)
+  final public class func decodeObjectWithCoder(_ theObject: ObjectiveC.NSObject, aDecoder: Foundation.NSCoder, conversionOptions: CirrentSDK.CustomConversionOptions = .DefaultNSCoding)
+  final public class func areEqual(_ lhs: ObjectiveC.NSObject, rhs: ObjectiveC.NSObject) -> Swift.Bool
+  final public class func dictionariesAreEqual(_ lhsdict: Foundation.NSDictionary, rhsdict: Foundation.NSDictionary) -> Swift.Bool
+  final public class func getCleanAppName(_ forObject: ObjectiveC.NSObject? = nil) -> Swift.String
+  final public class func getCleanAppName(_ aClass: Swift.AnyClass?) -> Swift.String
+  final public class func setBundleIdentifier(_ forClass: Swift.AnyClass)
+  final public class func setBundleIdentifier(_ identifier: Swift.String)
+  final public class func setBundleIdentifiers(_ classes: Swift.Array<Swift.AnyClass>)
+  final public class func setBundleIdentifiers(_ identifiers: Swift.Array<Swift.String>)
+  final public class func setDateFormatter(_ formatter: Foundation.DateFormatter?)
+  final public class func swiftClassTypeFromString(_ className: Swift.String) -> Swift.AnyClass?
+  final public class func swiftClassFromString(_ className: Swift.String) -> ObjectiveC.NSObject?
+  final public class func swiftStringFromClass(_ theObject: ObjectiveC.NSObject) -> Swift.String
+  final public class func swiftStringFromClass(_ aClass: Swift.AnyClass) -> Swift.String
+  final public class func valueForAny(_ parentObject: Any? = nil, key: Swift.String? = nil, anyValue: Any, conversionOptions: CirrentSDK.CustomConversionOptions = .DefaultDeserialize, isCachable: Swift.Bool = false, parents: [ObjectiveC.NSObject] = []) -> (value: Swift.AnyObject, type: Swift.String, isObject: Swift.Bool)
+  final public class func convertToInternalSwiftRepresentation(type: Swift.String) -> Swift.String
+  final public class func valueForAnyDetail(_ parentObject: Any? = nil, key: Swift.String? = nil, theValue: Any, valueType: Swift.String) -> (value: Swift.AnyObject, type: Swift.String, isObject: Swift.Bool)
+  public static func setObjectValue<T>(_ anyObject: T, key: Swift.String, theValue: Any?, typeInObject: Swift.String? = nil, valid: Swift.Bool, conversionOptions: CirrentSDK.CustomConversionOptions = .DefaultDeserialize, parents: [ObjectiveC.NSObject] = []) where T : ObjectiveC.NSObject
+  @objc deinit
+}
+extension Foundation.Date {
+  public init?(fromDateTimeString: Swift.String)
+}
+extension Swift.Array where Element : ObjectiveC.NSObject {
+  public init(json: Swift.String?, conversionOptions: CirrentSDK.CustomConversionOptions = .DefaultDeserialize, forKeyPath: Swift.String? = nil)
+  public init(data: Foundation.Data?, conversionOptions: CirrentSDK.CustomConversionOptions = .DefaultDeserialize, forKeyPath: Swift.String? = nil)
+  public init(dictionaryArray: [Foundation.NSDictionary], conversionOptions: CirrentSDK.CustomConversionOptions = .DefaultDeserialize)
+  public init(dictionary: Foundation.NSDictionary, forKeyPath: Swift.String, conversionOptions: CirrentSDK.CustomConversionOptions = .DefaultDeserialize)
+  public func getArrayTypeInstance<T>(_ arr: Swift.Array<T>) -> T where T : ObjectiveC.NSObject
+  public func getTypeInstance<T>() -> T where T : ObjectiveC.NSObject
+  public func getTypeAsString() -> Swift.String
+}
+extension Swift.Array where Element : CirrentSDK.CustomEVReflectable {
+  public func toJsonString(_ conversionOptions: CirrentSDK.CustomConversionOptions = .DefaultSerialize, prettyPrinted: Swift.Bool = false) -> Swift.String
+  public func toJsonData(_ conversionOptions: CirrentSDK.CustomConversionOptions = .DefaultSerialize, prettyPrinted: Swift.Bool = false, encoding: Swift.String.Encoding = .utf8) -> Foundation.Data
+  public func toDictionaryArray(_ conversionOptions: CirrentSDK.CustomConversionOptions = .DefaultSerialize) -> Foundation.NSArray
+}
+extension Swift.Array where Element : Foundation.NSDictionary {
+  public init(jsonArray: Swift.String)
+  public init(dataArray: Foundation.Data)
+  public func toJsonStringArray(prettyPrinted: Swift.Bool = false) -> Swift.String
+}
+extension Foundation.NSArray {
+  public func nestedArrayMap<T>(_ element: (Foundation.NSDictionary) -> T) -> [[T]]
+  public func doubleNestedArrayMap<T>(_ element: (Foundation.NSDictionary) -> T) -> [[[T]]]
+  public func tripleNestedArrayMap<T>(_ element: (Foundation.NSDictionary) -> T) -> [[[[T]]]]
+  public func quadrupleNestedArrayMap<T>(_ element: (Foundation.NSDictionary) -> T) -> [[[[[T]]]]]
+  public func quintupleNestedArrayMap<T>(_ element: (Foundation.NSDictionary) -> T) -> [[[[[[T]]]]]]
+  public func sextupleNestedArrayMap<T>(_ element: (Foundation.NSDictionary) -> T) -> [[[[[[[T]]]]]]]
+}
+@objc @_inheritsConvenienceInitializers public class StringValue : CirrentSDK.CustomEVObject {
+  @objc public var value: Swift.String
+  @objc required dynamic public init()
+  @objc deinit
+}
+public protocol CustomEVGenericsKVC {
+  func setGenericValue(_ value: Swift.AnyObject!, forUndefinedKey key: Swift.String)
+  func getGenericType() -> ObjectiveC.NSObject
+}
+public protocol CustomEVRaw {
+  var anyRawValue: Any { get }
+}
+extension CirrentSDK.CustomEVRaw where Self : Swift.RawRepresentable {
+  public var anyRawValue: Any {
+    get
+  }
+}
+public protocol CustomEVArrayConvertable {
+  func convertArray(_ key: Swift.String, array: Any) -> Foundation.NSArray
+}
+public protocol CustomEVAssociated {
+}
+extension CirrentSDK.CustomEVAssociated {
+  public var associated: (label: Swift.String, value: Any?, values: [Any]) {
+    get
+  }
+}
+extension Swift.Dictionary {
+  public init<T>(associated: [T]?) where T : CirrentSDK.CustomEVAssociated
+}
+@objc @_inheritsConvenienceInitializers public class BonjourService : CirrentSDK.CustomEVObject {
+  @objc required dynamic public init()
+  @objc deinit
+}
+public protocol CirrentProgressView {
+  func showProgress()
+  func stopProgress()
+}
+public struct CustomPrintOptions : Swift.OptionSet, Swift.CustomStringConvertible {
+  public let rawValue: Swift.Int
+  public init(rawValue: Swift.Int)
+  public static let None: CirrentSDK.CustomPrintOptions
+  public static let UnknownKeypath: CirrentSDK.CustomPrintOptions
+  public static let IncorrectKey: CirrentSDK.CustomPrintOptions
+  public static let ShouldExtendNSObject: CirrentSDK.CustomPrintOptions
+  public static let IsInvalidJson: CirrentSDK.CustomPrintOptions
+  public static let MissingProtocol: CirrentSDK.CustomPrintOptions
+  public static let MissingKey: CirrentSDK.CustomPrintOptions
+  public static let InvalidType: CirrentSDK.CustomPrintOptions
+  public static let InvalidValue: CirrentSDK.CustomPrintOptions
+  public static let InvalidClass: CirrentSDK.CustomPrintOptions
+  public static let EnumWithoutAssociatedValue: CirrentSDK.CustomPrintOptions
+  public static let UseWorkaround: CirrentSDK.CustomPrintOptions
+  public static var All: CirrentSDK.CustomPrintOptions
+  public static var Active: CirrentSDK.CustomPrintOptions
+  public var description: Swift.String {
+    get
+  }
+  public typealias ArrayLiteralElement = CirrentSDK.CustomPrintOptions
+  public typealias Element = CirrentSDK.CustomPrintOptions
+  public typealias RawValue = Swift.Int
+}
+public func evPrint(_ options: CirrentSDK.CustomPrintOptions, _ value: Swift.String)
+public protocol Algorithm : AnyObject {
+  var name: Swift.String { get }
+}
+public protocol SignAlgorithm : CirrentSDK.Algorithm {
+  func sign(_ message: Foundation.Data) -> Foundation.Data
+}
+public protocol VerifyAlgorithm : CirrentSDK.Algorithm {
+  func verify(_ message: Foundation.Data, signature: Foundation.Data) -> Swift.Bool
+}
+extension CirrentSDK.SignAlgorithm {
+  public func verify(_ message: Foundation.Data, signature: Foundation.Data) -> Swift.Bool
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class PerformanceData : CirrentSDK.BaseData {
+  override public func propertyMapping() -> [(keyInObject: Swift.String?, keyInResource: Swift.String?)]
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers public class PrivateNetworkInfo : CirrentSDK.CustomEVObject {
+  @objc public var priority: Swift.Int
+  @objc public var hidden: Swift.Bool
+  @objc public var ssid: Swift.String
+  @objc public var hexSsid: Swift.String
+  @objc public var security: Swift.String
+  @objc public var encryptedPreSharedKey: Swift.String
+  override public func propertyMapping() -> [(keyInObject: Swift.String?, keyInResource: Swift.String?)]
+  @objc override public func skipPropertyValue(_ value: Any, key: Swift.String) -> Swift.Bool
+  @objc required dynamic public init()
+  @objc deinit
+}
+public protocol CustomEVReflectable : ObjectiveC.NSObjectProtocol {
+  func initValidation(_ dict: Foundation.NSDictionary)
+  func propertyMapping() -> [(keyInObject: Swift.String?, keyInResource: Swift.String?)]
+  func propertyConverters() -> [(key: Swift.String, decodeConverter: ((Any?) -> ()), encodeConverter: (() -> Any?))]
+  func skipPropertyValue(_ value: Any, key: Swift.String) -> Swift.Bool
+  func decodePropertyValue(value: Any, key: Swift.String) -> Any?
+  func encodePropertyValue(value: Any, key: Swift.String) -> Any
+  func getType(_ dict: Foundation.NSDictionary) -> CirrentSDK.CustomEVReflectable
+  func getSpecificType(_ dict: Foundation.NSDictionary) -> CirrentSDK.CustomEVReflectable?
+  func customConverter() -> Swift.AnyObject?
+  var evReflectionStatuses: [(CirrentSDK.CustomDeserializationStatus, Swift.String)] { get set }
+}
+extension CirrentSDK.CustomEVReflectable where Self : ObjectiveC.NSObject {
+  public var evReflectionStatuses: [(CirrentSDK.CustomDeserializationStatus, Swift.String)] {
+    get
+    set
+  }
+  public init(dictionary: Foundation.NSDictionary, conversionOptions: CirrentSDK.CustomConversionOptions = .DefaultDeserialize, forKeyPath: Swift.String? = nil)
+  public init(json: Swift.String?, conversionOptions: CirrentSDK.CustomConversionOptions = .DefaultDeserialize, forKeyPath: Swift.String? = nil)
+  public init(data: Foundation.Data, conversionOptions: CirrentSDK.CustomConversionOptions = .DefaultDeserialize, forKeyPath: Swift.String? = nil)
+  public init(fileNameInTemp: Swift.String, conversionOptions: CirrentSDK.CustomConversionOptions = .DefaultNSCoding)
+  public init(fileNameInDocuments: Swift.String, conversionOptions: CirrentSDK.CustomConversionOptions = .DefaultNSCoding)
+  public init(usingValuesFrom: CirrentSDK.CustomEVReflectable, conversionOptions: CirrentSDK.CustomConversionOptions = .None)
+  public var hashValue: Swift.Int {
+    get
+  }
+  public var hash: Swift.Int {
+    get
+  }
+}
+extension CirrentSDK.CustomEVReflectable {
+  public static func == (lhs: CirrentSDK.CustomEVReflectable, rhs: CirrentSDK.CustomEVReflectable) -> Swift.Bool
+  public static func != (lhs: CirrentSDK.CustomEVReflectable, rhs: CirrentSDK.CustomEVReflectable) -> Swift.Bool
+  public func initValidation(_ dict: Foundation.NSDictionary)
+  public func propertyMapping() -> [(keyInObject: Swift.String?, keyInResource: Swift.String?)]
+  public func propertyConverters() -> [(key: Swift.String, decodeConverter: ((Any?) -> ()), encodeConverter: (() -> Any?))]
+  public func skipPropertyValue(_ value: Any, key: Swift.String) -> Swift.Bool
+  public func decodePropertyValue(value: Any, key: Swift.String) -> Any?
+  public func encodePropertyValue(value: Any, key: Swift.String) -> Any
+  public func customConverter() -> Swift.AnyObject?
+  public func getType(_ dict: Foundation.NSDictionary) -> CirrentSDK.CustomEVReflectable
+  public func getSpecificType(_ dict: Foundation.NSDictionary) -> CirrentSDK.CustomEVReflectable?
+  @discardableResult
+  public func saveToTemp(_ fileName: Swift.String) -> Swift.Bool
+  @discardableResult
+  public func saveToDocuments(_ fileName: Swift.String) -> Swift.Bool
+  public func toDictionary(_ conversionOptions: CirrentSDK.CustomConversionOptions = .DefaultSerialize) -> Foundation.NSDictionary
+  public func toJsonString(_ conversionOptions: CirrentSDK.CustomConversionOptions = .DefaultSerialize, prettyPrinted: Swift.Bool = false) -> Swift.String
+  public func toJsonData(_ conversionOptions: CirrentSDK.CustomConversionOptions = .DefaultSerialize, prettyPrinted: Swift.Bool = false) -> Foundation.Data
+  public static func arrayFromJson<T>(_ json: Swift.String?, conversionOptions: CirrentSDK.CustomConversionOptions = .DefaultDeserialize) -> [T] where T : ObjectiveC.NSObject
+  public func mapObjectTo<T>(_ conversionOptions: CirrentSDK.CustomConversionOptions = .DefaultDeserialize) -> T where T : ObjectiveC.NSObject
+  public func typeForKey(_ propertyName: Swift.String) -> Any.Type?
+  public func convertDictionary(_ key: Swift.String, dict: Any) -> Foundation.NSDictionary
+  public func initMayNotContainKeys(_ keys: [Swift.String], dict: Foundation.NSDictionary)
+  public func initMustContainKeys(_ keys: [Swift.String], dict: Foundation.NSDictionary)
+  public func evReflectionStatus() -> CirrentSDK.CustomDeserializationStatus
+  public func addStatusMessage(_ type: CirrentSDK.CustomDeserializationStatus, message: Swift.String)
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class NetworkEventData : CirrentSDK.BaseData {
+  override public func propertyMapping() -> [(keyInObject: Swift.String?, keyInResource: Swift.String?)]
+  @objc deinit
+}
+public struct ClaimSet {
+  public init(claims: [Swift.String : Any]? = nil)
+  public subscript(key: Swift.String) -> Any? {
+    get
+    set
+  }
+}
+extension CirrentSDK.ClaimSet {
+  public var issuer: Swift.String? {
+    get
+    set
+  }
+  public var audience: Swift.String? {
+    get
+    set
+  }
+  public var expiration: Foundation.Date? {
+    get
+    set
+  }
+  public var notBefore: Foundation.Date? {
+    get
+    set
+  }
+  public var issuedAt: Foundation.Date? {
+    get
+    set
+  }
+}
+@_hasMissingDesignatedInitializers public class ClaimSetBuilder {
+  public var issuer: Swift.String? {
+    get
+    set
+  }
+  public var audience: Swift.String? {
+    get
+    set
+  }
+  public var expiration: Foundation.Date? {
+    get
+    set
+  }
+  public var notBefore: Foundation.Date? {
+    get
+    set
+  }
+  public var issuedAt: Foundation.Date? {
+    get
+    set
+  }
+  public subscript(key: Swift.String) -> Any? {
+    get
+    set
+  }
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers public class RequestData : CirrentSDK.CustomEVObject {
+  @objc override dynamic public func setValue(_ value: Any!, forUndefinedKey key: Swift.String)
+  @objc required dynamic public init()
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers public class JWT {
+  public static func encode(claims: CirrentSDK.ClaimSet, algorithm: CirrentSDK.AlgorithmNum, headers: [Swift.String : Swift.String]? = nil) -> Swift.String
+  public static func encode(claims: [Swift.String : Any], algorithm: CirrentSDK.AlgorithmNum, headers: [Swift.String : Swift.String]? = nil) -> Swift.String
+  public static func encode(_ algorithm: CirrentSDK.AlgorithmNum, closure: ((CirrentSDK.ClaimSetBuilder) -> Swift.Void)) -> Swift.String
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers public class StringArray : CirrentSDK.CustomEVObject {
+  @objc public var value: [Swift.String]
+  @objc required dynamic public init()
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers public class SynchronizedDictionary<K, V> where K : Swift.Hashable {
+  public func setValue(value: V?, forKey key: K)
+  public var count: Swift.Int {
+    get
+  }
+  public func getValue(key: K) -> V?
+  public func getFullDictionary() -> [K : V]
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers public class UserActionStatus : CirrentSDK.CustomEVObject {
+  @objc public var code: Swift.String
+  @objc public var message: Swift.String
+  @objc required dynamic public init()
+  @objc deinit
+}
+public protocol CustomEVCustomReflectable {
+  static func constructWith(value: Any?) -> CirrentSDK.CustomEVCustomReflectable?
+  func constructWith(value: Any?) -> CirrentSDK.CustomEVCustomReflectable?
+  func toCodableValue() -> Any
+}
+@objc @_inheritsConvenienceInitializers @objcMembers open class CustomEVObject : ObjectiveC.NSObject, Foundation.NSCoding, CirrentSDK.CustomEVReflectable {
+  @objc override dynamic open func setValue(_ value: Any!, forUndefinedKey key: Swift.String)
+  @objc override dynamic open func isEqual(_ object: Any?) -> Swift.Bool
+  @objc override dynamic open var description: Swift.String {
+    @objc get
+  }
+  @objc override dynamic open var debugDescription: Swift.String {
+    @objc get
+  }
+  @objc required override dynamic public init()
+  @objc convenience required public init?(coder: Foundation.NSCoder)
+  @objc open func encode(with aCoder: Foundation.NSCoder)
+  @objc open func initValidation(_ dict: Foundation.NSDictionary)
+  open func propertyMapping() -> [(keyInObject: Swift.String?, keyInResource: Swift.String?)]
+  open func propertyConverters() -> [(key: Swift.String, decodeConverter: ((Any?) -> ()), encodeConverter: (() -> Any?))]
+  @objc open func decodePropertyValue(value: Any, key: Swift.String) -> Any?
+  @objc open func encodePropertyValue(value: Any, key: Swift.String) -> Any
+  @objc open func skipPropertyValue(_ value: Any, key: Swift.String) -> Swift.Bool
+  open func getSpecificType(_ dict: Foundation.NSDictionary) -> CirrentSDK.CustomEVReflectable?
+  @objc open func customConverter() -> Swift.AnyObject?
+  @objc deinit
+}
+extension Swift.String : CirrentSDK.CustomParameterEncoding {
+  public func encode(_ urlRequest: CirrentSDK.CustomURLRequestConvertible, with parameters: CirrentSDK.Parameters?) throws -> Foundation.URLRequest
+}
+@objc @_inheritsConvenienceInitializers public class DeviceStatusInfo : CirrentSDK.CustomEVObject {
+  @objc public var bound: Swift.String
+  @objc public var timestamp: Swift.String
+  @objc public var candidateNetworks: [CirrentSDK.WiFiNetwork]
+  @objc public var deviceKnownNetworks: [CirrentSDK.DeviceKnownNetwork]
+  override public func propertyMapping() -> [(keyInObject: Swift.String?, keyInResource: Swift.String?)]
+  @objc public func getBound() -> Swift.String
+  @objc required dynamic public init()
+  @objc deinit
+}
+public struct CustomConversionOptions : Swift.OptionSet, Swift.CustomStringConvertible {
+  public let rawValue: Swift.Int
+  public init(rawValue: Swift.Int)
+  public static let None: CirrentSDK.CustomConversionOptions
+  public static let PropertyConverter: CirrentSDK.CustomConversionOptions
+  public static let PropertyMapping: CirrentSDK.CustomConversionOptions
+  public static let SkipPropertyValue: CirrentSDK.CustomConversionOptions
+  public static let KeyCleanup: CirrentSDK.CustomConversionOptions
+  public static let Decoding: CirrentSDK.CustomConversionOptions
+  public static let Encoding: CirrentSDK.CustomConversionOptions
+  public static var All: CirrentSDK.CustomConversionOptions
+  public static var DefaultNSCoding: CirrentSDK.CustomConversionOptions
+  public static var DefaultComparing: CirrentSDK.CustomConversionOptions
+  public static var DefaultDeserialize: CirrentSDK.CustomConversionOptions
+  public static var DefaultSerialize: CirrentSDK.CustomConversionOptions
+  public var description: Swift.String {
+    get
+  }
+  public typealias ArrayLiteralElement = CirrentSDK.CustomConversionOptions
+  public typealias Element = CirrentSDK.CustomConversionOptions
+  public typealias RawValue = Swift.Int
+}
+public struct CustomDeserializationStatus : Swift.OptionSet, Swift.CustomStringConvertible {
+  public let rawValue: Swift.Int
+  public init(rawValue: Swift.Int)
+  public static let None: CirrentSDK.CustomDeserializationStatus
+  public static let IncorrectKey: CirrentSDK.CustomDeserializationStatus
+  public static let MissingKey: CirrentSDK.CustomDeserializationStatus
+  public static let InvalidType: CirrentSDK.CustomDeserializationStatus
+  public static let InvalidValue: CirrentSDK.CustomDeserializationStatus
+  public static let InvalidClass: CirrentSDK.CustomDeserializationStatus
+  public static let MissingProtocol: CirrentSDK.CustomDeserializationStatus
+  public static let Custom: CirrentSDK.CustomDeserializationStatus
+  public var description: Swift.String {
+    get
+  }
+  public typealias ArrayLiteralElement = CirrentSDK.CustomDeserializationStatus
+  public typealias Element = CirrentSDK.CustomDeserializationStatus
+  public typealias RawValue = Swift.Int
+}
+public protocol Cancelable : ObjectiveC.NSObjectProtocol {
+  func cancel()
+}
+public enum AlgorithmNum : Swift.CustomStringConvertible {
+  case hs256(Foundation.Data)
+  case hs384(Foundation.Data)
+  case hs512(Foundation.Data)
+  public var description: Swift.String {
+    get
+  }
+}
+extension Foundation.NSMutableDictionary {
+  convenience public init(json: Swift.String)
+  convenience public init(data: Foundation.Data)
+}
+extension Foundation.NSDictionary {
+  public func toJsonString(prettyPrinted: Swift.Bool = false) -> Swift.String
+  public func toJsonData(prettyPrinted: Swift.Bool = false) -> Foundation.Data
+}
+extension Foundation.NSMutableDictionary {
+  public func unionInPlace(dictionary: Foundation.NSDictionary)
+  public func unionInPlace<S>(sequence: S) where S : Swift.Sequence, S.Element == (Foundation.NSMutableDictionary.Key, Foundation.NSMutableDictionary.Value)
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class UpnpServiceFinder : ObjectiveC.NSObject {
+  @objc deinit
+}
+extension CirrentSDK.UpnpServiceFinder : CirrentSDK.GCDAsyncUdpSocketDelegate {
+  @objc dynamic public func udpSocket(_ sock: CirrentSDK.GCDAsyncUdpSocket, didNotConnect error: Swift.Error?)
+  @objc dynamic public func udpSocket(_ sock: CirrentSDK.GCDAsyncUdpSocket, didNotSendDataWithTag tag: Swift.Int, dueToError error: Swift.Error?)
+  @objc dynamic public func udpSocket(_ sock: CirrentSDK.GCDAsyncUdpSocket, didReceive data: Foundation.Data, fromAddress address: Foundation.Data, withFilterContext filterContext: Any?)
+  @objc dynamic public func udpSocketDidClose(_ sock: CirrentSDK.GCDAsyncUdpSocket, withError error: Swift.Error?)
+}
+@_hasMissingDesignatedInitializers public class MobileAppIntelligence {
+  public static func setDebugMode(enabled: Swift.Bool)
+  public static func isDebugModeEnabled() -> Swift.Bool
+  public static func initialize(token: Swift.String, onTokenInvalid: @escaping (_ retrier: CirrentSDK.Retrier) -> (), onError: ((_ error: CirrentSDK.MAIError) -> ())? = nil)
+  public static func startOnboarding(onboardingSessionTimeout: Swift.Int? = nil, type: CirrentSDK.OnboardingType? = nil)
+  public static func startOnboarding(onboardingSessionTimeout: Swift.Int, customType: Swift.String? = nil)
+  public static func startOnboarding(onboardingSessionTimeout: Swift.Int? = nil, customType: Swift.String)
+  public static func setOnboardingType(type: CirrentSDK.OnboardingType)
+  public static func setOnboardingType(customType: Swift.String)
+  public static func setOnboardingDeviceInfo(deviceId: Swift.String, additionalAttributes: [Swift.String : Swift.String]? = nil)
+  public static func enterStep(_ stepData: CirrentSDK.StepData)
+  public static func endOnboarding(_ endData: CirrentSDK.EndData? = nil)
+  public static func createToken(expiresIn: Swift.Int, accountId: Swift.String, appId: Swift.String, appKey: Swift.String, appSecret: Swift.String) -> Swift.String
+  public static func removeAllCollectedData()
+  public static func cancelAllTasks()
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers public class MAIError {
+  public var httpErrorCode: Swift.Int {
+    get
+    set
+  }
+  public var message: Swift.String {
+    get
+  }
+  public var errorType: CirrentSDK.ErrorType {
+    get
+  }
+  @objc deinit
+}
+public enum OnboardingType : Swift.String {
+  case softap
+  case ble
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public enum ErrorType {
+  case init_data_collecting_is_active
+  case lack_of_location_permission
+  case request_failed
+  case reserved_step_name_used
+  case initialization_required
+  case start_onboarding_required
+  case end_onboarding_required
+  case onboarding_type_required
+  public static func == (a: CirrentSDK.ErrorType, b: CirrentSDK.ErrorType) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+@_hasMissingDesignatedInitializers public class SynchronizedArray<T> {
+  public func append(newElement: T)
+  public var count: Swift.Int {
+    get
+  }
+  public func get(index: Swift.Int) -> T
+  public func forEach(_ body: (T) -> Swift.Void)
+  public func getFullArray() -> [T]
+  @objc deinit
+}
+extension CirrentSDK.SynchronizedArray where T : Swift.Equatable {
+  public func contains(_ element: T) -> Swift.Bool
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class NetUtils : ObjectiveC.NSObject {
+  public static let shared: CirrentSDK.NetUtils
+  public var isWifiEnabled: Swift.Bool {
+    get
+  }
+  public func addBearerPrefix(_ token: Swift.String) -> Swift.String
+  public func getCurrentBssid() -> Swift.String
+  public func getCurrentSsid() -> Swift.String
+  public func getPrivateNetworkInfo(isHiddenNetwork: Swift.Bool, priority: Swift.Int, selectedNetwork: CirrentSDK.WiFiNetwork, preSharedKey: Swift.String, scdPublicKey: Swift.String) -> Swift.String
+  public func getGatewayIp(_ completion: @escaping (Swift.String) -> ())
+  public func getAccountAndDeviceId(_ identificationDeviceData: Swift.String) -> [Swift.Int : Swift.String]
+  @objc deinit
+}
+public struct Collector : Swift.Hashable {
+  public static func upnp(servicesDiscoveryTimeout: Swift.Double? = nil) -> CirrentSDK.Collector
+  public static func bonjour(serviceTypesFinderTimeout: Swift.Double? = nil, serviceFinderTimeout: Swift.Double? = nil, resolvingTimeout: Swift.Double? = nil) -> CirrentSDK.Collector
+  public static func general() -> CirrentSDK.Collector
+  public func hash(into hasher: inout Swift.Hasher)
+  public static func == (lhs: CirrentSDK.Collector, rhs: CirrentSDK.Collector) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+@objc @_inheritsConvenienceInitializers public class WiFiNetwork : CirrentSDK.BaseNetwork {
+  @objc public var frequency: Swift.Int
+  @objc public var flags: Swift.String
+  @objc public var signalLevel: Swift.Int
+  @objc public var anqpRoamingConsortium: Swift.String
+  @objc public var capabilities: Swift.Int
+  @objc public var quality: Swift.Int
+  @objc public var noiseLevel: Swift.Int
+  @objc public var informationElement: Swift.String
+  @objc public var timestamp: Swift.String
+  @objc public func initialization(bssid: Swift.String, ssid: Swift.String)
+  @objc override dynamic public var debugDescription: Swift.String {
+    @objc get
+  }
+  @objc required dynamic public init()
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers public class StateCollector {
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers public class SoftApService : ObjectiveC.NSObject {
+  public static var shared: CirrentSDK.SoftApService {
+    get
+  }
+  public static let commonErrorHandler: (_ code: Swift.String, _ message: Swift.String) -> ()
+  public func setProgressView(customProgressView: CirrentSDK.CirrentProgressView?) -> CirrentSDK.SoftApService
+  public func setSoftApPort(port: Swift.Int) -> CirrentSDK.SoftApService
+  public func setSoftApDeviceStatusTimings(softApDeviceStatusDelay: Swift.Int, softApDeviceStatusMaxRequestCount: Swift.Int) -> CirrentSDK.SoftApService
+  @available(iOS 11.0, *)
+  public func connectToDeviceViaSoftAp(_ softApSsid: Swift.String, _ delegate: CirrentSDK.SoftApDeviceConnectionCallback)
+  public func getDeviceInfoViaSoftAp(userAccountId: Swift.String, delegate: CirrentSDK.SoftApDeviceInfoCallback, exceptionHandler: @escaping (_ code: Swift.String, _ message: Swift.String) -> () = commonErrorHandler)
+  public func identifyYourself(delegate: CirrentSDK.SoftApIdentificationCallback, exceptionHandler: @escaping (_ code: Swift.String, _ message: Swift.String) -> () = commonErrorHandler)
+  public func putPrivateCredentialsViaSoftAp(isHiddenNetwork: Swift.Bool, priority: Swift.Int, softApSsid: Swift.String, selectedNetwork: CirrentSDK.WiFiNetwork, preSharedKey: Swift.String, delegate: CirrentSDK.SoftApCredentialsSenderCallback, exceptionHandler: @escaping (_ code: Swift.String, _ message: Swift.String) -> () = commonErrorHandler)
+  public func cancelAllTasks()
+  public func leaveSoftApNetwork(softApSsid: Swift.String, disconnected: @escaping (_ isDisconnectedSuccessfully: Swift.Bool) -> ())
+  @objc override dynamic public init()
+  @objc deinit
+}
+extension CirrentSDK.SoftApService {
+  public func onNetworkJoined(softApSsid: Swift.String)
+  public func onJoiningProcess()
+  public func onNetworkJoiningFailed()
+  public func onDroppedSoftApNetwork(softApSsid: Swift.String)
+}
+public protocol SoftApDeviceConnectionCallback {
+  func onDeviceConnectedSuccessfully()
+  func onConnectionFailed()
+}
+public protocol SoftApIdentificationCallback {
+  func onDeviceIdentificationActionSent()
+}
+public protocol SoftApDeviceInfoCallback {
+  func onDeviceInfoReceived(deviceInfo: CirrentSDK.DeviceInfo, candidateNetworks: [CirrentSDK.WiFiNetwork])
+}
+public protocol SoftApCredentialsSenderCallback {
+  func onError(error: CirrentSDK.SoftApCredsSenderError)
+  func onCredentialsSent()
+  func onReturnedToNetworkWithInternet()
+  func onNetworkJoiningFailed()
+}
+public enum SoftApCredsSenderError : Swift.String {
+  case failedToReturnToPrivateNetwork
+  case invalidScdPublicKeyUsed
+  case incorrectPriorityValueUsed
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+@objc @_inheritsConvenienceInitializers public class BluetoothService : ObjectiveC.NSObject {
+  public static let shared: CirrentSDK.BluetoothService
+  public func setProgressView(customProgressView: CirrentSDK.CirrentProgressView?) -> CirrentSDK.BluetoothService
+  public func setBluetoothDeviceStatusTimings(bluetoothDeviceStatusDelay: Swift.Int, bluetoothDeviceStatusMaxRequestCount: Swift.Int) -> CirrentSDK.BluetoothService
+  public func connectToDeviceViaBluetooth(blePrefix: Swift.String, delegate: CirrentSDK.BluetoothDeviceConnectionCallback)
+  public func getDeviceInfoViaBluetooth(delegate: CirrentSDK.BluetoothDeviceInfoCallback)
+  public func identify(delegate: CirrentSDK.BluetoothIdentificationCallback)
+  public func putPrivateCredentialsViaBluetooth(isHiddenNetwork: Swift.Bool, priority: Swift.Int, preSharedKey: Swift.String, selectedNetwork: CirrentSDK.WiFiNetwork, delegate: CirrentSDK.BluetoothCredentialsSenderCallback)
+  public func cancelAllTasks()
+  @objc override dynamic public init()
+  @objc deinit
+}
+extension CirrentSDK.BluetoothService {
+  public func onNetworkJoined()
+  public func onJoiningProcess()
+  public func onNetworkJoiningFailed(errorMessage: Swift.String)
+}
+extension CirrentSDK.BluetoothService : CirrentSDK.BluetoothDeviceInfoCallback {
+  public func onError(error: CirrentSDK.BluetoothDeviceInfoError)
+  public func onInfoReceived(deviceInfo: CirrentSDK.DeviceInfo, candidateNetworks: [CirrentSDK.WiFiNetwork])
+}
+public protocol BluetoothDeviceConnectionCallback {
+  func onError(error: CirrentSDK.BluetoothDeviceConnectionError)
+  func onDeviceConnectedSuccessfully()
+}
+public enum BluetoothDeviceConnectionError : Swift.String {
+  case bluetoothIsNotReady
+  case failedToFindDevice
+  case operationTimeLimitExceeded
+  case unableToDiscoverServices
+  case unableToReadResponse
+  case unableToWriteData
+  case unableToDiscoverCharacteristics
+  case unableToConnect
+  case unknown
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public protocol BluetoothDeviceInfoCallback {
+  func onError(error: CirrentSDK.BluetoothDeviceInfoError)
+  func onInfoReceived(deviceInfo: CirrentSDK.DeviceInfo, candidateNetworks: [CirrentSDK.WiFiNetwork])
+}
+public enum BluetoothDeviceInfoError : Swift.String {
+  case operationTimeLimitExceeded
+  case unableToDiscoverServices
+  case unableToReadResponse
+  case unableToWriteData
+  case unableToDiscoverCharacteristics
+  case unknown
+  case connectionIsNotEstablished
+  case invalidScdPublicKeyReceived
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public protocol BluetoothIdentificationCallback {
+  func onError(error: CirrentSDK.BluetoothIdentificationError)
+  func onDeviceIdentificationActionSent()
+}
+public enum BluetoothIdentificationError : Swift.String {
+  case operationTimeLimitExceeded
+  case unableToDiscoverServices
+  case unableToReadResponse
+  case unableToWriteData
+  case unableToDiscoverCharacteristics
+  case unknown
+  case connectionIsNotEstablished
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public protocol BluetoothCredentialsSenderCallback {
+  func onError(error: CirrentSDK.BluetoothCredsSenderError)
+  func onCredentialsSent()
+  func onConnectedToPrivateNetwork()
+  func onNetworkJoiningFailed(errorMessage: Swift.String)
+}
+public enum BluetoothCredsSenderError : Swift.String {
+  case operationTimeLimitExceeded
+  case unableToDiscoverServices
+  case unableToReadResponse
+  case unableToWriteData
+  case unableToDiscoverCharacteristics
+  case unknown
+  case connectionIsNotEstablished
+  case invalidScdPublicKeyUsed
+  case incorrectPriorityValueUsed
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+@objc @_inheritsConvenienceInitializers public class BaseNetwork : CirrentSDK.CustomEVObject {
+  @objc public var bssid: Swift.String
+  @objc public var hexSsid: Swift.String
+  @objc public var ssid: Swift.String {
+    @objc get
+    @objc set
+  }
+  @objc public func getPresentedSsid() -> Swift.String
+  @objc public func getDecodedSsid() -> Swift.String
+  @objc override dynamic public var hash: Swift.Int {
+    @objc get
+  }
+  @objc override dynamic public func isEqual(_ object: Any?) -> Swift.Bool
+  @objc required dynamic public init()
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class DataContainer : CirrentSDK.CustomEVObject {
+  @objc override dynamic public func setValue(_ value: Any!, forUndefinedKey key: Swift.String)
+  @objc override public func skipPropertyValue(_ value: Any, key: Swift.String) -> Swift.Bool
+  override public func propertyMapping() -> [(keyInObject: Swift.String?, keyInResource: Swift.String?)]
+  @objc override dynamic public var description: Swift.String {
+    @objc get
+  }
+  @objc override dynamic public var hash: Swift.Int {
+    @objc get
+  }
+  @objc override dynamic public func isEqual(_ object: Any?) -> Swift.Bool
+  @objc deinit
+}
+@objc @_hasMissingDesignatedInitializers public class GatewayIpProvider : ObjectiveC.NSObject {
+  @objc deinit
+}
+public struct UpnpSearchRequest {
+  public var message: Swift.String {
+    get
+  }
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class BaseData : CirrentSDK.CustomEVObject {
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers public class Retrier {
+  public func retry(token: Swift.String)
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers public class DeviceInfo : CirrentSDK.CustomEVObject {
+  @objc public var deviceId: Swift.String
+  @objc public var accountId: Swift.String
+  @objc public var publicKey: Swift.String
+  @objc public var customString: Swift.String
+  override public func propertyMapping() -> [(keyInObject: Swift.String?, keyInResource: Swift.String?)]
+  @objc override dynamic public var debugDescription: Swift.String {
+    @objc get
+  }
+  @objc required dynamic public init()
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers public class WifiNetworkArray : CirrentSDK.CustomEVObject {
+  @objc public var value: [CirrentSDK.WiFiNetwork]
+  @objc required dynamic public init()
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers public class Event : CirrentSDK.CustomEVObject {
+  @objc override dynamic public func setValue(_ value: Any!, forUndefinedKey key: Swift.String)
+  @objc override public func skipPropertyValue(_ value: Any, key: Swift.String) -> Swift.Bool
+  @objc override dynamic public var description: Swift.String {
+    @objc get
+  }
+  @objc override dynamic public var hash: Swift.Int {
+    @objc get
+  }
+  @objc override dynamic public func isEqual(_ object: Any?) -> Swift.Bool
+  @objc required dynamic public init()
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers public class StepData {
+  public static func create(stepName: Swift.String) -> CirrentSDK.StepData
+  public static func create(result: CirrentSDK.StepResult, stepName: Swift.String, reason: Swift.String) -> CirrentSDK.StepData
+  public func setDebugInfo(_ debugInfo: [Swift.String : Swift.String]) -> CirrentSDK.StepData
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers public class EndData {
+  public static func create(failureReason: Swift.String? = nil) -> CirrentSDK.EndData
+  public func setDebugInfo(_ debugInfo: [Swift.String : Swift.String]) -> CirrentSDK.EndData
+  @objc deinit
+}
+public enum StepResult : Swift.String {
+  case success
+  case failure
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public enum CommunicationError : Swift.String {
+  case operationTimeLimitExceeded
+  case unableToDiscoverServices
+  case unableToReadResponse
+  case unableToWriteData
+  case unableToDiscoverCharacteristics
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+@available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, *)
+public struct CustomDataResponsePublisher<Value> : Combine.Publisher {
+  public typealias Output = CirrentSDK.CustomDataResponse<Value, CirrentSDK.CustomAFError>
+  public typealias Failure = Swift.Never
+  public init<Serializer>(_ request: CirrentSDK.CustomDataRequest, queue: Dispatch.DispatchQueue, serializer: Serializer) where Value == Serializer.SerializedObject, Serializer : CirrentSDK.CustomResponseSerializer
+  public init<Serializer>(_ request: CirrentSDK.CustomDataRequest, queue: Dispatch.DispatchQueue, serializer: Serializer) where Value == Serializer.SerializedObject, Serializer : CirrentSDK.CustomDataResponseSerializerProtocol
+  public func result() -> Combine.AnyPublisher<Swift.Result<Value, CirrentSDK.CustomAFError>, Swift.Never>
+  public func value() -> Combine.AnyPublisher<Value, CirrentSDK.CustomAFError>
+  public func receive<S>(subscriber: S) where S : Combine.Subscriber, S.Failure == CirrentSDK.CustomDataResponsePublisher<Value>.Failure, S.Input == CirrentSDK.CustomDataResponsePublisher<Value>.Output
+}
+@available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, *)
+extension CirrentSDK.CustomDataResponsePublisher where Value == Foundation.Data? {
+  @available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, *)
+  public init(_ request: CirrentSDK.CustomDataRequest, queue: Dispatch.DispatchQueue)
+}
+extension CirrentSDK.CustomDataRequest {
+  @available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, *)
+  public func publishResponse<Serializer, T>(using serializer: Serializer, on queue: Dispatch.DispatchQueue = .main) -> CirrentSDK.CustomDataResponsePublisher<T> where Serializer : CirrentSDK.CustomResponseSerializer, T == Serializer.SerializedObject
+  @available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, *)
+  public func publishData(queue: Dispatch.DispatchQueue = .main, preprocessor: CirrentSDK.CustomDataPreprocessor = CustomDataResponseSerializer.defaultDataPreprocessor, emptyResponseCodes: Swift.Set<Swift.Int> = CustomDataResponseSerializer.defaultEmptyResponseCodes, emptyRequestMethods: Swift.Set<CirrentSDK.CustomHTTPMethod> = CustomDataResponseSerializer.defaultEmptyRequestMethods) -> CirrentSDK.CustomDataResponsePublisher<Foundation.Data>
+  @available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, *)
+  public func publishString(queue: Dispatch.DispatchQueue = .main, preprocessor: CirrentSDK.CustomDataPreprocessor = CustomStringResponseSerializer.defaultDataPreprocessor, encoding: Swift.String.Encoding? = nil, emptyResponseCodes: Swift.Set<Swift.Int> = CustomStringResponseSerializer.defaultEmptyResponseCodes, emptyRequestMethods: Swift.Set<CirrentSDK.CustomHTTPMethod> = CustomStringResponseSerializer.defaultEmptyRequestMethods) -> CirrentSDK.CustomDataResponsePublisher<Swift.String>
+  @available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, *)
+  @available(*, deprecated, message: "Renamed publishDecodable(type:queue:preprocessor:decoder:emptyResponseCodes:emptyRequestMethods).")
+  @_disfavoredOverload public func publishDecodable<T>(type: T.Type = T.self, queue: Dispatch.DispatchQueue = .main, preprocessor: CirrentSDK.CustomDataPreprocessor = CustomDecodableResponseSerializer<T>.defaultDataPreprocessor, decoder: CirrentSDK.CustomDataDecoder = JSONDecoder(), emptyResponseCodes: Swift.Set<Swift.Int> = CustomDecodableResponseSerializer<T>.defaultEmptyResponseCodes, emptyResponseMethods: Swift.Set<CirrentSDK.CustomHTTPMethod> = CustomDecodableResponseSerializer<T>.defaultEmptyRequestMethods) -> CirrentSDK.CustomDataResponsePublisher<T> where T : Swift.Decodable
+  @available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, *)
+  public func publishDecodable<T>(type: T.Type = T.self, queue: Dispatch.DispatchQueue = .main, preprocessor: CirrentSDK.CustomDataPreprocessor = CustomDecodableResponseSerializer<T>.defaultDataPreprocessor, decoder: CirrentSDK.CustomDataDecoder = JSONDecoder(), emptyResponseCodes: Swift.Set<Swift.Int> = CustomDecodableResponseSerializer<T>.defaultEmptyResponseCodes, emptyRequestMethods: Swift.Set<CirrentSDK.CustomHTTPMethod> = CustomDecodableResponseSerializer<T>.defaultEmptyRequestMethods) -> CirrentSDK.CustomDataResponsePublisher<T> where T : Swift.Decodable
+  @available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, *)
+  public func publishUnserialized(queue: Dispatch.DispatchQueue = .main) -> CirrentSDK.CustomDataResponsePublisher<Foundation.Data?>
+}
+@available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, *)
+public struct CustomDataStreamPublisher<Value> : Combine.Publisher {
+  public typealias Output = CirrentSDK.CustomDataStreamRequest.Stream<Value, CirrentSDK.CustomAFError>
+  public typealias Failure = Swift.Never
+  public init<Serializer>(_ request: CirrentSDK.CustomDataStreamRequest, queue: Dispatch.DispatchQueue, serializer: Serializer) where Value == Serializer.SerializedObject, Serializer : CirrentSDK.CustomDataStreamSerializer
+  public func result() -> Combine.AnyPublisher<Swift.Result<Value, CirrentSDK.CustomAFError>, Swift.Never>
+  public func value() -> Combine.AnyPublisher<Value, CirrentSDK.CustomAFError>
+  public func receive<S>(subscriber: S) where S : Combine.Subscriber, S.Failure == CirrentSDK.CustomDataStreamPublisher<Value>.Failure, S.Input == CirrentSDK.CustomDataStreamPublisher<Value>.Output
+}
+extension CirrentSDK.CustomDataStreamRequest {
+  @available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, *)
+  final public func publishStream<Serializer>(using serializer: Serializer, on queue: Dispatch.DispatchQueue = .main) -> CirrentSDK.CustomDataStreamPublisher<Serializer.SerializedObject> where Serializer : CirrentSDK.CustomDataStreamSerializer
+  @available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, *)
+  final public func publishData(queue: Dispatch.DispatchQueue = .main) -> CirrentSDK.CustomDataStreamPublisher<Foundation.Data>
+  @available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, *)
+  final public func publishString(queue: Dispatch.DispatchQueue = .main) -> CirrentSDK.CustomDataStreamPublisher<Swift.String>
+  @available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, *)
+  final public func publishDecodable<T>(type: T.Type = T.self, queue: Dispatch.DispatchQueue = .main, decoder: CirrentSDK.CustomDataDecoder = JSONDecoder(), preprocessor: CirrentSDK.CustomDataPreprocessor = CustomPassthroughPreprocessor()) -> CirrentSDK.CustomDataStreamPublisher<T> where T : Swift.Decodable
+}
+@available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, *)
+public struct CustomDownloadResponsePublisher<Value> : Combine.Publisher {
+  public typealias Output = CirrentSDK.CustomDownloadResponse<Value, CirrentSDK.CustomAFError>
+  public typealias Failure = Swift.Never
+  public init<Serializer>(_ request: CirrentSDK.CustomDownloadRequest, queue: Dispatch.DispatchQueue, serializer: Serializer) where Value == Serializer.SerializedObject, Serializer : CirrentSDK.CustomResponseSerializer
+  @available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, *)
+  public init<Serializer>(_ request: CirrentSDK.CustomDownloadRequest, queue: Dispatch.DispatchQueue, serializer: Serializer) where Value == Serializer.SerializedObject, Serializer : CirrentSDK.CustomDownloadResponseSerializerProtocol
+  public func result() -> Combine.AnyPublisher<Swift.Result<Value, CirrentSDK.CustomAFError>, Swift.Never>
+  public func value() -> Combine.AnyPublisher<Value, CirrentSDK.CustomAFError>
+  public func receive<S>(subscriber: S) where S : Combine.Subscriber, S.Failure == CirrentSDK.CustomDownloadResponsePublisher<Value>.Failure, S.Input == CirrentSDK.CustomDownloadResponsePublisher<Value>.Output
+}
+extension CirrentSDK.CustomDownloadRequest {
+  @available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, *)
+  public func publishResponse<Serializer, T>(using serializer: Serializer, on queue: Dispatch.DispatchQueue = .main) -> CirrentSDK.CustomDownloadResponsePublisher<T> where Serializer : CirrentSDK.CustomResponseSerializer, T == Serializer.SerializedObject
+  @available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, *)
+  public func publishResponse<Serializer, T>(using serializer: Serializer, on queue: Dispatch.DispatchQueue = .main) -> CirrentSDK.CustomDownloadResponsePublisher<T> where Serializer : CirrentSDK.CustomDownloadResponseSerializerProtocol, T == Serializer.SerializedObject
+  @available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, *)
+  public func publishURL(queue: Dispatch.DispatchQueue = .main) -> CirrentSDK.CustomDownloadResponsePublisher<Foundation.URL>
+  @available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, *)
+  public func publishData(queue: Dispatch.DispatchQueue = .main, preprocessor: CirrentSDK.CustomDataPreprocessor = CustomDataResponseSerializer.defaultDataPreprocessor, emptyResponseCodes: Swift.Set<Swift.Int> = CustomDataResponseSerializer.defaultEmptyResponseCodes, emptyRequestMethods: Swift.Set<CirrentSDK.CustomHTTPMethod> = CustomDataResponseSerializer.defaultEmptyRequestMethods) -> CirrentSDK.CustomDownloadResponsePublisher<Foundation.Data>
+  @available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, *)
+  public func publishString(queue: Dispatch.DispatchQueue = .main, preprocessor: CirrentSDK.CustomDataPreprocessor = CustomStringResponseSerializer.defaultDataPreprocessor, encoding: Swift.String.Encoding? = nil, emptyResponseCodes: Swift.Set<Swift.Int> = CustomStringResponseSerializer.defaultEmptyResponseCodes, emptyRequestMethods: Swift.Set<CirrentSDK.CustomHTTPMethod> = CustomStringResponseSerializer.defaultEmptyRequestMethods) -> CirrentSDK.CustomDownloadResponsePublisher<Swift.String>
+  @available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, *)
+  @available(*, deprecated, message: "Renamed publishDecodable(type:queue:preprocessor:decoder:emptyResponseCodes:emptyRequestMethods).")
+  @_disfavoredOverload public func publishDecodable<T>(type: T.Type = T.self, queue: Dispatch.DispatchQueue = .main, preprocessor: CirrentSDK.CustomDataPreprocessor = CustomDecodableResponseSerializer<T>.defaultDataPreprocessor, decoder: CirrentSDK.CustomDataDecoder = JSONDecoder(), emptyResponseCodes: Swift.Set<Swift.Int> = CustomDecodableResponseSerializer<T>.defaultEmptyResponseCodes, emptyResponseMethods: Swift.Set<CirrentSDK.CustomHTTPMethod> = CustomDecodableResponseSerializer<T>.defaultEmptyRequestMethods) -> CirrentSDK.CustomDownloadResponsePublisher<T> where T : Swift.Decodable
+  @available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, *)
+  public func publishDecodable<T>(type: T.Type = T.self, queue: Dispatch.DispatchQueue = .main, preprocessor: CirrentSDK.CustomDataPreprocessor = CustomDecodableResponseSerializer<T>.defaultDataPreprocessor, decoder: CirrentSDK.CustomDataDecoder = JSONDecoder(), emptyResponseCodes: Swift.Set<Swift.Int> = CustomDecodableResponseSerializer<T>.defaultEmptyResponseCodes, emptyRequestMethods: Swift.Set<CirrentSDK.CustomHTTPMethod> = CustomDecodableResponseSerializer<T>.defaultEmptyRequestMethods) -> CirrentSDK.CustomDownloadResponsePublisher<T> where T : Swift.Decodable
+}
+@available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, *)
+extension CirrentSDK.CustomDownloadResponsePublisher where Value == Foundation.URL? {
+  @available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, *)
+  public init(_ request: CirrentSDK.CustomDownloadRequest, queue: Dispatch.DispatchQueue)
+}
+extension CirrentSDK.CustomDownloadRequest {
+  @available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, *)
+  public func publishUnserialized(on queue: Dispatch.DispatchQueue = .main) -> CirrentSDK.CustomDownloadResponsePublisher<Foundation.URL?>
+}
+public protocol CustomAuthenticationCredential {
+  var requiresRefresh: Swift.Bool { get }
+}
+public protocol CustomAuthenticator : AnyObject {
+  associatedtype Credential : CirrentSDK.CustomAuthenticationCredential
+  func apply(_ credential: Self.Credential, to urlRequest: inout Foundation.URLRequest)
+  func refresh(_ credential: Self.Credential, for session: CirrentSDK.CustomSession, completion: @escaping (Swift.Result<Self.Credential, Swift.Error>) -> Swift.Void)
+  func didRequest(_ urlRequest: Foundation.URLRequest, with response: Foundation.HTTPURLResponse, failDueToAuthenticationError error: Swift.Error) -> Swift.Bool
+  func isRequest(_ urlRequest: Foundation.URLRequest, authenticatedWith credential: Self.Credential) -> Swift.Bool
+}
+public enum CustomAuthenticationError : Swift.Error {
+  case missingCredential
+  case excessiveRefresh
+  public static func == (a: CirrentSDK.CustomAuthenticationError, b: CirrentSDK.CustomAuthenticationError) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+public class CustomAuthenticationInterceptor<AuthenticatorType> : CirrentSDK.CustomRequestInterceptor where AuthenticatorType : CirrentSDK.CustomAuthenticator {
+  public typealias Credential = AuthenticatorType.Credential
+  public struct CustomRefreshWindow {
+    public let interval: Foundation.TimeInterval
+    public let maximumAttempts: Swift.Int
+    public init(interval: Foundation.TimeInterval = 30.0, maximumAttempts: Swift.Int = 5)
+  }
+  public var credential: CirrentSDK.CustomAuthenticationInterceptor<AuthenticatorType>.Credential? {
+    get
+    set
+  }
+  public init(authenticator: AuthenticatorType, credential: CirrentSDK.CustomAuthenticationInterceptor<AuthenticatorType>.Credential? = nil, refreshWindow: CirrentSDK.CustomAuthenticationInterceptor<AuthenticatorType>.CustomRefreshWindow? = CustomRefreshWindow())
+  public func adapt(_ urlRequest: Foundation.URLRequest, for session: CirrentSDK.CustomSession, completion: @escaping (Swift.Result<Foundation.URLRequest, Swift.Error>) -> Swift.Void)
+  public func retry(_ request: CirrentSDK.CustomRequest, for session: CirrentSDK.CustomSession, dueTo error: Swift.Error, completion: @escaping (CirrentSDK.CustomRetryResult) -> Swift.Void)
+  @objc deinit
+}
+public struct CustomAlamofireExtension<ExtendedType> {
+  public var type: ExtendedType {
+    get
+  }
+  public init(_ type: ExtendedType)
+}
+public protocol CustomAlamofireExtended {
+  associatedtype ExtendedType
+  static var af: CirrentSDK.CustomAlamofireExtension<Self.ExtendedType>.Type { get set }
+  var af: CirrentSDK.CustomAlamofireExtension<Self.ExtendedType> { get set }
+}
+extension CirrentSDK.CustomAlamofireExtended {
+  public static var af: CirrentSDK.CustomAlamofireExtension<Self>.Type {
+    get
+    set
+  }
+  public var af: CirrentSDK.CustomAlamofireExtension<Self> {
+    get
+    set
+  }
+}
+public typealias AFResult<Success> = Swift.Result<Success, CirrentSDK.CustomAFError>
+public protocol CustomURLConvertible {
+  func asURL() throws -> Foundation.URL
+}
+extension Swift.String : CirrentSDK.CustomURLConvertible {
+  public func asURL() throws -> Foundation.URL
+}
+extension Foundation.URL : CirrentSDK.CustomURLConvertible {
+  public func asURL() throws -> Foundation.URL
+}
+extension Foundation.URLComponents : CirrentSDK.CustomURLConvertible {
+  public func asURL() throws -> Foundation.URL
+}
+public protocol CustomURLRequestConvertible {
+  func asURLRequest() throws -> Foundation.URLRequest
+}
+extension CirrentSDK.CustomURLRequestConvertible {
+  public var urlRequest: Foundation.URLRequest? {
+    get
+  }
+}
+extension Foundation.URLRequest : CirrentSDK.CustomURLRequestConvertible {
+  public func asURLRequest() throws -> Foundation.URLRequest
+}
+extension Foundation.URLRequest {
+  public init(url: CirrentSDK.CustomURLConvertible, method: CirrentSDK.CustomHTTPMethod, headers: CirrentSDK.CustomHTTPHeaders? = nil) throws
+}
+public enum CustomAFError : Swift.Error {
+  public enum CustomMultipartEncodingFailureReason {
+    case bodyPartURLInvalid(url: Foundation.URL)
+    case bodyPartFilenameInvalid(in: Foundation.URL)
+    case bodyPartFileNotReachable(at: Foundation.URL)
+    case bodyPartFileNotReachableWithError(atURL: Foundation.URL, error: Swift.Error)
+    case bodyPartFileIsDirectory(at: Foundation.URL)
+    case bodyPartFileSizeNotAvailable(at: Foundation.URL)
+    case bodyPartFileSizeQueryFailedWithError(forURL: Foundation.URL, error: Swift.Error)
+    case bodyPartInputStreamCreationFailed(for: Foundation.URL)
+    case outputStreamCreationFailed(for: Foundation.URL)
+    case outputStreamFileAlreadyExists(at: Foundation.URL)
+    case outputStreamURLInvalid(url: Foundation.URL)
+    case outputStreamWriteFailed(error: Swift.Error)
+    case inputStreamReadFailed(error: Swift.Error)
+  }
+  public struct CustomUnexpectedInputStreamLength : Swift.Error {
+    public var bytesExpected: Swift.UInt64
+    public var bytesRead: Swift.UInt64
+  }
+  public enum CustomParameterEncodingFailureReason {
+    case missingURL
+    case jsonEncodingFailed(error: Swift.Error)
+    case customEncodingFailed(error: Swift.Error)
+  }
+  public enum CustomParameterEncoderFailureReason {
+    public enum RequiredComponent {
+      case url
+      case httpMethod(rawValue: Swift.String)
+    }
+    case missingRequiredComponent(CirrentSDK.CustomAFError.CustomParameterEncoderFailureReason.RequiredComponent)
+    case encoderFailed(error: Swift.Error)
+  }
+  public enum CustomResponseValidationFailureReason {
+    case dataFileNil
+    case dataFileReadFailed(at: Foundation.URL)
+    case missingContentType(acceptableContentTypes: [Swift.String])
+    case unacceptableContentType(acceptableContentTypes: [Swift.String], responseContentType: Swift.String)
+    case unacceptableStatusCode(code: Swift.Int)
+    case customValidationFailed(error: Swift.Error)
+  }
+  public enum CustomResponseSerializationFailureReason {
+    case inputDataNilOrZeroLength
+    case inputFileNil
+    case inputFileReadFailed(at: Foundation.URL)
+    case stringSerializationFailed(encoding: Swift.String.Encoding)
+    case jsonSerializationFailed(error: Swift.Error)
+    case decodingFailed(error: Swift.Error)
+    case customSerializationFailed(error: Swift.Error)
+    case invalidEmptyResponse(type: Swift.String)
+  }
+  public enum CustomServerTrustFailureReason {
+    public struct Output {
+      public let host: Swift.String
+      public let trust: Security.SecTrust
+      public let status: Darwin.OSStatus
+      public let result: Security.SecTrustResultType
+    }
+    case noRequiredEvaluator(host: Swift.String)
+    case noCertificatesFound
+    case noPublicKeysFound
+    case policyApplicationFailed(trust: Security.SecTrust, policy: Security.SecPolicy, status: Darwin.OSStatus)
+    case settingAnchorCertificatesFailed(status: Darwin.OSStatus, certificates: [Security.SecCertificate])
+    case revocationPolicyCreationFailed
+    case trustEvaluationFailed(error: Swift.Error?)
+    case defaultEvaluationFailed(output: CirrentSDK.CustomAFError.CustomServerTrustFailureReason.Output)
+    case hostValidationFailed(output: CirrentSDK.CustomAFError.CustomServerTrustFailureReason.Output)
+    case revocationCheckFailed(output: CirrentSDK.CustomAFError.CustomServerTrustFailureReason.Output, options: CirrentSDK.CustomRevocationTrustEvaluator.CustomOptions)
+    case certificatePinningFailed(host: Swift.String, trust: Security.SecTrust, pinnedCertificates: [Security.SecCertificate], serverCertificates: [Security.SecCertificate])
+    case publicKeyPinningFailed(host: Swift.String, trust: Security.SecTrust, pinnedKeys: [Security.SecKey], serverKeys: [Security.SecKey])
+    case customEvaluationFailed(error: Swift.Error)
+  }
+  public enum CustomURLRequestValidationFailureReason {
+    case bodyDataInGETRequest(Foundation.Data)
+  }
+  case createUploadableFailed(error: Swift.Error)
+  case createURLRequestFailed(error: Swift.Error)
+  case downloadedFileMoveFailed(error: Swift.Error, source: Foundation.URL, destination: Foundation.URL)
+  case explicitlyCancelled
+  case invalidURL(url: CirrentSDK.CustomURLConvertible)
+  case multipartEncodingFailed(reason: CirrentSDK.CustomAFError.CustomMultipartEncodingFailureReason)
+  case parameterEncodingFailed(reason: CirrentSDK.CustomAFError.CustomParameterEncodingFailureReason)
+  case parameterEncoderFailed(reason: CirrentSDK.CustomAFError.CustomParameterEncoderFailureReason)
+  case requestAdaptationFailed(error: Swift.Error)
+  case requestRetryFailed(retryError: Swift.Error, originalError: Swift.Error)
+  case responseValidationFailed(reason: CirrentSDK.CustomAFError.CustomResponseValidationFailureReason)
+  case responseSerializationFailed(reason: CirrentSDK.CustomAFError.CustomResponseSerializationFailureReason)
+  case serverTrustEvaluationFailed(reason: CirrentSDK.CustomAFError.CustomServerTrustFailureReason)
+  case sessionDeinitialized
+  case sessionInvalidated(error: Swift.Error?)
+  case sessionTaskFailed(error: Swift.Error)
+  case urlRequestValidationFailed(reason: CirrentSDK.CustomAFError.CustomURLRequestValidationFailureReason)
+}
+extension Swift.Error {
+  public var asAFError: CirrentSDK.CustomAFError? {
+    get
+  }
+  public func asAFError(orFailWith message: @autoclosure () -> Swift.String, file: Swift.StaticString = #file, line: Swift.UInt = #line) -> CirrentSDK.CustomAFError
+}
+extension CirrentSDK.CustomAFError {
+  public var isSessionDeinitializedError: Swift.Bool {
+    get
+  }
+  public var isSessionInvalidatedError: Swift.Bool {
+    get
+  }
+  public var isExplicitlyCancelledError: Swift.Bool {
+    get
+  }
+  public var isInvalidURLError: Swift.Bool {
+    get
+  }
+  public var isParameterEncodingError: Swift.Bool {
+    get
+  }
+  public var isParameterEncoderError: Swift.Bool {
+    get
+  }
+  public var isMultipartEncodingError: Swift.Bool {
+    get
+  }
+  public var isRequestAdaptationError: Swift.Bool {
+    get
+  }
+  public var isResponseValidationError: Swift.Bool {
+    get
+  }
+  public var isResponseSerializationError: Swift.Bool {
+    get
+  }
+  public var isServerTrustEvaluationError: Swift.Bool {
+    get
+  }
+  public var isRequestRetryError: Swift.Bool {
+    get
+  }
+  public var isCreateUploadableError: Swift.Bool {
+    get
+  }
+  public var isCreateURLRequestError: Swift.Bool {
+    get
+  }
+  public var isDownloadedFileMoveError: Swift.Bool {
+    get
+  }
+  public var isSessionTaskError: Swift.Bool {
+    get
+  }
+}
+extension CirrentSDK.CustomAFError {
+  public var urlConvertible: CirrentSDK.CustomURLConvertible? {
+    get
+  }
+  public var url: Foundation.URL? {
+    get
+  }
+  public var underlyingError: Swift.Error? {
+    get
+  }
+  public var acceptableContentTypes: [Swift.String]? {
+    get
+  }
+  public var responseContentType: Swift.String? {
+    get
+  }
+  public var responseCode: Swift.Int? {
+    get
+  }
+  public var failedStringEncoding: Swift.String.Encoding? {
+    get
+  }
+  public var sourceURL: Foundation.URL? {
+    get
+  }
+  public var destinationURL: Foundation.URL? {
+    get
+  }
+  public var downloadResumeData: Foundation.Data? {
+    get
+  }
+}
+extension CirrentSDK.CustomAFError : Foundation.LocalizedError {
+  public var errorDescription: Swift.String? {
+    get
+  }
+}
+extension CirrentSDK.CustomRequest {
+  public typealias ValidationResult = Swift.Result<Swift.Void, Swift.Error>
+}
+extension CirrentSDK.CustomDataRequest {
+  public typealias Validation = (Foundation.URLRequest?, Foundation.HTTPURLResponse, Foundation.Data?) -> CirrentSDK.CustomDataRequest.ValidationResult
+  @discardableResult
+  public func validate<S>(statusCode acceptableStatusCodes: S) -> Self where S : Swift.Sequence, S.Element == Swift.Int
+  @discardableResult
+  public func validate<S>(contentType acceptableContentTypes: @autoclosure @escaping () -> S) -> Self where S : Swift.Sequence, S.Element == Swift.String
+  @discardableResult
+  public func validate() -> Self
+}
+extension CirrentSDK.CustomDataStreamRequest {
+  public typealias Validation = (_ request: Foundation.URLRequest?, _ response: Foundation.HTTPURLResponse) -> CirrentSDK.CustomDataStreamRequest.ValidationResult
+  @discardableResult
+  final public func validate<S>(statusCode acceptableStatusCodes: S) -> Self where S : Swift.Sequence, S.Element == Swift.Int
+  @discardableResult
+  final public func validate<S>(contentType acceptableContentTypes: @autoclosure @escaping () -> S) -> Self where S : Swift.Sequence, S.Element == Swift.String
+  @discardableResult
+  final public func validate() -> Self
+}
+extension CirrentSDK.CustomDownloadRequest {
+  public typealias Validation = (_ request: Foundation.URLRequest?, _ response: Foundation.HTTPURLResponse, _ fileURL: Foundation.URL?) -> CirrentSDK.CustomDownloadRequest.ValidationResult
+  @discardableResult
+  public func validate<S>(statusCode acceptableStatusCodes: S) -> Self where S : Swift.Sequence, S.Element == Swift.Int
+  @discardableResult
+  public func validate<S>(contentType acceptableContentTypes: @autoclosure @escaping () -> S) -> Self where S : Swift.Sequence, S.Element == Swift.String
+  @discardableResult
+  public func validate() -> Self
+}
+open class CustomServerTrustManager {
+  final public let allHostsMustBeEvaluated: Swift.Bool
+  final public let evaluators: [Swift.String : CirrentSDK.CustomServerTrustEvaluating]
+  public init(allHostsMustBeEvaluated: Swift.Bool = true, evaluators: [Swift.String : CirrentSDK.CustomServerTrustEvaluating])
+  open func serverTrustEvaluator(forHost host: Swift.String) throws -> CirrentSDK.CustomServerTrustEvaluating?
+  @objc deinit
+}
+public protocol CustomServerTrustEvaluating {
+  func evaluate(_ trust: Security.SecTrust, forHost host: Swift.String) throws
+}
+final public class CustomDefaultTrustEvaluator : CirrentSDK.CustomServerTrustEvaluating {
+  public init(validateHost: Swift.Bool = true)
+  final public func evaluate(_ trust: Security.SecTrust, forHost host: Swift.String) throws
+  @objc deinit
+}
+final public class CustomRevocationTrustEvaluator : CirrentSDK.CustomServerTrustEvaluating {
+  public struct CustomOptions : Swift.OptionSet {
+    public static let crl: CirrentSDK.CustomRevocationTrustEvaluator.CustomOptions
+    public static let networkAccessDisabled: CirrentSDK.CustomRevocationTrustEvaluator.CustomOptions
+    public static let ocsp: CirrentSDK.CustomRevocationTrustEvaluator.CustomOptions
+    public static let preferCRL: CirrentSDK.CustomRevocationTrustEvaluator.CustomOptions
+    public static let requirePositiveResponse: CirrentSDK.CustomRevocationTrustEvaluator.CustomOptions
+    public static let any: CirrentSDK.CustomRevocationTrustEvaluator.CustomOptions
+    public let rawValue: CoreFoundation.CFOptionFlags
+    public init(rawValue: CoreFoundation.CFOptionFlags)
+    public typealias ArrayLiteralElement = CirrentSDK.CustomRevocationTrustEvaluator.CustomOptions
+    public typealias Element = CirrentSDK.CustomRevocationTrustEvaluator.CustomOptions
+    public typealias RawValue = CoreFoundation.CFOptionFlags
+  }
+  public init(performDefaultValidation: Swift.Bool = true, validateHost: Swift.Bool = true, options: CirrentSDK.CustomRevocationTrustEvaluator.CustomOptions = .any)
+  final public func evaluate(_ trust: Security.SecTrust, forHost host: Swift.String) throws
+  @objc deinit
+}
+final public class CustomPinnedCertificatesTrustEvaluator : CirrentSDK.CustomServerTrustEvaluating {
+  public init(certificates: [Security.SecCertificate] = Bundle.main.af.certificates, acceptSelfSignedCertificates: Swift.Bool = false, performDefaultValidation: Swift.Bool = true, validateHost: Swift.Bool = true)
+  final public func evaluate(_ trust: Security.SecTrust, forHost host: Swift.String) throws
+  @objc deinit
+}
+final public class CustomPublicKeysTrustEvaluator : CirrentSDK.CustomServerTrustEvaluating {
+  public init(keys: [Security.SecKey] = Bundle.main.af.publicKeys, performDefaultValidation: Swift.Bool = true, validateHost: Swift.Bool = true)
+  final public func evaluate(_ trust: Security.SecTrust, forHost host: Swift.String) throws
+  @objc deinit
+}
+final public class CustomCompositeTrustEvaluator : CirrentSDK.CustomServerTrustEvaluating {
+  public init(evaluators: [CirrentSDK.CustomServerTrustEvaluating])
+  final public func evaluate(_ trust: Security.SecTrust, forHost host: Swift.String) throws
+  @objc deinit
+}
+@available(*, deprecated, renamed: "DisabledTrustEvaluator", message: "DisabledEvaluator has been renamed DisabledTrustEvaluator.")
+public typealias DisabledEvaluator = CirrentSDK.CustomDisabledTrustEvaluator
+final public class CustomDisabledTrustEvaluator : CirrentSDK.CustomServerTrustEvaluating {
+  public init()
+  final public func evaluate(_ trust: Security.SecTrust, forHost host: Swift.String) throws
+  @objc deinit
+}
+extension Swift.Array where Element == CirrentSDK.CustomServerTrustEvaluating {
+  public func evaluate(_ trust: Security.SecTrust, forHost host: Swift.String) throws
+}
+extension Foundation.Bundle : CirrentSDK.CustomAlamofireExtended {
+  public typealias ExtendedType = Foundation.Bundle
+}
+extension CirrentSDK.CustomAlamofireExtension where ExtendedType : Foundation.Bundle {
+  public var certificates: [Security.SecCertificate] {
+    get
+  }
+  public var publicKeys: [Security.SecKey] {
+    get
+  }
+  public func paths(forResourcesOfTypes types: [Swift.String]) -> [Swift.String]
+}
+extension Security.SecTrust : CirrentSDK.CustomAlamofireExtended {
+  public typealias ExtendedType = Security.SecTrust
+}
+extension CirrentSDK.CustomAlamofireExtension where ExtendedType == Security.SecTrust {
+  @available(iOS 12, macOS 10.14, tvOS 12, watchOS 5, *)
+  public func evaluate(afterApplying policy: Security.SecPolicy) throws
+  @available(iOS, introduced: 10, deprecated: 12, renamed: "evaluate(afterApplying:)")
+  @available(macOS, introduced: 10.12, deprecated: 10.14, renamed: "evaluate(afterApplying:)")
+  @available(tvOS, introduced: 10, deprecated: 12, renamed: "evaluate(afterApplying:)")
+  @available(watchOS, introduced: 3, deprecated: 5, renamed: "evaluate(afterApplying:)")
+  public func validate(policy: Security.SecPolicy, errorProducer: (_ status: Darwin.OSStatus, _ result: Security.SecTrustResultType) -> Swift.Error) throws
+  public func apply(policy: Security.SecPolicy) throws -> Security.SecTrust
+  @available(iOS 12, macOS 10.14, tvOS 12, watchOS 5, *)
+  public func evaluate() throws
+  @available(iOS, introduced: 10, deprecated: 12, renamed: "evaluate()")
+  @available(macOS, introduced: 10.12, deprecated: 10.14, renamed: "evaluate()")
+  @available(tvOS, introduced: 10, deprecated: 12, renamed: "evaluate()")
+  @available(watchOS, introduced: 3, deprecated: 5, renamed: "evaluate()")
+  public func validate(errorProducer: (_ status: Darwin.OSStatus, _ result: Security.SecTrustResultType) -> Swift.Error) throws
+  public func setAnchorCertificates(_ certificates: [Security.SecCertificate]) throws
+  public var publicKeys: [Security.SecKey] {
+    get
+  }
+  public var certificates: [Security.SecCertificate] {
+    get
+  }
+  public var certificateData: [Foundation.Data] {
+    get
+  }
+  public func performDefaultValidation(forHost host: Swift.String) throws
+  public func performValidation(forHost host: Swift.String) throws
+}
+extension Security.SecPolicy : CirrentSDK.CustomAlamofireExtended {
+  public typealias ExtendedType = Security.SecPolicy
+}
+extension CirrentSDK.CustomAlamofireExtension where ExtendedType == Security.SecPolicy {
+  public static let `default`: Security.SecPolicy
+  public static func hostname(_ hostname: Swift.String) -> Security.SecPolicy
+  public static func revocation(options: CirrentSDK.CustomRevocationTrustEvaluator.CustomOptions) throws -> Security.SecPolicy
+}
+extension Swift.Array : CirrentSDK.CustomAlamofireExtended {
+  public typealias ExtendedType = Swift.Array<Element>
+}
+extension CirrentSDK.CustomAlamofireExtension where ExtendedType == [Security.SecCertificate] {
+  public var data: [Foundation.Data] {
+    get
+  }
+  public var publicKeys: [Security.SecKey] {
+    get
+  }
+}
+extension Security.SecCertificate : CirrentSDK.CustomAlamofireExtended {
+  public typealias ExtendedType = Security.SecCertificate
+}
+extension CirrentSDK.CustomAlamofireExtension where ExtendedType == Security.SecCertificate {
+  public var publicKey: Security.SecKey? {
+    get
+  }
+}
+extension Swift.Int32 : CirrentSDK.CustomAlamofireExtended {
+  public typealias ExtendedType = Swift.Int32
+}
+extension CirrentSDK.CustomAlamofireExtension where ExtendedType == Darwin.OSStatus {
+  public var isSuccess: Swift.Bool {
+    get
+  }
+}
+extension Security.SecTrustResultType : CirrentSDK.CustomAlamofireExtended {
+  public typealias ExtendedType = Security.SecTrustResultType
+}
+extension CirrentSDK.CustomAlamofireExtension where ExtendedType == Security.SecTrustResultType {
+  public var isSuccess: Swift.Bool {
+    get
+  }
+}
+public struct CustomRequestAdapterState {
+  public let requestID: Foundation.UUID
+  public let session: CirrentSDK.CustomSession
+}
+public protocol CustomRequestAdapter {
+  func adapt(_ urlRequest: Foundation.URLRequest, for session: CirrentSDK.CustomSession, completion: @escaping (Swift.Result<Foundation.URLRequest, Swift.Error>) -> Swift.Void)
+  func adapt(_ urlRequest: Foundation.URLRequest, using state: CirrentSDK.CustomRequestAdapterState, completion: @escaping (Swift.Result<Foundation.URLRequest, Swift.Error>) -> Swift.Void)
+}
+extension CirrentSDK.CustomRequestAdapter {
+  public func adapt(_ urlRequest: Foundation.URLRequest, using state: CirrentSDK.CustomRequestAdapterState, completion: @escaping (Swift.Result<Foundation.URLRequest, Swift.Error>) -> Swift.Void)
+}
+public enum CustomRetryResult {
+  case retry
+  case retryWithDelay(Foundation.TimeInterval)
+  case doNotRetry
+  case doNotRetryWithError(Swift.Error)
+}
+public protocol CustomRequestRetrier {
+  func retry(_ request: CirrentSDK.CustomRequest, for session: CirrentSDK.CustomSession, dueTo error: Swift.Error, completion: @escaping (CirrentSDK.CustomRetryResult) -> Swift.Void)
+}
+public protocol CustomRequestInterceptor : CirrentSDK.CustomRequestAdapter, CirrentSDK.CustomRequestRetrier {
+}
+extension CirrentSDK.CustomRequestInterceptor {
+  public func adapt(_ urlRequest: Foundation.URLRequest, for session: CirrentSDK.CustomSession, completion: @escaping (Swift.Result<Foundation.URLRequest, Swift.Error>) -> Swift.Void)
+  public func retry(_ request: CirrentSDK.CustomRequest, for session: CirrentSDK.CustomSession, dueTo error: Swift.Error, completion: @escaping (CirrentSDK.CustomRetryResult) -> Swift.Void)
+}
+public typealias AdaptHandler = (Foundation.URLRequest, CirrentSDK.CustomSession, _ completion: @escaping (Swift.Result<Foundation.URLRequest, Swift.Error>) -> Swift.Void) -> Swift.Void
+public typealias RetryHandler = (CirrentSDK.CustomRequest, CirrentSDK.CustomSession, Swift.Error, _ completion: @escaping (CirrentSDK.CustomRetryResult) -> Swift.Void) -> Swift.Void
+open class CustomAdapter : CirrentSDK.CustomRequestInterceptor {
+  public init(_ adaptHandler: @escaping CirrentSDK.AdaptHandler)
+  open func adapt(_ urlRequest: Foundation.URLRequest, for session: CirrentSDK.CustomSession, completion: @escaping (Swift.Result<Foundation.URLRequest, Swift.Error>) -> Swift.Void)
+  open func adapt(_ urlRequest: Foundation.URLRequest, using state: CirrentSDK.CustomRequestAdapterState, completion: @escaping (Swift.Result<Foundation.URLRequest, Swift.Error>) -> Swift.Void)
+  @objc deinit
+}
+open class CustomRetrier : CirrentSDK.CustomRequestInterceptor {
+  public init(_ retryHandler: @escaping CirrentSDK.RetryHandler)
+  open func retry(_ request: CirrentSDK.CustomRequest, for session: CirrentSDK.CustomSession, dueTo error: Swift.Error, completion: @escaping (CirrentSDK.CustomRetryResult) -> Swift.Void)
+  @objc deinit
+}
+open class CustomInterceptor : CirrentSDK.CustomRequestInterceptor {
+  final public let adapters: [CirrentSDK.CustomRequestAdapter]
+  final public let retriers: [CirrentSDK.CustomRequestRetrier]
+  public init(adaptHandler: @escaping CirrentSDK.AdaptHandler, retryHandler: @escaping CirrentSDK.RetryHandler)
+  public init(adapter: CirrentSDK.CustomRequestAdapter, retrier: CirrentSDK.CustomRequestRetrier)
+  public init(adapters: [CirrentSDK.CustomRequestAdapter] = [], retriers: [CirrentSDK.CustomRequestRetrier] = [], interceptors: [CirrentSDK.CustomRequestInterceptor] = [])
+  open func adapt(_ urlRequest: Foundation.URLRequest, for session: CirrentSDK.CustomSession, completion: @escaping (Swift.Result<Foundation.URLRequest, Swift.Error>) -> Swift.Void)
+  open func adapt(_ urlRequest: Foundation.URLRequest, using state: CirrentSDK.CustomRequestAdapterState, completion: @escaping (Swift.Result<Foundation.URLRequest, Swift.Error>) -> Swift.Void)
+  open func retry(_ request: CirrentSDK.CustomRequest, for session: CirrentSDK.CustomSession, dueTo error: Swift.Error, completion: @escaping (CirrentSDK.CustomRetryResult) -> Swift.Void)
+  @objc deinit
+}
+open class CustomSession {
+  public static let `default`: CirrentSDK.CustomSession
+  final public let session: Foundation.URLSession
+  final public let delegate: CirrentSDK.CustomSessionDelegate
+  final public let rootQueue: Dispatch.DispatchQueue
+  final public let startRequestsImmediately: Swift.Bool
+  final public let requestQueue: Dispatch.DispatchQueue
+  final public let serializationQueue: Dispatch.DispatchQueue
+  final public let interceptor: CirrentSDK.CustomRequestInterceptor?
+  final public let serverTrustManager: CirrentSDK.CustomServerTrustManager?
+  final public let redirectHandler: CirrentSDK.CustomRedirectHandler?
+  final public let cachedResponseHandler: CirrentSDK.CustomCachedResponseHandler?
+  final public let eventMonitor: CirrentSDK.CompositeEventMonitor
+  final public let defaultEventMonitors: [CirrentSDK.CustomEventMonitor]
+  public init(session: Foundation.URLSession, delegate: CirrentSDK.CustomSessionDelegate, rootQueue: Dispatch.DispatchQueue, startRequestsImmediately: Swift.Bool = true, requestQueue: Dispatch.DispatchQueue? = nil, serializationQueue: Dispatch.DispatchQueue? = nil, interceptor: CirrentSDK.CustomRequestInterceptor? = nil, serverTrustManager: CirrentSDK.CustomServerTrustManager? = nil, redirectHandler: CirrentSDK.CustomRedirectHandler? = nil, cachedResponseHandler: CirrentSDK.CustomCachedResponseHandler? = nil, eventMonitors: [CirrentSDK.CustomEventMonitor] = [])
+  convenience public init(configuration: Foundation.URLSessionConfiguration = URLSessionConfiguration.af.default, delegate: CirrentSDK.CustomSessionDelegate = CustomSessionDelegate(), rootQueue: Dispatch.DispatchQueue = DispatchQueue(label: "org.alamofire.session.rootQueue"), startRequestsImmediately: Swift.Bool = true, requestQueue: Dispatch.DispatchQueue? = nil, serializationQueue: Dispatch.DispatchQueue? = nil, interceptor: CirrentSDK.CustomRequestInterceptor? = nil, serverTrustManager: CirrentSDK.CustomServerTrustManager? = nil, redirectHandler: CirrentSDK.CustomRedirectHandler? = nil, cachedResponseHandler: CirrentSDK.CustomCachedResponseHandler? = nil, eventMonitors: [CirrentSDK.CustomEventMonitor] = [])
+  @objc deinit
+  public func withAllRequests(perform action: @escaping (Swift.Set<CirrentSDK.CustomRequest>) -> Swift.Void)
+  public func cancelAllRequests(completingOnQueue queue: Dispatch.DispatchQueue = .main, completion: (() -> Swift.Void)? = nil)
+  public typealias RequestModifier = (inout Foundation.URLRequest) throws -> Swift.Void
+  open func request(_ convertible: CirrentSDK.CustomURLConvertible, method: CirrentSDK.CustomHTTPMethod = .get, parameters: CirrentSDK.Parameters? = nil, encoding: CirrentSDK.CustomParameterEncoding = CustomURLEncoding.default, headers: CirrentSDK.CustomHTTPHeaders? = nil, interceptor: CirrentSDK.CustomRequestInterceptor? = nil, requestModifier: CirrentSDK.CustomSession.RequestModifier? = nil) -> CirrentSDK.CustomDataRequest
+  open func request<Parameters>(_ convertible: CirrentSDK.CustomURLConvertible, method: CirrentSDK.CustomHTTPMethod = .get, parameters: Parameters? = nil, encoder: CirrentSDK.CustomParameterEncoder = CustomURLEncodedFormParameterEncoder.default, headers: CirrentSDK.CustomHTTPHeaders? = nil, interceptor: CirrentSDK.CustomRequestInterceptor? = nil, requestModifier: CirrentSDK.CustomSession.RequestModifier? = nil) -> CirrentSDK.CustomDataRequest where Parameters : Swift.Encodable
+  open func request(_ convertible: CirrentSDK.CustomURLRequestConvertible, interceptor: CirrentSDK.CustomRequestInterceptor? = nil) -> CirrentSDK.CustomDataRequest
+  open func streamRequest<Parameters>(_ convertible: CirrentSDK.CustomURLConvertible, method: CirrentSDK.CustomHTTPMethod = .get, parameters: Parameters? = nil, encoder: CirrentSDK.CustomParameterEncoder = CustomURLEncodedFormParameterEncoder.default, headers: CirrentSDK.CustomHTTPHeaders? = nil, automaticallyCancelOnStreamError: Swift.Bool = false, interceptor: CirrentSDK.CustomRequestInterceptor? = nil, requestModifier: CirrentSDK.CustomSession.RequestModifier? = nil) -> CirrentSDK.CustomDataStreamRequest where Parameters : Swift.Encodable
+  open func streamRequest(_ convertible: CirrentSDK.CustomURLConvertible, method: CirrentSDK.CustomHTTPMethod = .get, headers: CirrentSDK.CustomHTTPHeaders? = nil, automaticallyCancelOnStreamError: Swift.Bool = false, interceptor: CirrentSDK.CustomRequestInterceptor? = nil, requestModifier: CirrentSDK.CustomSession.RequestModifier? = nil) -> CirrentSDK.CustomDataStreamRequest
+  open func streamRequest(_ convertible: CirrentSDK.CustomURLRequestConvertible, automaticallyCancelOnStreamError: Swift.Bool = false, interceptor: CirrentSDK.CustomRequestInterceptor? = nil) -> CirrentSDK.CustomDataStreamRequest
+  open func download(_ convertible: CirrentSDK.CustomURLConvertible, method: CirrentSDK.CustomHTTPMethod = .get, parameters: CirrentSDK.Parameters? = nil, encoding: CirrentSDK.CustomParameterEncoding = CustomURLEncoding.default, headers: CirrentSDK.CustomHTTPHeaders? = nil, interceptor: CirrentSDK.CustomRequestInterceptor? = nil, requestModifier: CirrentSDK.CustomSession.RequestModifier? = nil, to destination: CirrentSDK.CustomDownloadRequest.Destination? = nil) -> CirrentSDK.CustomDownloadRequest
+  open func download<Parameters>(_ convertible: CirrentSDK.CustomURLConvertible, method: CirrentSDK.CustomHTTPMethod = .get, parameters: Parameters? = nil, encoder: CirrentSDK.CustomParameterEncoder = CustomURLEncodedFormParameterEncoder.default, headers: CirrentSDK.CustomHTTPHeaders? = nil, interceptor: CirrentSDK.CustomRequestInterceptor? = nil, requestModifier: CirrentSDK.CustomSession.RequestModifier? = nil, to destination: CirrentSDK.CustomDownloadRequest.Destination? = nil) -> CirrentSDK.CustomDownloadRequest where Parameters : Swift.Encodable
+  open func download(_ convertible: CirrentSDK.CustomURLRequestConvertible, interceptor: CirrentSDK.CustomRequestInterceptor? = nil, to destination: CirrentSDK.CustomDownloadRequest.Destination? = nil) -> CirrentSDK.CustomDownloadRequest
+  open func download(resumingWith data: Foundation.Data, interceptor: CirrentSDK.CustomRequestInterceptor? = nil, to destination: CirrentSDK.CustomDownloadRequest.Destination? = nil) -> CirrentSDK.CustomDownloadRequest
+  open func upload(_ data: Foundation.Data, to convertible: CirrentSDK.CustomURLConvertible, method: CirrentSDK.CustomHTTPMethod = .post, headers: CirrentSDK.CustomHTTPHeaders? = nil, interceptor: CirrentSDK.CustomRequestInterceptor? = nil, fileManager: Foundation.FileManager = .default, requestModifier: CirrentSDK.CustomSession.RequestModifier? = nil) -> CirrentSDK.CustomUploadRequest
+  open func upload(_ data: Foundation.Data, with convertible: CirrentSDK.CustomURLRequestConvertible, interceptor: CirrentSDK.CustomRequestInterceptor? = nil, fileManager: Foundation.FileManager = .default) -> CirrentSDK.CustomUploadRequest
+  open func upload(_ fileURL: Foundation.URL, to convertible: CirrentSDK.CustomURLConvertible, method: CirrentSDK.CustomHTTPMethod = .post, headers: CirrentSDK.CustomHTTPHeaders? = nil, interceptor: CirrentSDK.CustomRequestInterceptor? = nil, fileManager: Foundation.FileManager = .default, requestModifier: CirrentSDK.CustomSession.RequestModifier? = nil) -> CirrentSDK.CustomUploadRequest
+  open func upload(_ fileURL: Foundation.URL, with convertible: CirrentSDK.CustomURLRequestConvertible, interceptor: CirrentSDK.CustomRequestInterceptor? = nil, fileManager: Foundation.FileManager = .default) -> CirrentSDK.CustomUploadRequest
+  open func upload(_ stream: Foundation.InputStream, to convertible: CirrentSDK.CustomURLConvertible, method: CirrentSDK.CustomHTTPMethod = .post, headers: CirrentSDK.CustomHTTPHeaders? = nil, interceptor: CirrentSDK.CustomRequestInterceptor? = nil, fileManager: Foundation.FileManager = .default, requestModifier: CirrentSDK.CustomSession.RequestModifier? = nil) -> CirrentSDK.CustomUploadRequest
+  open func upload(_ stream: Foundation.InputStream, with convertible: CirrentSDK.CustomURLRequestConvertible, interceptor: CirrentSDK.CustomRequestInterceptor? = nil, fileManager: Foundation.FileManager = .default) -> CirrentSDK.CustomUploadRequest
+  open func upload(multipartFormData: @escaping (CirrentSDK.CustomMultipartFormData) -> Swift.Void, to url: CirrentSDK.CustomURLConvertible, usingThreshold encodingMemoryThreshold: Swift.UInt64 = CustomMultipartFormData.encodingMemoryThreshold, method: CirrentSDK.CustomHTTPMethod = .post, headers: CirrentSDK.CustomHTTPHeaders? = nil, interceptor: CirrentSDK.CustomRequestInterceptor? = nil, fileManager: Foundation.FileManager = .default, requestModifier: CirrentSDK.CustomSession.RequestModifier? = nil) -> CirrentSDK.CustomUploadRequest
+  open func upload(multipartFormData: @escaping (CirrentSDK.CustomMultipartFormData) -> Swift.Void, with request: CirrentSDK.CustomURLRequestConvertible, usingThreshold encodingMemoryThreshold: Swift.UInt64 = CustomMultipartFormData.encodingMemoryThreshold, interceptor: CirrentSDK.CustomRequestInterceptor? = nil, fileManager: Foundation.FileManager = .default) -> CirrentSDK.CustomUploadRequest
+  open func upload(multipartFormData: CirrentSDK.CustomMultipartFormData, to url: CirrentSDK.CustomURLConvertible, usingThreshold encodingMemoryThreshold: Swift.UInt64 = CustomMultipartFormData.encodingMemoryThreshold, method: CirrentSDK.CustomHTTPMethod = .post, headers: CirrentSDK.CustomHTTPHeaders? = nil, interceptor: CirrentSDK.CustomRequestInterceptor? = nil, fileManager: Foundation.FileManager = .default, requestModifier: CirrentSDK.CustomSession.RequestModifier? = nil) -> CirrentSDK.CustomUploadRequest
+  open func upload(multipartFormData: CirrentSDK.CustomMultipartFormData, with request: CirrentSDK.CustomURLRequestConvertible, usingThreshold encodingMemoryThreshold: Swift.UInt64 = CustomMultipartFormData.encodingMemoryThreshold, interceptor: CirrentSDK.CustomRequestInterceptor? = nil, fileManager: Foundation.FileManager = .default) -> CirrentSDK.CustomUploadRequest
+}
+extension CirrentSDK.CustomSession : CirrentSDK.CustomRequestDelegate {
+  public var sessionConfiguration: Foundation.URLSessionConfiguration {
+    get
+  }
+  public var startImmediately: Swift.Bool {
+    get
+  }
+  public func cleanup(after request: CirrentSDK.CustomRequest)
+  public func retryResult(for request: CirrentSDK.CustomRequest, dueTo error: CirrentSDK.CustomAFError, completion: @escaping (CirrentSDK.CustomRetryResult) -> Swift.Void)
+  public func retryRequest(_ request: CirrentSDK.CustomRequest, withDelay timeDelay: Foundation.TimeInterval?)
+}
+public typealias AFDataResponse<Success> = CirrentSDK.CustomDataResponse<Success, CirrentSDK.CustomAFError>
+public typealias AFDownloadResponse<Success> = CirrentSDK.CustomDownloadResponse<Success, CirrentSDK.CustomAFError>
+public struct CustomDataResponse<Success, Failure> where Failure : Swift.Error {
+  public let request: Foundation.URLRequest?
+  public let response: Foundation.HTTPURLResponse?
+  public let data: Foundation.Data?
+  public let metrics: Foundation.URLSessionTaskMetrics?
+  public let serializationDuration: Foundation.TimeInterval
+  public let result: Swift.Result<Success, Failure>
+  public var value: Success? {
+    get
+  }
+  public var error: Failure? {
+    get
+  }
+  public init(request: Foundation.URLRequest?, response: Foundation.HTTPURLResponse?, data: Foundation.Data?, metrics: Foundation.URLSessionTaskMetrics?, serializationDuration: Foundation.TimeInterval, result: Swift.Result<Success, Failure>)
+}
+extension CirrentSDK.CustomDataResponse : Swift.CustomStringConvertible, Swift.CustomDebugStringConvertible {
+  public var description: Swift.String {
+    get
+  }
+  public var debugDescription: Swift.String {
+    get
+  }
+}
+extension CirrentSDK.CustomDataResponse {
+  public func map<NewSuccess>(_ transform: (Success) -> NewSuccess) -> CirrentSDK.CustomDataResponse<NewSuccess, Failure>
+  public func tryMap<NewSuccess>(_ transform: (Success) throws -> NewSuccess) -> CirrentSDK.CustomDataResponse<NewSuccess, Swift.Error>
+  public func mapError<NewFailure>(_ transform: (Failure) -> NewFailure) -> CirrentSDK.CustomDataResponse<Success, NewFailure> where NewFailure : Swift.Error
+  public func tryMapError<NewFailure>(_ transform: (Failure) throws -> NewFailure) -> CirrentSDK.CustomDataResponse<Success, Swift.Error> where NewFailure : Swift.Error
+}
+public struct CustomDownloadResponse<Success, Failure> where Failure : Swift.Error {
+  public let request: Foundation.URLRequest?
+  public let response: Foundation.HTTPURLResponse?
+  public let fileURL: Foundation.URL?
+  public let resumeData: Foundation.Data?
+  public let metrics: Foundation.URLSessionTaskMetrics?
+  public let serializationDuration: Foundation.TimeInterval
+  public let result: Swift.Result<Success, Failure>
+  public var value: Success? {
+    get
+  }
+  public var error: Failure? {
+    get
+  }
+  public init(request: Foundation.URLRequest?, response: Foundation.HTTPURLResponse?, fileURL: Foundation.URL?, resumeData: Foundation.Data?, metrics: Foundation.URLSessionTaskMetrics?, serializationDuration: Foundation.TimeInterval, result: Swift.Result<Success, Failure>)
+}
+extension CirrentSDK.CustomDownloadResponse : Swift.CustomStringConvertible, Swift.CustomDebugStringConvertible {
+  public var description: Swift.String {
+    get
+  }
+  public var debugDescription: Swift.String {
+    get
+  }
+}
+extension CirrentSDK.CustomDownloadResponse {
+  public func map<NewSuccess>(_ transform: (Success) -> NewSuccess) -> CirrentSDK.CustomDownloadResponse<NewSuccess, Failure>
+  public func tryMap<NewSuccess>(_ transform: (Success) throws -> NewSuccess) -> CirrentSDK.CustomDownloadResponse<NewSuccess, Swift.Error>
+  public func mapError<NewFailure>(_ transform: (Failure) -> NewFailure) -> CirrentSDK.CustomDownloadResponse<Success, NewFailure> where NewFailure : Swift.Error
+  public func tryMapError<NewFailure>(_ transform: (Failure) throws -> NewFailure) -> CirrentSDK.CustomDownloadResponse<Success, Swift.Error> where NewFailure : Swift.Error
+}
+public protocol CustomCachedResponseHandler {
+  func dataTask(_ task: Foundation.URLSessionDataTask, willCacheResponse response: Foundation.CachedURLResponse, completion: @escaping (Foundation.CachedURLResponse?) -> Swift.Void)
+}
+public struct CustomResponseCacher {
+  public enum CustomBehavior {
+    case cache
+    case doNotCache
+    case modify((Foundation.URLSessionDataTask, Foundation.CachedURLResponse) -> Foundation.CachedURLResponse?)
+  }
+  public static let cache: CirrentSDK.CustomResponseCacher
+  public static let doNotCache: CirrentSDK.CustomResponseCacher
+  public let behavior: CirrentSDK.CustomResponseCacher.CustomBehavior
+  public init(behavior: CirrentSDK.CustomResponseCacher.CustomBehavior)
+}
+extension CirrentSDK.CustomResponseCacher : CirrentSDK.CustomCachedResponseHandler {
+  public func dataTask(_ task: Foundation.URLSessionDataTask, willCacheResponse response: Foundation.CachedURLResponse, completion: @escaping (Foundation.CachedURLResponse?) -> Swift.Void)
+}
+public protocol CustomRedirectHandler {
+  func task(_ task: Foundation.URLSessionTask, willBeRedirectedTo request: Foundation.URLRequest, for response: Foundation.HTTPURLResponse, completion: @escaping (Foundation.URLRequest?) -> Swift.Void)
+}
+public struct CustomRedirector {
+  public enum CustomBehavior {
+    case follow
+    case doNotFollow
+    case modify((Foundation.URLSessionTask, Foundation.URLRequest, Foundation.HTTPURLResponse) -> Foundation.URLRequest?)
+  }
+  public static let follow: CirrentSDK.CustomRedirector
+  public static let doNotFollow: CirrentSDK.CustomRedirector
+  public let behavior: CirrentSDK.CustomRedirector.CustomBehavior
+  public init(behavior: CirrentSDK.CustomRedirector.CustomBehavior)
+}
+extension CirrentSDK.CustomRedirector : CirrentSDK.CustomRedirectHandler {
+  public func task(_ task: Foundation.URLSessionTask, willBeRedirectedTo request: Foundation.URLRequest, for response: Foundation.HTTPURLResponse, completion: @escaping (Foundation.URLRequest?) -> Swift.Void)
+}
+public protocol CustomEventMonitor {
+  var queue: Dispatch.DispatchQueue { get }
+  func urlSession(_ session: Foundation.URLSession, didBecomeInvalidWithError error: Swift.Error?)
+  func urlSession(_ session: Foundation.URLSession, task: Foundation.URLSessionTask, didReceive challenge: Foundation.URLAuthenticationChallenge)
+  func urlSession(_ session: Foundation.URLSession, task: Foundation.URLSessionTask, didSendBodyData bytesSent: Swift.Int64, totalBytesSent: Swift.Int64, totalBytesExpectedToSend: Swift.Int64)
+  func urlSession(_ session: Foundation.URLSession, taskNeedsNewBodyStream task: Foundation.URLSessionTask)
+  func urlSession(_ session: Foundation.URLSession, task: Foundation.URLSessionTask, willPerformHTTPRedirection response: Foundation.HTTPURLResponse, newRequest request: Foundation.URLRequest)
+  func urlSession(_ session: Foundation.URLSession, task: Foundation.URLSessionTask, didFinishCollecting metrics: Foundation.URLSessionTaskMetrics)
+  func urlSession(_ session: Foundation.URLSession, task: Foundation.URLSessionTask, didCompleteWithError error: Swift.Error?)
+  @available(macOS 10.13, iOS 11.0, tvOS 11.0, watchOS 4.0, *)
+  func urlSession(_ session: Foundation.URLSession, taskIsWaitingForConnectivity task: Foundation.URLSessionTask)
+  func urlSession(_ session: Foundation.URLSession, dataTask: Foundation.URLSessionDataTask, didReceive data: Foundation.Data)
+  func urlSession(_ session: Foundation.URLSession, dataTask: Foundation.URLSessionDataTask, willCacheResponse proposedResponse: Foundation.CachedURLResponse)
+  func urlSession(_ session: Foundation.URLSession, downloadTask: Foundation.URLSessionDownloadTask, didResumeAtOffset fileOffset: Swift.Int64, expectedTotalBytes: Swift.Int64)
+  func urlSession(_ session: Foundation.URLSession, downloadTask: Foundation.URLSessionDownloadTask, didWriteData bytesWritten: Swift.Int64, totalBytesWritten: Swift.Int64, totalBytesExpectedToWrite: Swift.Int64)
+  func urlSession(_ session: Foundation.URLSession, downloadTask: Foundation.URLSessionDownloadTask, didFinishDownloadingTo location: Foundation.URL)
+  func request(_ request: CirrentSDK.CustomRequest, didCreateInitialURLRequest urlRequest: Foundation.URLRequest)
+  func request(_ request: CirrentSDK.CustomRequest, didFailToCreateURLRequestWithError error: CirrentSDK.CustomAFError)
+  func request(_ request: CirrentSDK.CustomRequest, didAdaptInitialRequest initialRequest: Foundation.URLRequest, to adaptedRequest: Foundation.URLRequest)
+  func request(_ request: CirrentSDK.CustomRequest, didFailToAdaptURLRequest initialRequest: Foundation.URLRequest, withError error: CirrentSDK.CustomAFError)
+  func request(_ request: CirrentSDK.CustomRequest, didCreateURLRequest urlRequest: Foundation.URLRequest)
+  func request(_ request: CirrentSDK.CustomRequest, didCreateTask task: Foundation.URLSessionTask)
+  func request(_ request: CirrentSDK.CustomRequest, didGatherMetrics metrics: Foundation.URLSessionTaskMetrics)
+  func request(_ request: CirrentSDK.CustomRequest, didFailTask task: Foundation.URLSessionTask, earlyWithError error: CirrentSDK.CustomAFError)
+  func request(_ request: CirrentSDK.CustomRequest, didCompleteTask task: Foundation.URLSessionTask, with error: CirrentSDK.CustomAFError?)
+  func requestIsRetrying(_ request: CirrentSDK.CustomRequest)
+  func requestDidFinish(_ request: CirrentSDK.CustomRequest)
+  func requestDidResume(_ request: CirrentSDK.CustomRequest)
+  func request(_ request: CirrentSDK.CustomRequest, didResumeTask task: Foundation.URLSessionTask)
+  func requestDidSuspend(_ request: CirrentSDK.CustomRequest)
+  func request(_ request: CirrentSDK.CustomRequest, didSuspendTask task: Foundation.URLSessionTask)
+  func requestDidCancel(_ request: CirrentSDK.CustomRequest)
+  func request(_ request: CirrentSDK.CustomRequest, didCancelTask task: Foundation.URLSessionTask)
+  func request(_ request: CirrentSDK.CustomDataRequest, didValidateRequest urlRequest: Foundation.URLRequest?, response: Foundation.HTTPURLResponse, data: Foundation.Data?, withResult result: CirrentSDK.CustomRequest.ValidationResult)
+  func request(_ request: CirrentSDK.CustomDataRequest, didParseResponse response: CirrentSDK.CustomDataResponse<Foundation.Data?, CirrentSDK.CustomAFError>)
+  func request<Value>(_ request: CirrentSDK.CustomDataRequest, didParseResponse response: CirrentSDK.CustomDataResponse<Value, CirrentSDK.CustomAFError>)
+  func request(_ request: CirrentSDK.CustomDataStreamRequest, didValidateRequest urlRequest: Foundation.URLRequest?, response: Foundation.HTTPURLResponse, withResult result: CirrentSDK.CustomRequest.ValidationResult)
+  func request<Value>(_ request: CirrentSDK.CustomDataStreamRequest, didParseStream result: Swift.Result<Value, CirrentSDK.CustomAFError>)
+  func request(_ request: CirrentSDK.CustomUploadRequest, didCreateUploadable uploadable: CirrentSDK.CustomUploadRequest.CustomUploadable)
+  func request(_ request: CirrentSDK.CustomUploadRequest, didFailToCreateUploadableWithError error: CirrentSDK.CustomAFError)
+  func request(_ request: CirrentSDK.CustomUploadRequest, didProvideInputStream stream: Foundation.InputStream)
+  func request(_ request: CirrentSDK.CustomDownloadRequest, didFinishDownloadingUsing task: Foundation.URLSessionTask, with result: Swift.Result<Foundation.URL, CirrentSDK.CustomAFError>)
+  func request(_ request: CirrentSDK.CustomDownloadRequest, didCreateDestinationURL url: Foundation.URL)
+  func request(_ request: CirrentSDK.CustomDownloadRequest, didValidateRequest urlRequest: Foundation.URLRequest?, response: Foundation.HTTPURLResponse, fileURL: Foundation.URL?, withResult result: CirrentSDK.CustomRequest.ValidationResult)
+  func request(_ request: CirrentSDK.CustomDownloadRequest, didParseResponse response: CirrentSDK.CustomDownloadResponse<Foundation.URL?, CirrentSDK.CustomAFError>)
+  func request<Value>(_ request: CirrentSDK.CustomDownloadRequest, didParseResponse response: CirrentSDK.CustomDownloadResponse<Value, CirrentSDK.CustomAFError>)
+}
+extension CirrentSDK.CustomEventMonitor {
+  public var queue: Dispatch.DispatchQueue {
+    get
+  }
+  public func urlSession(_ session: Foundation.URLSession, didBecomeInvalidWithError error: Swift.Error?)
+  public func urlSession(_ session: Foundation.URLSession, task: Foundation.URLSessionTask, didReceive challenge: Foundation.URLAuthenticationChallenge)
+  public func urlSession(_ session: Foundation.URLSession, task: Foundation.URLSessionTask, didSendBodyData bytesSent: Swift.Int64, totalBytesSent: Swift.Int64, totalBytesExpectedToSend: Swift.Int64)
+  public func urlSession(_ session: Foundation.URLSession, taskNeedsNewBodyStream task: Foundation.URLSessionTask)
+  public func urlSession(_ session: Foundation.URLSession, task: Foundation.URLSessionTask, willPerformHTTPRedirection response: Foundation.HTTPURLResponse, newRequest request: Foundation.URLRequest)
+  public func urlSession(_ session: Foundation.URLSession, task: Foundation.URLSessionTask, didFinishCollecting metrics: Foundation.URLSessionTaskMetrics)
+  public func urlSession(_ session: Foundation.URLSession, task: Foundation.URLSessionTask, didCompleteWithError error: Swift.Error?)
+  public func urlSession(_ session: Foundation.URLSession, taskIsWaitingForConnectivity task: Foundation.URLSessionTask)
+  public func urlSession(_ session: Foundation.URLSession, dataTask: Foundation.URLSessionDataTask, didReceive data: Foundation.Data)
+  public func urlSession(_ session: Foundation.URLSession, dataTask: Foundation.URLSessionDataTask, willCacheResponse proposedResponse: Foundation.CachedURLResponse)
+  public func urlSession(_ session: Foundation.URLSession, downloadTask: Foundation.URLSessionDownloadTask, didResumeAtOffset fileOffset: Swift.Int64, expectedTotalBytes: Swift.Int64)
+  public func urlSession(_ session: Foundation.URLSession, downloadTask: Foundation.URLSessionDownloadTask, didWriteData bytesWritten: Swift.Int64, totalBytesWritten: Swift.Int64, totalBytesExpectedToWrite: Swift.Int64)
+  public func urlSession(_ session: Foundation.URLSession, downloadTask: Foundation.URLSessionDownloadTask, didFinishDownloadingTo location: Foundation.URL)
+  public func request(_ request: CirrentSDK.CustomRequest, didCreateInitialURLRequest urlRequest: Foundation.URLRequest)
+  public func request(_ request: CirrentSDK.CustomRequest, didFailToCreateURLRequestWithError error: CirrentSDK.CustomAFError)
+  public func request(_ request: CirrentSDK.CustomRequest, didAdaptInitialRequest initialRequest: Foundation.URLRequest, to adaptedRequest: Foundation.URLRequest)
+  public func request(_ request: CirrentSDK.CustomRequest, didFailToAdaptURLRequest initialRequest: Foundation.URLRequest, withError error: CirrentSDK.CustomAFError)
+  public func request(_ request: CirrentSDK.CustomRequest, didCreateURLRequest urlRequest: Foundation.URLRequest)
+  public func request(_ request: CirrentSDK.CustomRequest, didCreateTask task: Foundation.URLSessionTask)
+  public func request(_ request: CirrentSDK.CustomRequest, didGatherMetrics metrics: Foundation.URLSessionTaskMetrics)
+  public func request(_ request: CirrentSDK.CustomRequest, didFailTask task: Foundation.URLSessionTask, earlyWithError error: CirrentSDK.CustomAFError)
+  public func request(_ request: CirrentSDK.CustomRequest, didCompleteTask task: Foundation.URLSessionTask, with error: CirrentSDK.CustomAFError?)
+  public func requestIsRetrying(_ request: CirrentSDK.CustomRequest)
+  public func requestDidFinish(_ request: CirrentSDK.CustomRequest)
+  public func requestDidResume(_ request: CirrentSDK.CustomRequest)
+  public func request(_ request: CirrentSDK.CustomRequest, didResumeTask task: Foundation.URLSessionTask)
+  public func requestDidSuspend(_ request: CirrentSDK.CustomRequest)
+  public func request(_ request: CirrentSDK.CustomRequest, didSuspendTask task: Foundation.URLSessionTask)
+  public func requestDidCancel(_ request: CirrentSDK.CustomRequest)
+  public func request(_ request: CirrentSDK.CustomRequest, didCancelTask task: Foundation.URLSessionTask)
+  public func request(_ request: CirrentSDK.CustomDataRequest, didValidateRequest urlRequest: Foundation.URLRequest?, response: Foundation.HTTPURLResponse, data: Foundation.Data?, withResult result: CirrentSDK.CustomRequest.ValidationResult)
+  public func request(_ request: CirrentSDK.CustomDataRequest, didParseResponse response: CirrentSDK.CustomDataResponse<Foundation.Data?, CirrentSDK.CustomAFError>)
+  public func request<Value>(_ request: CirrentSDK.CustomDataRequest, didParseResponse response: CirrentSDK.CustomDataResponse<Value, CirrentSDK.CustomAFError>)
+  public func request(_ request: CirrentSDK.CustomDataStreamRequest, didValidateRequest urlRequest: Foundation.URLRequest?, response: Foundation.HTTPURLResponse, withResult result: CirrentSDK.CustomRequest.ValidationResult)
+  public func request<Value>(_ request: CirrentSDK.CustomDataStreamRequest, didParseStream result: Swift.Result<Value, CirrentSDK.CustomAFError>)
+  public func request(_ request: CirrentSDK.CustomUploadRequest, didCreateUploadable uploadable: CirrentSDK.CustomUploadRequest.CustomUploadable)
+  public func request(_ request: CirrentSDK.CustomUploadRequest, didFailToCreateUploadableWithError error: CirrentSDK.CustomAFError)
+  public func request(_ request: CirrentSDK.CustomUploadRequest, didProvideInputStream stream: Foundation.InputStream)
+  public func request(_ request: CirrentSDK.CustomDownloadRequest, didFinishDownloadingUsing task: Foundation.URLSessionTask, with result: Swift.Result<Foundation.URL, CirrentSDK.CustomAFError>)
+  public func request(_ request: CirrentSDK.CustomDownloadRequest, didCreateDestinationURL url: Foundation.URL)
+  public func request(_ request: CirrentSDK.CustomDownloadRequest, didValidateRequest urlRequest: Foundation.URLRequest?, response: Foundation.HTTPURLResponse, fileURL: Foundation.URL?, withResult result: CirrentSDK.CustomRequest.ValidationResult)
+  public func request(_ request: CirrentSDK.CustomDownloadRequest, didParseResponse response: CirrentSDK.CustomDownloadResponse<Foundation.URL?, CirrentSDK.CustomAFError>)
+  public func request<Value>(_ request: CirrentSDK.CustomDownloadRequest, didParseResponse response: CirrentSDK.CustomDownloadResponse<Value, CirrentSDK.CustomAFError>)
+}
+@_hasMissingDesignatedInitializers final public class CompositeEventMonitor : CirrentSDK.CustomEventMonitor {
+  final public let queue: Dispatch.DispatchQueue
+  final public func urlSession(_ session: Foundation.URLSession, didBecomeInvalidWithError error: Swift.Error?)
+  final public func urlSession(_ session: Foundation.URLSession, task: Foundation.URLSessionTask, didReceive challenge: Foundation.URLAuthenticationChallenge)
+  final public func urlSession(_ session: Foundation.URLSession, task: Foundation.URLSessionTask, didSendBodyData bytesSent: Swift.Int64, totalBytesSent: Swift.Int64, totalBytesExpectedToSend: Swift.Int64)
+  final public func urlSession(_ session: Foundation.URLSession, taskNeedsNewBodyStream task: Foundation.URLSessionTask)
+  final public func urlSession(_ session: Foundation.URLSession, task: Foundation.URLSessionTask, willPerformHTTPRedirection response: Foundation.HTTPURLResponse, newRequest request: Foundation.URLRequest)
+  final public func urlSession(_ session: Foundation.URLSession, task: Foundation.URLSessionTask, didFinishCollecting metrics: Foundation.URLSessionTaskMetrics)
+  final public func urlSession(_ session: Foundation.URLSession, task: Foundation.URLSessionTask, didCompleteWithError error: Swift.Error?)
+  @available(macOS 10.13, iOS 11.0, tvOS 11.0, watchOS 4.0, *)
+  final public func urlSession(_ session: Foundation.URLSession, taskIsWaitingForConnectivity task: Foundation.URLSessionTask)
+  final public func urlSession(_ session: Foundation.URLSession, dataTask: Foundation.URLSessionDataTask, didReceive data: Foundation.Data)
+  final public func urlSession(_ session: Foundation.URLSession, dataTask: Foundation.URLSessionDataTask, willCacheResponse proposedResponse: Foundation.CachedURLResponse)
+  final public func urlSession(_ session: Foundation.URLSession, downloadTask: Foundation.URLSessionDownloadTask, didResumeAtOffset fileOffset: Swift.Int64, expectedTotalBytes: Swift.Int64)
+  final public func urlSession(_ session: Foundation.URLSession, downloadTask: Foundation.URLSessionDownloadTask, didWriteData bytesWritten: Swift.Int64, totalBytesWritten: Swift.Int64, totalBytesExpectedToWrite: Swift.Int64)
+  final public func urlSession(_ session: Foundation.URLSession, downloadTask: Foundation.URLSessionDownloadTask, didFinishDownloadingTo location: Foundation.URL)
+  final public func request(_ request: CirrentSDK.CustomRequest, didCreateInitialURLRequest urlRequest: Foundation.URLRequest)
+  final public func request(_ request: CirrentSDK.CustomRequest, didFailToCreateURLRequestWithError error: CirrentSDK.CustomAFError)
+  final public func request(_ request: CirrentSDK.CustomRequest, didAdaptInitialRequest initialRequest: Foundation.URLRequest, to adaptedRequest: Foundation.URLRequest)
+  final public func request(_ request: CirrentSDK.CustomRequest, didFailToAdaptURLRequest initialRequest: Foundation.URLRequest, withError error: CirrentSDK.CustomAFError)
+  final public func request(_ request: CirrentSDK.CustomRequest, didCreateURLRequest urlRequest: Foundation.URLRequest)
+  final public func request(_ request: CirrentSDK.CustomRequest, didCreateTask task: Foundation.URLSessionTask)
+  final public func request(_ request: CirrentSDK.CustomRequest, didGatherMetrics metrics: Foundation.URLSessionTaskMetrics)
+  final public func request(_ request: CirrentSDK.CustomRequest, didFailTask task: Foundation.URLSessionTask, earlyWithError error: CirrentSDK.CustomAFError)
+  final public func request(_ request: CirrentSDK.CustomRequest, didCompleteTask task: Foundation.URLSessionTask, with error: CirrentSDK.CustomAFError?)
+  final public func requestIsRetrying(_ request: CirrentSDK.CustomRequest)
+  final public func requestDidFinish(_ request: CirrentSDK.CustomRequest)
+  final public func requestDidResume(_ request: CirrentSDK.CustomRequest)
+  final public func request(_ request: CirrentSDK.CustomRequest, didResumeTask task: Foundation.URLSessionTask)
+  final public func requestDidSuspend(_ request: CirrentSDK.CustomRequest)
+  final public func request(_ request: CirrentSDK.CustomRequest, didSuspendTask task: Foundation.URLSessionTask)
+  final public func requestDidCancel(_ request: CirrentSDK.CustomRequest)
+  final public func request(_ request: CirrentSDK.CustomRequest, didCancelTask task: Foundation.URLSessionTask)
+  final public func request(_ request: CirrentSDK.CustomDataRequest, didValidateRequest urlRequest: Foundation.URLRequest?, response: Foundation.HTTPURLResponse, data: Foundation.Data?, withResult result: CirrentSDK.CustomRequest.ValidationResult)
+  final public func request(_ request: CirrentSDK.CustomDataRequest, didParseResponse response: CirrentSDK.CustomDataResponse<Foundation.Data?, CirrentSDK.CustomAFError>)
+  final public func request<Value>(_ request: CirrentSDK.CustomDataRequest, didParseResponse response: CirrentSDK.CustomDataResponse<Value, CirrentSDK.CustomAFError>)
+  final public func request(_ request: CirrentSDK.CustomDataStreamRequest, didValidateRequest urlRequest: Foundation.URLRequest?, response: Foundation.HTTPURLResponse, withResult result: CirrentSDK.CustomRequest.ValidationResult)
+  final public func request<Value>(_ request: CirrentSDK.CustomDataStreamRequest, didParseStream result: Swift.Result<Value, CirrentSDK.CustomAFError>)
+  final public func request(_ request: CirrentSDK.CustomUploadRequest, didCreateUploadable uploadable: CirrentSDK.CustomUploadRequest.CustomUploadable)
+  final public func request(_ request: CirrentSDK.CustomUploadRequest, didFailToCreateUploadableWithError error: CirrentSDK.CustomAFError)
+  final public func request(_ request: CirrentSDK.CustomUploadRequest, didProvideInputStream stream: Foundation.InputStream)
+  final public func request(_ request: CirrentSDK.CustomDownloadRequest, didFinishDownloadingUsing task: Foundation.URLSessionTask, with result: Swift.Result<Foundation.URL, CirrentSDK.CustomAFError>)
+  final public func request(_ request: CirrentSDK.CustomDownloadRequest, didCreateDestinationURL url: Foundation.URL)
+  final public func request(_ request: CirrentSDK.CustomDownloadRequest, didValidateRequest urlRequest: Foundation.URLRequest?, response: Foundation.HTTPURLResponse, fileURL: Foundation.URL?, withResult result: CirrentSDK.CustomRequest.ValidationResult)
+  final public func request(_ request: CirrentSDK.CustomDownloadRequest, didParseResponse response: CirrentSDK.CustomDownloadResponse<Foundation.URL?, CirrentSDK.CustomAFError>)
+  final public func request<Value>(_ request: CirrentSDK.CustomDownloadRequest, didParseResponse response: CirrentSDK.CustomDownloadResponse<Value, CirrentSDK.CustomAFError>)
+  @objc deinit
+}
+open class ClosureEventMonitor : CirrentSDK.CustomEventMonitor {
+  open var sessionDidBecomeInvalidWithError: ((Foundation.URLSession, Swift.Error?) -> Swift.Void)?
+  open var taskDidReceiveChallenge: ((Foundation.URLSession, Foundation.URLSessionTask, Foundation.URLAuthenticationChallenge) -> Swift.Void)?
+  open var taskDidSendBodyData: ((Foundation.URLSession, Foundation.URLSessionTask, Swift.Int64, Swift.Int64, Swift.Int64) -> Swift.Void)?
+  open var taskNeedNewBodyStream: ((Foundation.URLSession, Foundation.URLSessionTask) -> Swift.Void)?
+  open var taskWillPerformHTTPRedirection: ((Foundation.URLSession, Foundation.URLSessionTask, Foundation.HTTPURLResponse, Foundation.URLRequest) -> Swift.Void)?
+  open var taskDidFinishCollectingMetrics: ((Foundation.URLSession, Foundation.URLSessionTask, Foundation.URLSessionTaskMetrics) -> Swift.Void)?
+  open var taskDidComplete: ((Foundation.URLSession, Foundation.URLSessionTask, Swift.Error?) -> Swift.Void)?
+  open var taskIsWaitingForConnectivity: ((Foundation.URLSession, Foundation.URLSessionTask) -> Swift.Void)?
+  open var dataTaskDidReceiveData: ((Foundation.URLSession, Foundation.URLSessionDataTask, Foundation.Data) -> Swift.Void)?
+  open var dataTaskWillCacheResponse: ((Foundation.URLSession, Foundation.URLSessionDataTask, Foundation.CachedURLResponse) -> Swift.Void)?
+  open var downloadTaskDidFinishDownloadingToURL: ((Foundation.URLSession, Foundation.URLSessionDownloadTask, Foundation.URL) -> Swift.Void)?
+  open var downloadTaskDidWriteData: ((Foundation.URLSession, Foundation.URLSessionDownloadTask, Swift.Int64, Swift.Int64, Swift.Int64) -> Swift.Void)?
+  open var downloadTaskDidResumeAtOffset: ((Foundation.URLSession, Foundation.URLSessionDownloadTask, Swift.Int64, Swift.Int64) -> Swift.Void)?
+  open var requestDidCreateInitialURLRequest: ((CirrentSDK.CustomRequest, Foundation.URLRequest) -> Swift.Void)?
+  open var requestDidFailToCreateURLRequestWithError: ((CirrentSDK.CustomRequest, CirrentSDK.CustomAFError) -> Swift.Void)?
+  open var requestDidAdaptInitialRequestToAdaptedRequest: ((CirrentSDK.CustomRequest, Foundation.URLRequest, Foundation.URLRequest) -> Swift.Void)?
+  open var requestDidFailToAdaptURLRequestWithError: ((CirrentSDK.CustomRequest, Foundation.URLRequest, CirrentSDK.CustomAFError) -> Swift.Void)?
+  open var requestDidCreateURLRequest: ((CirrentSDK.CustomRequest, Foundation.URLRequest) -> Swift.Void)?
+  open var requestDidCreateTask: ((CirrentSDK.CustomRequest, Foundation.URLSessionTask) -> Swift.Void)?
+  open var requestDidGatherMetrics: ((CirrentSDK.CustomRequest, Foundation.URLSessionTaskMetrics) -> Swift.Void)?
+  open var requestDidFailTaskEarlyWithError: ((CirrentSDK.CustomRequest, Foundation.URLSessionTask, CirrentSDK.CustomAFError) -> Swift.Void)?
+  open var requestDidCompleteTaskWithError: ((CirrentSDK.CustomRequest, Foundation.URLSessionTask, CirrentSDK.CustomAFError?) -> Swift.Void)?
+  open var requestIsRetrying: ((CirrentSDK.CustomRequest) -> Swift.Void)?
+  open var requestDidFinish: ((CirrentSDK.CustomRequest) -> Swift.Void)?
+  open var requestDidResume: ((CirrentSDK.CustomRequest) -> Swift.Void)?
+  open var requestDidResumeTask: ((CirrentSDK.CustomRequest, Foundation.URLSessionTask) -> Swift.Void)?
+  open var requestDidSuspend: ((CirrentSDK.CustomRequest) -> Swift.Void)?
+  open var requestDidSuspendTask: ((CirrentSDK.CustomRequest, Foundation.URLSessionTask) -> Swift.Void)?
+  open var requestDidCancel: ((CirrentSDK.CustomRequest) -> Swift.Void)?
+  open var requestDidCancelTask: ((CirrentSDK.CustomRequest, Foundation.URLSessionTask) -> Swift.Void)?
+  open var requestDidValidateRequestResponseDataWithResult: ((CirrentSDK.CustomDataRequest, Foundation.URLRequest?, Foundation.HTTPURLResponse, Foundation.Data?, CirrentSDK.CustomRequest.ValidationResult) -> Swift.Void)?
+  open var requestDidParseResponse: ((CirrentSDK.CustomDataRequest, CirrentSDK.CustomDataResponse<Foundation.Data?, CirrentSDK.CustomAFError>) -> Swift.Void)?
+  open var requestDidValidateRequestResponseWithResult: ((CirrentSDK.CustomDataStreamRequest, Foundation.URLRequest?, Foundation.HTTPURLResponse, CirrentSDK.CustomRequest.ValidationResult) -> Swift.Void)?
+  open var requestDidCreateUploadable: ((CirrentSDK.CustomUploadRequest, CirrentSDK.CustomUploadRequest.CustomUploadable) -> Swift.Void)?
+  open var requestDidFailToCreateUploadableWithError: ((CirrentSDK.CustomUploadRequest, CirrentSDK.CustomAFError) -> Swift.Void)?
+  open var requestDidProvideInputStream: ((CirrentSDK.CustomUploadRequest, Foundation.InputStream) -> Swift.Void)?
+  open var requestDidFinishDownloadingUsingTaskWithResult: ((CirrentSDK.CustomDownloadRequest, Foundation.URLSessionTask, Swift.Result<Foundation.URL, CirrentSDK.CustomAFError>) -> Swift.Void)?
+  open var requestDidCreateDestinationURL: ((CirrentSDK.CustomDownloadRequest, Foundation.URL) -> Swift.Void)?
+  open var requestDidValidateRequestResponseFileURLWithResult: ((CirrentSDK.CustomDownloadRequest, Foundation.URLRequest?, Foundation.HTTPURLResponse, Foundation.URL?, CirrentSDK.CustomRequest.ValidationResult) -> Swift.Void)?
+  open var requestDidParseDownloadResponse: ((CirrentSDK.CustomDownloadRequest, CirrentSDK.CustomDownloadResponse<Foundation.URL?, CirrentSDK.CustomAFError>) -> Swift.Void)?
+  final public let queue: Dispatch.DispatchQueue
+  public init(queue: Dispatch.DispatchQueue = .main)
+  open func urlSession(_ session: Foundation.URLSession, didBecomeInvalidWithError error: Swift.Error?)
+  open func urlSession(_ session: Foundation.URLSession, task: Foundation.URLSessionTask, didReceive challenge: Foundation.URLAuthenticationChallenge)
+  open func urlSession(_ session: Foundation.URLSession, task: Foundation.URLSessionTask, didSendBodyData bytesSent: Swift.Int64, totalBytesSent: Swift.Int64, totalBytesExpectedToSend: Swift.Int64)
+  open func urlSession(_ session: Foundation.URLSession, taskNeedsNewBodyStream task: Foundation.URLSessionTask)
+  open func urlSession(_ session: Foundation.URLSession, task: Foundation.URLSessionTask, willPerformHTTPRedirection response: Foundation.HTTPURLResponse, newRequest request: Foundation.URLRequest)
+  open func urlSession(_ session: Foundation.URLSession, task: Foundation.URLSessionTask, didFinishCollecting metrics: Foundation.URLSessionTaskMetrics)
+  open func urlSession(_ session: Foundation.URLSession, task: Foundation.URLSessionTask, didCompleteWithError error: Swift.Error?)
+  open func urlSession(_ session: Foundation.URLSession, taskIsWaitingForConnectivity task: Foundation.URLSessionTask)
+  open func urlSession(_ session: Foundation.URLSession, dataTask: Foundation.URLSessionDataTask, didReceive data: Foundation.Data)
+  open func urlSession(_ session: Foundation.URLSession, dataTask: Foundation.URLSessionDataTask, willCacheResponse proposedResponse: Foundation.CachedURLResponse)
+  open func urlSession(_ session: Foundation.URLSession, downloadTask: Foundation.URLSessionDownloadTask, didResumeAtOffset fileOffset: Swift.Int64, expectedTotalBytes: Swift.Int64)
+  open func urlSession(_ session: Foundation.URLSession, downloadTask: Foundation.URLSessionDownloadTask, didWriteData bytesWritten: Swift.Int64, totalBytesWritten: Swift.Int64, totalBytesExpectedToWrite: Swift.Int64)
+  open func urlSession(_ session: Foundation.URLSession, downloadTask: Foundation.URLSessionDownloadTask, didFinishDownloadingTo location: Foundation.URL)
+  open func request(_ request: CirrentSDK.CustomRequest, didCreateInitialURLRequest urlRequest: Foundation.URLRequest)
+  open func request(_ request: CirrentSDK.CustomRequest, didFailToCreateURLRequestWithError error: CirrentSDK.CustomAFError)
+  open func request(_ request: CirrentSDK.CustomRequest, didAdaptInitialRequest initialRequest: Foundation.URLRequest, to adaptedRequest: Foundation.URLRequest)
+  open func request(_ request: CirrentSDK.CustomRequest, didFailToAdaptURLRequest initialRequest: Foundation.URLRequest, withError error: CirrentSDK.CustomAFError)
+  open func request(_ request: CirrentSDK.CustomRequest, didCreateURLRequest urlRequest: Foundation.URLRequest)
+  open func request(_ request: CirrentSDK.CustomRequest, didCreateTask task: Foundation.URLSessionTask)
+  open func request(_ request: CirrentSDK.CustomRequest, didGatherMetrics metrics: Foundation.URLSessionTaskMetrics)
+  open func request(_ request: CirrentSDK.CustomRequest, didFailTask task: Foundation.URLSessionTask, earlyWithError error: CirrentSDK.CustomAFError)
+  open func request(_ request: CirrentSDK.CustomRequest, didCompleteTask task: Foundation.URLSessionTask, with error: CirrentSDK.CustomAFError?)
+  open func requestIsRetrying(_ request: CirrentSDK.CustomRequest)
+  open func requestDidFinish(_ request: CirrentSDK.CustomRequest)
+  open func requestDidResume(_ request: CirrentSDK.CustomRequest)
+  public func request(_ request: CirrentSDK.CustomRequest, didResumeTask task: Foundation.URLSessionTask)
+  open func requestDidSuspend(_ request: CirrentSDK.CustomRequest)
+  public func request(_ request: CirrentSDK.CustomRequest, didSuspendTask task: Foundation.URLSessionTask)
+  open func requestDidCancel(_ request: CirrentSDK.CustomRequest)
+  public func request(_ request: CirrentSDK.CustomRequest, didCancelTask task: Foundation.URLSessionTask)
+  open func request(_ request: CirrentSDK.CustomDataRequest, didValidateRequest urlRequest: Foundation.URLRequest?, response: Foundation.HTTPURLResponse, data: Foundation.Data?, withResult result: CirrentSDK.CustomRequest.ValidationResult)
+  open func request(_ request: CirrentSDK.CustomDataRequest, didParseResponse response: CirrentSDK.CustomDataResponse<Foundation.Data?, CirrentSDK.CustomAFError>)
+  public func request(_ request: CirrentSDK.CustomDataStreamRequest, didValidateRequest urlRequest: Foundation.URLRequest?, response: Foundation.HTTPURLResponse, withResult result: CirrentSDK.CustomRequest.ValidationResult)
+  open func request(_ request: CirrentSDK.CustomUploadRequest, didCreateUploadable uploadable: CirrentSDK.CustomUploadRequest.CustomUploadable)
+  open func request(_ request: CirrentSDK.CustomUploadRequest, didFailToCreateUploadableWithError error: CirrentSDK.CustomAFError)
+  open func request(_ request: CirrentSDK.CustomUploadRequest, didProvideInputStream stream: Foundation.InputStream)
+  open func request(_ request: CirrentSDK.CustomDownloadRequest, didFinishDownloadingUsing task: Foundation.URLSessionTask, with result: Swift.Result<Foundation.URL, CirrentSDK.CustomAFError>)
+  open func request(_ request: CirrentSDK.CustomDownloadRequest, didCreateDestinationURL url: Foundation.URL)
+  open func request(_ request: CirrentSDK.CustomDownloadRequest, didValidateRequest urlRequest: Foundation.URLRequest?, response: Foundation.HTTPURLResponse, fileURL: Foundation.URL?, withResult result: CirrentSDK.CustomRequest.ValidationResult)
+  open func request(_ request: CirrentSDK.CustomDownloadRequest, didParseResponse response: CirrentSDK.CustomDownloadResponse<Foundation.URL?, CirrentSDK.CustomAFError>)
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers open class CustomNetworkReachabilityManager {
+  public enum CustomNetworkReachabilityStatus {
+    case unknown
+    case notReachable
+    case reachable(CirrentSDK.CustomNetworkReachabilityManager.CustomNetworkReachabilityStatus.CustomConnectionType)
+    public enum CustomConnectionType {
+      case ethernetOrWiFi
+      case cellular
+      public static func == (a: CirrentSDK.CustomNetworkReachabilityManager.CustomNetworkReachabilityStatus.CustomConnectionType, b: CirrentSDK.CustomNetworkReachabilityManager.CustomNetworkReachabilityStatus.CustomConnectionType) -> Swift.Bool
+      public func hash(into hasher: inout Swift.Hasher)
+      public var hashValue: Swift.Int {
+        get
+      }
+    }
+  }
+  public typealias Listener = (CirrentSDK.CustomNetworkReachabilityManager.CustomNetworkReachabilityStatus) -> Swift.Void
+  public static let `default`: CirrentSDK.CustomNetworkReachabilityManager?
+  open var isReachable: Swift.Bool {
+    get
+  }
+  open var isReachableOnCellular: Swift.Bool {
+    get
+  }
+  open var isReachableOnEthernetOrWiFi: Swift.Bool {
+    get
+  }
+  final public let reachabilityQueue: Dispatch.DispatchQueue
+  open var flags: SystemConfiguration.SCNetworkReachabilityFlags? {
+    get
+  }
+  open var status: CirrentSDK.CustomNetworkReachabilityManager.CustomNetworkReachabilityStatus {
+    get
+  }
+  convenience public init?(host: Swift.String)
+  convenience public init?()
+  @objc deinit
+  @discardableResult
+  open func startListening(onQueue queue: Dispatch.DispatchQueue = .main, onUpdatePerforming listener: @escaping CirrentSDK.CustomNetworkReachabilityManager.Listener) -> Swift.Bool
+  open func stopListening()
+}
+extension CirrentSDK.CustomNetworkReachabilityManager.CustomNetworkReachabilityStatus : Swift.Equatable {
+  public static func == (a: CirrentSDK.CustomNetworkReachabilityManager.CustomNetworkReachabilityStatus, b: CirrentSDK.CustomNetworkReachabilityManager.CustomNetworkReachabilityStatus) -> Swift.Bool
+}
+extension Foundation.URLRequest {
+  public var method: CirrentSDK.CustomHTTPMethod? {
+    get
+    set
+  }
+  public func validate() throws
+}
+extension CirrentSDK.CustomRequest {
+  public static let didResumeNotification: Foundation.Notification.Name
+  public static let didSuspendNotification: Foundation.Notification.Name
+  public static let didCancelNotification: Foundation.Notification.Name
+  public static let didFinishNotification: Foundation.Notification.Name
+  public static let didResumeTaskNotification: Foundation.Notification.Name
+  public static let didSuspendTaskNotification: Foundation.Notification.Name
+  public static let didCancelTaskNotification: Foundation.Notification.Name
+  public static let didCompleteTaskNotification: Foundation.Notification.Name
+}
+extension Foundation.Notification {
+  public var request: CirrentSDK.CustomRequest? {
+    get
+  }
+}
+@_hasMissingDesignatedInitializers final public class AlamofireNotifications : CirrentSDK.CustomEventMonitor {
+  final public func requestDidResume(_ request: CirrentSDK.CustomRequest)
+  final public func requestDidSuspend(_ request: CirrentSDK.CustomRequest)
+  final public func requestDidCancel(_ request: CirrentSDK.CustomRequest)
+  final public func requestDidFinish(_ request: CirrentSDK.CustomRequest)
+  final public func request(_ request: CirrentSDK.CustomRequest, didResumeTask task: Foundation.URLSessionTask)
+  final public func request(_ request: CirrentSDK.CustomRequest, didSuspendTask task: Foundation.URLSessionTask)
+  final public func request(_ request: CirrentSDK.CustomRequest, didCancelTask task: Foundation.URLSessionTask)
+  final public func request(_ request: CirrentSDK.CustomRequest, didCompleteTask task: Foundation.URLSessionTask, with error: CirrentSDK.CustomAFError?)
+  @objc deinit
+}
+public typealias Parameters = [Swift.String : Any]
+public protocol CustomParameterEncoding {
+  func encode(_ urlRequest: CirrentSDK.CustomURLRequestConvertible, with parameters: CirrentSDK.Parameters?) throws -> Foundation.URLRequest
+}
+public struct CustomURLEncoding : CirrentSDK.CustomParameterEncoding {
+  public enum CustomDestination {
+    case methodDependent
+    case queryString
+    case httpBody
+    public static func == (a: CirrentSDK.CustomURLEncoding.CustomDestination, b: CirrentSDK.CustomURLEncoding.CustomDestination) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+  public enum CustomArrayEncoding {
+    case brackets
+    case noBrackets
+    case indexInBrackets
+    public static func == (a: CirrentSDK.CustomURLEncoding.CustomArrayEncoding, b: CirrentSDK.CustomURLEncoding.CustomArrayEncoding) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+  public enum CustomBoolEncoding {
+    case numeric
+    case literal
+    public static func == (a: CirrentSDK.CustomURLEncoding.CustomBoolEncoding, b: CirrentSDK.CustomURLEncoding.CustomBoolEncoding) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+  public static var `default`: CirrentSDK.CustomURLEncoding {
+    get
+  }
+  public static var queryString: CirrentSDK.CustomURLEncoding {
+    get
+  }
+  public static var httpBody: CirrentSDK.CustomURLEncoding {
+    get
+  }
+  public let destination: CirrentSDK.CustomURLEncoding.CustomDestination
+  public let arrayEncoding: CirrentSDK.CustomURLEncoding.CustomArrayEncoding
+  public let boolEncoding: CirrentSDK.CustomURLEncoding.CustomBoolEncoding
+  public init(destination: CirrentSDK.CustomURLEncoding.CustomDestination = .methodDependent, arrayEncoding: CirrentSDK.CustomURLEncoding.CustomArrayEncoding = .brackets, boolEncoding: CirrentSDK.CustomURLEncoding.CustomBoolEncoding = .numeric)
+  public func encode(_ urlRequest: CirrentSDK.CustomURLRequestConvertible, with parameters: CirrentSDK.Parameters?) throws -> Foundation.URLRequest
+  public func queryComponents(fromKey key: Swift.String, value: Any) -> [(Swift.String, Swift.String)]
+  public func escape(_ string: Swift.String) -> Swift.String
+}
+public struct CustomJSONEncoding : CirrentSDK.CustomParameterEncoding {
+  public static var `default`: CirrentSDK.CustomJSONEncoding {
+    get
+  }
+  public static var prettyPrinted: CirrentSDK.CustomJSONEncoding {
+    get
+  }
+  public let options: Foundation.JSONSerialization.WritingOptions
+  public init(options: Foundation.JSONSerialization.WritingOptions = [])
+  public func encode(_ urlRequest: CirrentSDK.CustomURLRequestConvertible, with parameters: CirrentSDK.Parameters?) throws -> Foundation.URLRequest
+  public func encode(_ urlRequest: CirrentSDK.CustomURLRequestConvertible, withJSONObject jsonObject: Any? = nil) throws -> Foundation.URLRequest
+}
+open class CustomMultipartFormData {
+  public static let encodingMemoryThreshold: Swift.UInt64
+  open var contentType: Swift.String {
+    get
+    set
+  }
+  public var contentLength: Swift.UInt64 {
+    get
+  }
+  final public let boundary: Swift.String
+  public init(fileManager: Foundation.FileManager = .default, boundary: Swift.String? = nil)
+  public func append(_ data: Foundation.Data, withName name: Swift.String, fileName: Swift.String? = nil, mimeType: Swift.String? = nil)
+  public func append(_ fileURL: Foundation.URL, withName name: Swift.String)
+  public func append(_ fileURL: Foundation.URL, withName name: Swift.String, fileName: Swift.String, mimeType: Swift.String)
+  public func append(_ stream: Foundation.InputStream, withLength length: Swift.UInt64, name: Swift.String, fileName: Swift.String, mimeType: Swift.String)
+  public func append(_ stream: Foundation.InputStream, withLength length: Swift.UInt64, headers: CirrentSDK.CustomHTTPHeaders)
+  public func encode() throws -> Foundation.Data
+  public func writeEncodedData(to fileURL: Foundation.URL) throws
+  @objc deinit
+}
+public protocol CustomDataResponseSerializerProtocol {
+  associatedtype SerializedObject
+  func serialize(request: Foundation.URLRequest?, response: Foundation.HTTPURLResponse?, data: Foundation.Data?, error: Swift.Error?) throws -> Self.SerializedObject
+}
+public protocol CustomDownloadResponseSerializerProtocol {
+  associatedtype SerializedObject
+  func serializeDownload(request: Foundation.URLRequest?, response: Foundation.HTTPURLResponse?, fileURL: Foundation.URL?, error: Swift.Error?) throws -> Self.SerializedObject
+}
+public protocol CustomResponseSerializer : CirrentSDK.CustomDataResponseSerializerProtocol, CirrentSDK.CustomDownloadResponseSerializerProtocol {
+  var dataPreprocessor: CirrentSDK.CustomDataPreprocessor { get }
+  var emptyRequestMethods: Swift.Set<CirrentSDK.CustomHTTPMethod> { get }
+  var emptyResponseCodes: Swift.Set<Swift.Int> { get }
+}
+public protocol CustomDataPreprocessor {
+  func preprocess(_ data: Foundation.Data) throws -> Foundation.Data
+}
+public struct CustomPassthroughPreprocessor : CirrentSDK.CustomDataPreprocessor {
+  public init()
+  public func preprocess(_ data: Foundation.Data) throws -> Foundation.Data
+}
+public struct CustomGoogleXSSIPreprocessor : CirrentSDK.CustomDataPreprocessor {
+  public init()
+  public func preprocess(_ data: Foundation.Data) throws -> Foundation.Data
+}
+extension CirrentSDK.CustomResponseSerializer {
+  public static var defaultDataPreprocessor: CirrentSDK.CustomDataPreprocessor {
+    get
+  }
+  public static var defaultEmptyRequestMethods: Swift.Set<CirrentSDK.CustomHTTPMethod> {
+    get
+  }
+  public static var defaultEmptyResponseCodes: Swift.Set<Swift.Int> {
+    get
+  }
+  public var dataPreprocessor: CirrentSDK.CustomDataPreprocessor {
+    get
+  }
+  public var emptyRequestMethods: Swift.Set<CirrentSDK.CustomHTTPMethod> {
+    get
+  }
+  public var emptyResponseCodes: Swift.Set<Swift.Int> {
+    get
+  }
+  public func requestAllowsEmptyResponseData(_ request: Foundation.URLRequest?) -> Swift.Bool?
+  public func responseAllowsEmptyResponseData(_ response: Foundation.HTTPURLResponse?) -> Swift.Bool?
+  public func emptyResponseAllowed(forRequest request: Foundation.URLRequest?, response: Foundation.HTTPURLResponse?) -> Swift.Bool
+}
+extension CirrentSDK.CustomDownloadResponseSerializerProtocol where Self : CirrentSDK.CustomDataResponseSerializerProtocol {
+  public func serializeDownload(request: Foundation.URLRequest?, response: Foundation.HTTPURLResponse?, fileURL: Foundation.URL?, error: Swift.Error?) throws -> Self.SerializedObject
+}
+extension CirrentSDK.CustomDataRequest {
+  @discardableResult
+  public func response(queue: Dispatch.DispatchQueue = .main, completionHandler: @escaping (CirrentSDK.AFDataResponse<Foundation.Data?>) -> Swift.Void) -> Self
+  @discardableResult
+  public func response<Serializer>(queue: Dispatch.DispatchQueue = .main, responseSerializer: Serializer, completionHandler: @escaping (CirrentSDK.AFDataResponse<Serializer.SerializedObject>) -> Swift.Void) -> Self where Serializer : CirrentSDK.CustomDataResponseSerializerProtocol
+  @discardableResult
+  public func response<Serializer>(queue: Dispatch.DispatchQueue = .main, responseSerializer: Serializer, completionHandler: @escaping (CirrentSDK.AFDataResponse<Serializer.SerializedObject>) -> Swift.Void) -> Self where Serializer : CirrentSDK.CustomResponseSerializer
+}
+extension CirrentSDK.CustomDownloadRequest {
+  @discardableResult
+  public func response(queue: Dispatch.DispatchQueue = .main, completionHandler: @escaping (CirrentSDK.AFDownloadResponse<Foundation.URL?>) -> Swift.Void) -> Self
+  @discardableResult
+  public func response<Serializer>(queue: Dispatch.DispatchQueue = .main, responseSerializer: Serializer, completionHandler: @escaping (CirrentSDK.AFDownloadResponse<Serializer.SerializedObject>) -> Swift.Void) -> Self where Serializer : CirrentSDK.CustomDownloadResponseSerializerProtocol
+  @discardableResult
+  public func response<Serializer>(queue: Dispatch.DispatchQueue = .main, responseSerializer: Serializer, completionHandler: @escaping (CirrentSDK.AFDownloadResponse<Serializer.SerializedObject>) -> Swift.Void) -> Self where Serializer : CirrentSDK.CustomResponseSerializer
+}
+public struct CustomURLResponseSerializer : CirrentSDK.CustomDownloadResponseSerializerProtocol {
+  public init()
+  public func serializeDownload(request: Foundation.URLRequest?, response: Foundation.HTTPURLResponse?, fileURL: Foundation.URL?, error: Swift.Error?) throws -> Foundation.URL
+  public typealias SerializedObject = Foundation.URL
+}
+extension CirrentSDK.CustomDownloadRequest {
+  @discardableResult
+  public func responseURL(queue: Dispatch.DispatchQueue = .main, completionHandler: @escaping (CirrentSDK.AFDownloadResponse<Foundation.URL>) -> Swift.Void) -> Self
+}
+final public class CustomDataResponseSerializer : CirrentSDK.CustomResponseSerializer {
+  final public let dataPreprocessor: CirrentSDK.CustomDataPreprocessor
+  final public let emptyResponseCodes: Swift.Set<Swift.Int>
+  final public let emptyRequestMethods: Swift.Set<CirrentSDK.CustomHTTPMethod>
+  public init(dataPreprocessor: CirrentSDK.CustomDataPreprocessor = CustomDataResponseSerializer.defaultDataPreprocessor, emptyResponseCodes: Swift.Set<Swift.Int> = CustomDataResponseSerializer.defaultEmptyResponseCodes, emptyRequestMethods: Swift.Set<CirrentSDK.CustomHTTPMethod> = CustomDataResponseSerializer.defaultEmptyRequestMethods)
+  final public func serialize(request: Foundation.URLRequest?, response: Foundation.HTTPURLResponse?, data: Foundation.Data?, error: Swift.Error?) throws -> Foundation.Data
+  public typealias SerializedObject = Foundation.Data
+  @objc deinit
+}
+extension CirrentSDK.CustomDataRequest {
+  @discardableResult
+  public func responseData(queue: Dispatch.DispatchQueue = .main, dataPreprocessor: CirrentSDK.CustomDataPreprocessor = CustomDataResponseSerializer.defaultDataPreprocessor, emptyResponseCodes: Swift.Set<Swift.Int> = CustomDataResponseSerializer.defaultEmptyResponseCodes, emptyRequestMethods: Swift.Set<CirrentSDK.CustomHTTPMethod> = CustomDataResponseSerializer.defaultEmptyRequestMethods, completionHandler: @escaping (CirrentSDK.AFDataResponse<Foundation.Data>) -> Swift.Void) -> Self
+}
+extension CirrentSDK.CustomDownloadRequest {
+  @discardableResult
+  public func responseData(queue: Dispatch.DispatchQueue = .main, dataPreprocessor: CirrentSDK.CustomDataPreprocessor = CustomDataResponseSerializer.defaultDataPreprocessor, emptyResponseCodes: Swift.Set<Swift.Int> = CustomDataResponseSerializer.defaultEmptyResponseCodes, emptyRequestMethods: Swift.Set<CirrentSDK.CustomHTTPMethod> = CustomDataResponseSerializer.defaultEmptyRequestMethods, completionHandler: @escaping (CirrentSDK.AFDownloadResponse<Foundation.Data>) -> Swift.Void) -> Self
+}
+final public class CustomStringResponseSerializer : CirrentSDK.CustomResponseSerializer {
+  final public let dataPreprocessor: CirrentSDK.CustomDataPreprocessor
+  final public let encoding: Swift.String.Encoding?
+  final public let emptyResponseCodes: Swift.Set<Swift.Int>
+  final public let emptyRequestMethods: Swift.Set<CirrentSDK.CustomHTTPMethod>
+  public init(dataPreprocessor: CirrentSDK.CustomDataPreprocessor = CustomStringResponseSerializer.defaultDataPreprocessor, encoding: Swift.String.Encoding? = nil, emptyResponseCodes: Swift.Set<Swift.Int> = CustomStringResponseSerializer.defaultEmptyResponseCodes, emptyRequestMethods: Swift.Set<CirrentSDK.CustomHTTPMethod> = CustomStringResponseSerializer.defaultEmptyRequestMethods)
+  final public func serialize(request: Foundation.URLRequest?, response: Foundation.HTTPURLResponse?, data: Foundation.Data?, error: Swift.Error?) throws -> Swift.String
+  public typealias SerializedObject = Swift.String
+  @objc deinit
+}
+extension CirrentSDK.CustomDataRequest {
+  @discardableResult
+  public func responseString(queue: Dispatch.DispatchQueue = .main, dataPreprocessor: CirrentSDK.CustomDataPreprocessor = CustomStringResponseSerializer.defaultDataPreprocessor, encoding: Swift.String.Encoding? = nil, emptyResponseCodes: Swift.Set<Swift.Int> = CustomStringResponseSerializer.defaultEmptyResponseCodes, emptyRequestMethods: Swift.Set<CirrentSDK.CustomHTTPMethod> = CustomStringResponseSerializer.defaultEmptyRequestMethods, completionHandler: @escaping (CirrentSDK.AFDataResponse<Swift.String>) -> Swift.Void) -> Self
+}
+extension CirrentSDK.CustomDownloadRequest {
+  @discardableResult
+  public func responseString(queue: Dispatch.DispatchQueue = .main, dataPreprocessor: CirrentSDK.CustomDataPreprocessor = CustomStringResponseSerializer.defaultDataPreprocessor, encoding: Swift.String.Encoding? = nil, emptyResponseCodes: Swift.Set<Swift.Int> = CustomStringResponseSerializer.defaultEmptyResponseCodes, emptyRequestMethods: Swift.Set<CirrentSDK.CustomHTTPMethod> = CustomStringResponseSerializer.defaultEmptyRequestMethods, completionHandler: @escaping (CirrentSDK.AFDownloadResponse<Swift.String>) -> Swift.Void) -> Self
+}
+@available(*, deprecated, message: "JSONResponseSerializer deprecated and will be removed in Alamofire 6. Use DecodableResponseSerializer instead.")
+final public class CustomJSONResponseSerializer : CirrentSDK.CustomResponseSerializer {
+  final public let dataPreprocessor: CirrentSDK.CustomDataPreprocessor
+  final public let emptyResponseCodes: Swift.Set<Swift.Int>
+  final public let emptyRequestMethods: Swift.Set<CirrentSDK.CustomHTTPMethod>
+  final public let options: Foundation.JSONSerialization.ReadingOptions
+  public init(dataPreprocessor: CirrentSDK.CustomDataPreprocessor = CustomJSONResponseSerializer.defaultDataPreprocessor, emptyResponseCodes: Swift.Set<Swift.Int> = CustomJSONResponseSerializer.defaultEmptyResponseCodes, emptyRequestMethods: Swift.Set<CirrentSDK.CustomHTTPMethod> = CustomJSONResponseSerializer.defaultEmptyRequestMethods, options: Foundation.JSONSerialization.ReadingOptions = .allowFragments)
+  final public func serialize(request: Foundation.URLRequest?, response: Foundation.HTTPURLResponse?, data: Foundation.Data?, error: Swift.Error?) throws -> Any
+  public typealias SerializedObject = Any
+  @objc deinit
+}
+extension CirrentSDK.CustomDataRequest {
+  @available(*, deprecated, message: "responseJSON deprecated and will be removed in Alamofire 6. Use responseDecodable instead.")
+  @discardableResult
+  public func responseJSON(queue: Dispatch.DispatchQueue = .main, dataPreprocessor: CirrentSDK.CustomDataPreprocessor = CustomJSONResponseSerializer.defaultDataPreprocessor, emptyResponseCodes: Swift.Set<Swift.Int> = CustomJSONResponseSerializer.defaultEmptyResponseCodes, emptyRequestMethods: Swift.Set<CirrentSDK.CustomHTTPMethod> = CustomJSONResponseSerializer.defaultEmptyRequestMethods, options: Foundation.JSONSerialization.ReadingOptions = .allowFragments, completionHandler: @escaping (CirrentSDK.AFDataResponse<Any>) -> Swift.Void) -> Self
+}
+extension CirrentSDK.CustomDownloadRequest {
+  @available(*, deprecated, message: "responseJSON deprecated and will be removed in Alamofire 6. Use responseDecodable instead.")
+  @discardableResult
+  public func responseJSON(queue: Dispatch.DispatchQueue = .main, dataPreprocessor: CirrentSDK.CustomDataPreprocessor = CustomJSONResponseSerializer.defaultDataPreprocessor, emptyResponseCodes: Swift.Set<Swift.Int> = CustomJSONResponseSerializer.defaultEmptyResponseCodes, emptyRequestMethods: Swift.Set<CirrentSDK.CustomHTTPMethod> = CustomJSONResponseSerializer.defaultEmptyRequestMethods, options: Foundation.JSONSerialization.ReadingOptions = .allowFragments, completionHandler: @escaping (CirrentSDK.AFDownloadResponse<Any>) -> Swift.Void) -> Self
+}
+public protocol CustomEmptyResponse {
+  static func emptyValue() -> Self
+}
+public struct CustomEmpty : Swift.Codable {
+  public static let value: CirrentSDK.CustomEmpty
+  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
+}
+extension CirrentSDK.CustomEmpty : CirrentSDK.CustomEmptyResponse {
+  public static func emptyValue() -> CirrentSDK.CustomEmpty
+}
+public protocol CustomDataDecoder {
+  func decode<D>(_ type: D.Type, from data: Foundation.Data) throws -> D where D : Swift.Decodable
+}
+extension Foundation.JSONDecoder : CirrentSDK.CustomDataDecoder {
+}
+extension Foundation.PropertyListDecoder : CirrentSDK.CustomDataDecoder {
+}
+final public class CustomDecodableResponseSerializer<T> : CirrentSDK.CustomResponseSerializer where T : Swift.Decodable {
+  final public let dataPreprocessor: CirrentSDK.CustomDataPreprocessor
+  final public let decoder: CirrentSDK.CustomDataDecoder
+  final public let emptyResponseCodes: Swift.Set<Swift.Int>
+  final public let emptyRequestMethods: Swift.Set<CirrentSDK.CustomHTTPMethod>
+  public init(dataPreprocessor: CirrentSDK.CustomDataPreprocessor = CustomDecodableResponseSerializer.defaultDataPreprocessor, decoder: CirrentSDK.CustomDataDecoder = JSONDecoder(), emptyResponseCodes: Swift.Set<Swift.Int> = CustomDecodableResponseSerializer.defaultEmptyResponseCodes, emptyRequestMethods: Swift.Set<CirrentSDK.CustomHTTPMethod> = CustomDecodableResponseSerializer.defaultEmptyRequestMethods)
+  final public func serialize(request: Foundation.URLRequest?, response: Foundation.HTTPURLResponse?, data: Foundation.Data?, error: Swift.Error?) throws -> T
+  public typealias SerializedObject = T
+  @objc deinit
+}
+extension CirrentSDK.CustomDataRequest {
+  @discardableResult
+  public func responseDecodable<T>(of type: T.Type = T.self, queue: Dispatch.DispatchQueue = .main, dataPreprocessor: CirrentSDK.CustomDataPreprocessor = CustomDecodableResponseSerializer<T>.defaultDataPreprocessor, decoder: CirrentSDK.CustomDataDecoder = JSONDecoder(), emptyResponseCodes: Swift.Set<Swift.Int> = CustomDecodableResponseSerializer<T>.defaultEmptyResponseCodes, emptyRequestMethods: Swift.Set<CirrentSDK.CustomHTTPMethod> = CustomDecodableResponseSerializer<T>.defaultEmptyRequestMethods, completionHandler: @escaping (CirrentSDK.AFDataResponse<T>) -> Swift.Void) -> Self where T : Swift.Decodable
+}
+extension CirrentSDK.CustomDownloadRequest {
+  @discardableResult
+  public func responseDecodable<T>(of type: T.Type = T.self, queue: Dispatch.DispatchQueue = .main, dataPreprocessor: CirrentSDK.CustomDataPreprocessor = CustomDecodableResponseSerializer<T>.defaultDataPreprocessor, decoder: CirrentSDK.CustomDataDecoder = JSONDecoder(), emptyResponseCodes: Swift.Set<Swift.Int> = CustomDecodableResponseSerializer<T>.defaultEmptyResponseCodes, emptyRequestMethods: Swift.Set<CirrentSDK.CustomHTTPMethod> = CustomDecodableResponseSerializer<T>.defaultEmptyRequestMethods, completionHandler: @escaping (CirrentSDK.AFDownloadResponse<T>) -> Swift.Void) -> Self where T : Swift.Decodable
+}
+public protocol CustomDataStreamSerializer {
+  associatedtype SerializedObject
+  func serialize(_ data: Foundation.Data) throws -> Self.SerializedObject
+}
+public struct CustomDecodableStreamSerializer<T> : CirrentSDK.CustomDataStreamSerializer where T : Swift.Decodable {
+  public let decoder: CirrentSDK.CustomDataDecoder
+  public let dataPreprocessor: CirrentSDK.CustomDataPreprocessor
+  public init(decoder: CirrentSDK.CustomDataDecoder = JSONDecoder(), dataPreprocessor: CirrentSDK.CustomDataPreprocessor = CustomPassthroughPreprocessor())
+  public func serialize(_ data: Foundation.Data) throws -> T
+  public typealias SerializedObject = T
+}
+public struct CustomPassthroughStreamSerializer : CirrentSDK.CustomDataStreamSerializer {
+  public init()
+  public func serialize(_ data: Foundation.Data) throws -> Foundation.Data
+  public typealias SerializedObject = Foundation.Data
+}
+public struct CustomStringStreamSerializer : CirrentSDK.CustomDataStreamSerializer {
+  public init()
+  public func serialize(_ data: Foundation.Data) throws -> Swift.String
+  public typealias SerializedObject = Swift.String
+}
+extension CirrentSDK.CustomDataStreamRequest {
+  @discardableResult
+  final public func responseStream(on queue: Dispatch.DispatchQueue = .main, stream: @escaping CirrentSDK.CustomDataStreamRequest.Handler<Foundation.Data, Swift.Never>) -> Self
+  @discardableResult
+  final public func responseStream<Serializer>(using serializer: Serializer, on queue: Dispatch.DispatchQueue = .main, stream: @escaping CirrentSDK.CustomDataStreamRequest.Handler<Serializer.SerializedObject, CirrentSDK.CustomAFError>) -> Self where Serializer : CirrentSDK.CustomDataStreamSerializer
+  @discardableResult
+  final public func responseStreamString(on queue: Dispatch.DispatchQueue = .main, stream: @escaping CirrentSDK.CustomDataStreamRequest.Handler<Swift.String, Swift.Never>) -> Self
+  @discardableResult
+  final public func responseStreamDecodable<T>(of type: T.Type = T.self, on queue: Dispatch.DispatchQueue = .main, using decoder: CirrentSDK.CustomDataDecoder = JSONDecoder(), preprocessor: CirrentSDK.CustomDataPreprocessor = CustomPassthroughPreprocessor(), stream: @escaping CirrentSDK.CustomDataStreamRequest.Handler<T, CirrentSDK.CustomAFError>) -> Self where T : Swift.Decodable
+}
+final public class CustomURLEncodedFormEncoder {
+  public enum CustomArrayEncoding {
+    case brackets
+    case noBrackets
+    case indexInBrackets
+    public static func == (a: CirrentSDK.CustomURLEncodedFormEncoder.CustomArrayEncoding, b: CirrentSDK.CustomURLEncodedFormEncoder.CustomArrayEncoding) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+  public enum CustomBoolEncoding {
+    case numeric
+    case literal
+    public static func == (a: CirrentSDK.CustomURLEncodedFormEncoder.CustomBoolEncoding, b: CirrentSDK.CustomURLEncodedFormEncoder.CustomBoolEncoding) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+  public enum CustomDataEncoding {
+    case deferredToData
+    case base64
+    case custom((Foundation.Data) throws -> Swift.String)
+  }
+  public enum CustomDateEncoding {
+    case deferredToDate
+    case secondsSince1970
+    case millisecondsSince1970
+    case iso8601
+    case formatted(Foundation.DateFormatter)
+    case custom((Foundation.Date) throws -> Swift.String)
+  }
+  public enum CustomKeyEncoding {
+    case useDefaultKeys
+    case convertToSnakeCase
+    case convertToKebabCase
+    case capitalized
+    case uppercased
+    case lowercased
+    case custom((Swift.String) -> Swift.String)
+  }
+  public enum CustomSpaceEncoding {
+    case percentEscaped
+    case plusReplaced
+    public static func == (a: CirrentSDK.CustomURLEncodedFormEncoder.CustomSpaceEncoding, b: CirrentSDK.CustomURLEncodedFormEncoder.CustomSpaceEncoding) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+  public enum CustomError : Swift.Error {
+    case invalidRootObject(Swift.String)
+  }
+  final public let alphabetizeKeyValuePairs: Swift.Bool
+  final public let arrayEncoding: CirrentSDK.CustomURLEncodedFormEncoder.CustomArrayEncoding
+  final public let boolEncoding: CirrentSDK.CustomURLEncodedFormEncoder.CustomBoolEncoding
+  final public let dataEncoding: CirrentSDK.CustomURLEncodedFormEncoder.CustomDataEncoding
+  final public let dateEncoding: CirrentSDK.CustomURLEncodedFormEncoder.CustomDateEncoding
+  final public let keyEncoding: CirrentSDK.CustomURLEncodedFormEncoder.CustomKeyEncoding
+  final public let spaceEncoding: CirrentSDK.CustomURLEncodedFormEncoder.CustomSpaceEncoding
+  final public var allowedCharacters: Foundation.CharacterSet
+  public init(alphabetizeKeyValuePairs: Swift.Bool = true, arrayEncoding: CirrentSDK.CustomURLEncodedFormEncoder.CustomArrayEncoding = .brackets, boolEncoding: CirrentSDK.CustomURLEncodedFormEncoder.CustomBoolEncoding = .numeric, dataEncoding: CirrentSDK.CustomURLEncodedFormEncoder.CustomDataEncoding = .base64, dateEncoding: CirrentSDK.CustomURLEncodedFormEncoder.CustomDateEncoding = .deferredToDate, keyEncoding: CirrentSDK.CustomURLEncodedFormEncoder.CustomKeyEncoding = .useDefaultKeys, spaceEncoding: CirrentSDK.CustomURLEncodedFormEncoder.CustomSpaceEncoding = .percentEscaped, allowedCharacters: Foundation.CharacterSet = .afURLQueryAllowed)
+  final public func encode(_ value: Swift.Encodable) throws -> Swift.String
+  final public func encode(_ value: Swift.Encodable) throws -> Foundation.Data
+  @objc deinit
+}
+extension Foundation.CharacterSet {
+  public static let afURLQueryAllowed: Foundation.CharacterSet
+}
+open class CustomRetryPolicy : CirrentSDK.CustomRequestInterceptor {
+  public static let defaultRetryLimit: Swift.UInt
+  public static let defaultExponentialBackoffBase: Swift.UInt
+  public static let defaultExponentialBackoffScale: Swift.Double
+  public static let defaultRetryableHTTPMethods: Swift.Set<CirrentSDK.CustomHTTPMethod>
+  public static let defaultRetryableHTTPStatusCodes: Swift.Set<Swift.Int>
+  public static let defaultRetryableURLErrorCodes: Swift.Set<Foundation.URLError.Code>
+  final public let retryLimit: Swift.UInt
+  final public let exponentialBackoffBase: Swift.UInt
+  final public let exponentialBackoffScale: Swift.Double
+  final public let retryableHTTPMethods: Swift.Set<CirrentSDK.CustomHTTPMethod>
+  final public let retryableHTTPStatusCodes: Swift.Set<Swift.Int>
+  final public let retryableURLErrorCodes: Swift.Set<Foundation.URLError.Code>
+  public init(retryLimit: Swift.UInt = CustomRetryPolicy.defaultRetryLimit, exponentialBackoffBase: Swift.UInt = CustomRetryPolicy.defaultExponentialBackoffBase, exponentialBackoffScale: Swift.Double = CustomRetryPolicy.defaultExponentialBackoffScale, retryableHTTPMethods: Swift.Set<CirrentSDK.CustomHTTPMethod> = CustomRetryPolicy.defaultRetryableHTTPMethods, retryableHTTPStatusCodes: Swift.Set<Swift.Int> = CustomRetryPolicy.defaultRetryableHTTPStatusCodes, retryableURLErrorCodes: Swift.Set<Foundation.URLError.Code> = CustomRetryPolicy.defaultRetryableURLErrorCodes)
+  open func retry(_ request: CirrentSDK.CustomRequest, for session: CirrentSDK.CustomSession, dueTo error: Swift.Error, completion: @escaping (CirrentSDK.CustomRetryResult) -> Swift.Void)
+  open func shouldRetry(request: CirrentSDK.CustomRequest, dueTo error: Swift.Error) -> Swift.Bool
+  @objc deinit
+}
+open class CustomConnectionLostRetryPolicy : CirrentSDK.CustomRetryPolicy {
+  public init(retryLimit: Swift.UInt = CustomRetryPolicy.defaultRetryLimit, exponentialBackoffBase: Swift.UInt = CustomRetryPolicy.defaultExponentialBackoffBase, exponentialBackoffScale: Swift.Double = CustomRetryPolicy.defaultExponentialBackoffScale, retryableHTTPMethods: Swift.Set<CirrentSDK.CustomHTTPMethod> = CustomRetryPolicy.defaultRetryableHTTPMethods)
+  @objc deinit
+}
+@available(macOS 10.15, iOS 13, tvOS 13, watchOS 6, *)
+extension CirrentSDK.CustomRequest {
+  
+  #if compiler(>=5.3) && $RethrowsProtocol
+  public func uploadProgress(bufferingPolicy: CirrentSDK.StreamOf<Foundation.Progress>.BufferingPolicy = .unbounded) -> CirrentSDK.StreamOf<Foundation.Progress>
+  #endif
+
+  
+  #if compiler(>=5.3) && $RethrowsProtocol
+  public func downloadProgress(bufferingPolicy: CirrentSDK.StreamOf<Foundation.Progress>.BufferingPolicy = .unbounded) -> CirrentSDK.StreamOf<Foundation.Progress>
+  #endif
+
+  
+  #if compiler(>=5.3) && $RethrowsProtocol
+  public func urlRequests(bufferingPolicy: CirrentSDK.StreamOf<Foundation.URLRequest>.BufferingPolicy = .unbounded) -> CirrentSDK.StreamOf<Foundation.URLRequest>
+  #endif
+
+  
+  #if compiler(>=5.3) && $RethrowsProtocol
+  public func urlSessionTasks(bufferingPolicy: CirrentSDK.StreamOf<Foundation.URLSessionTask>.BufferingPolicy = .unbounded) -> CirrentSDK.StreamOf<Foundation.URLSessionTask>
+  #endif
+
+  
+  #if compiler(>=5.3) && $RethrowsProtocol
+  public func cURLDescriptions(bufferingPolicy: CirrentSDK.StreamOf<Swift.String>.BufferingPolicy = .unbounded) -> CirrentSDK.StreamOf<Swift.String>
+  #endif
+
+}
+@available(macOS 10.15, iOS 13, tvOS 13, watchOS 6, *)
+public struct CustomDataTask<Value> {
+  
+  #if compiler(>=5.3) && $EffectfulProp
+  public var response: CirrentSDK.CustomDataResponse<Value, CirrentSDK.CustomAFError> {
+    get async
+  }
+  #endif
+
+  
+  #if compiler(>=5.3) && $EffectfulProp
+  public var result: Swift.Result<Value, CirrentSDK.CustomAFError> {
+    get async
+  }
+  #endif
+
+  
+  #if compiler(>=5.3) && $EffectfulProp
+  public var value: Value {
+    get async throws
+  }
+  #endif
+
+  public func cancel()
+  public func resume()
+  public func suspend()
+}
+@available(macOS 10.15, iOS 13, tvOS 13, watchOS 6, *)
+extension CirrentSDK.CustomDataRequest {
+  public func serializingData(automaticallyCancelling shouldAutomaticallyCancel: Swift.Bool = false, dataPreprocessor: CirrentSDK.CustomDataPreprocessor = CustomDataResponseSerializer.defaultDataPreprocessor, emptyResponseCodes: Swift.Set<Swift.Int> = CustomDataResponseSerializer.defaultEmptyResponseCodes, emptyRequestMethods: Swift.Set<CirrentSDK.CustomHTTPMethod> = CustomDataResponseSerializer.defaultEmptyRequestMethods) -> CirrentSDK.CustomDataTask<Foundation.Data>
+  public func serializingDecodable<Value>(_ type: Value.Type = Value.self, automaticallyCancelling shouldAutomaticallyCancel: Swift.Bool = false, dataPreprocessor: CirrentSDK.CustomDataPreprocessor = CustomDecodableResponseSerializer<Value>.defaultDataPreprocessor, decoder: CirrentSDK.CustomDataDecoder = JSONDecoder(), emptyResponseCodes: Swift.Set<Swift.Int> = CustomDecodableResponseSerializer<Value>.defaultEmptyResponseCodes, emptyRequestMethods: Swift.Set<CirrentSDK.CustomHTTPMethod> = CustomDecodableResponseSerializer<Value>.defaultEmptyRequestMethods) -> CirrentSDK.CustomDataTask<Value> where Value : Swift.Decodable
+  public func serializingString(automaticallyCancelling shouldAutomaticallyCancel: Swift.Bool = false, dataPreprocessor: CirrentSDK.CustomDataPreprocessor = CustomStringResponseSerializer.defaultDataPreprocessor, encoding: Swift.String.Encoding? = nil, emptyResponseCodes: Swift.Set<Swift.Int> = CustomStringResponseSerializer.defaultEmptyResponseCodes, emptyRequestMethods: Swift.Set<CirrentSDK.CustomHTTPMethod> = CustomStringResponseSerializer.defaultEmptyRequestMethods) -> CirrentSDK.CustomDataTask<Swift.String>
+  public func serializingResponse<Serializer>(using serializer: Serializer, automaticallyCancelling shouldAutomaticallyCancel: Swift.Bool = false) -> CirrentSDK.CustomDataTask<Serializer.SerializedObject> where Serializer : CirrentSDK.CustomResponseSerializer
+  public func serializingResponse<Serializer>(using serializer: Serializer, automaticallyCancelling shouldAutomaticallyCancel: Swift.Bool = false) -> CirrentSDK.CustomDataTask<Serializer.SerializedObject> where Serializer : CirrentSDK.CustomDataResponseSerializerProtocol
+}
+@available(macOS 10.15, iOS 13, tvOS 13, watchOS 6, *)
+public struct DownloadTask<Value> {
+  
+  #if compiler(>=5.3) && $EffectfulProp
+  public var response: CirrentSDK.CustomDownloadResponse<Value, CirrentSDK.CustomAFError> {
+    get async
+  }
+  #endif
+
+  
+  #if compiler(>=5.3) && $EffectfulProp
+  public var result: Swift.Result<Value, CirrentSDK.CustomAFError> {
+    get async
+  }
+  #endif
+
+  
+  #if compiler(>=5.3) && $EffectfulProp
+  public var value: Value {
+    get async throws
+  }
+  #endif
+
+  public func cancel()
+  public func resume()
+  public func suspend()
+}
+@available(macOS 10.15, iOS 13, tvOS 13, watchOS 6, *)
+extension CirrentSDK.CustomDownloadRequest {
+  public func serializingData(automaticallyCancelling shouldAutomaticallyCancel: Swift.Bool = false, dataPreprocessor: CirrentSDK.CustomDataPreprocessor = CustomDataResponseSerializer.defaultDataPreprocessor, emptyResponseCodes: Swift.Set<Swift.Int> = CustomDataResponseSerializer.defaultEmptyResponseCodes, emptyRequestMethods: Swift.Set<CirrentSDK.CustomHTTPMethod> = CustomDataResponseSerializer.defaultEmptyRequestMethods) -> CirrentSDK.DownloadTask<Foundation.Data>
+  public func serializingDecodable<Value>(_ type: Value.Type = Value.self, automaticallyCancelling shouldAutomaticallyCancel: Swift.Bool = false, dataPreprocessor: CirrentSDK.CustomDataPreprocessor = CustomDecodableResponseSerializer<Value>.defaultDataPreprocessor, decoder: CirrentSDK.CustomDataDecoder = JSONDecoder(), emptyResponseCodes: Swift.Set<Swift.Int> = CustomDecodableResponseSerializer<Value>.defaultEmptyResponseCodes, emptyRequestMethods: Swift.Set<CirrentSDK.CustomHTTPMethod> = CustomDecodableResponseSerializer<Value>.defaultEmptyRequestMethods) -> CirrentSDK.DownloadTask<Value> where Value : Swift.Decodable
+  public func serializingDownloadedFileURL() -> CirrentSDK.DownloadTask<Foundation.URL>
+  public func serializingString(automaticallyCancelling shouldAutomaticallyCancel: Swift.Bool = false, dataPreprocessor: CirrentSDK.CustomDataPreprocessor = CustomStringResponseSerializer.defaultDataPreprocessor, encoding: Swift.String.Encoding? = nil, emptyResponseCodes: Swift.Set<Swift.Int> = CustomStringResponseSerializer.defaultEmptyResponseCodes, emptyRequestMethods: Swift.Set<CirrentSDK.CustomHTTPMethod> = CustomStringResponseSerializer.defaultEmptyRequestMethods) -> CirrentSDK.DownloadTask<Swift.String>
+  public func serializingDownload<Serializer>(using serializer: Serializer, automaticallyCancelling shouldAutomaticallyCancel: Swift.Bool = false) -> CirrentSDK.DownloadTask<Serializer.SerializedObject> where Serializer : CirrentSDK.CustomResponseSerializer
+  public func serializingDownload<Serializer>(using serializer: Serializer, automaticallyCancelling shouldAutomaticallyCancel: Swift.Bool = false) -> CirrentSDK.DownloadTask<Serializer.SerializedObject> where Serializer : CirrentSDK.CustomDownloadResponseSerializerProtocol
+}
+@available(macOS 10.15, iOS 13, tvOS 13, watchOS 6, *)
+public struct DataStreamTask {
+  
+  #if compiler(>=5.3) && $RethrowsProtocol
+  public typealias Stream<Success, Failure> = CirrentSDK.StreamOf<CirrentSDK.CustomDataStreamRequest.Stream<Success, Failure>> where Failure : Swift.Error
+  #endif
+
+  
+  #if compiler(>=5.3) && $RethrowsProtocol
+  public func streamingData(automaticallyCancelling shouldAutomaticallyCancel: Swift.Bool = true, bufferingPolicy: CirrentSDK.DataStreamTask.Stream<Foundation.Data, Swift.Never>.BufferingPolicy = .unbounded) -> CirrentSDK.DataStreamTask.Stream<Foundation.Data, Swift.Never>
+  #endif
+
+  
+  #if compiler(>=5.3) && $RethrowsProtocol
+  public func streamingStrings(automaticallyCancelling shouldAutomaticallyCancel: Swift.Bool = true, bufferingPolicy: CirrentSDK.DataStreamTask.Stream<Swift.String, Swift.Never>.BufferingPolicy = .unbounded) -> CirrentSDK.DataStreamTask.Stream<Swift.String, Swift.Never>
+  #endif
+
+  
+  #if compiler(>=5.3) && $RethrowsProtocol
+  public func streamingDecodables<T>(_ type: T.Type = T.self, automaticallyCancelling shouldAutomaticallyCancel: Swift.Bool = true, bufferingPolicy: CirrentSDK.DataStreamTask.Stream<T, CirrentSDK.CustomAFError>.BufferingPolicy = .unbounded) -> CirrentSDK.DataStreamTask.Stream<T, CirrentSDK.CustomAFError> where T : Swift.Decodable
+  #endif
+
+  
+  #if compiler(>=5.3) && $RethrowsProtocol
+  public func streamingResponses<Serializer>(serializedUsing serializer: Serializer, automaticallyCancelling shouldAutomaticallyCancel: Swift.Bool = true, bufferingPolicy: CirrentSDK.DataStreamTask.Stream<Serializer.SerializedObject, CirrentSDK.CustomAFError>.BufferingPolicy = .unbounded) -> CirrentSDK.DataStreamTask.Stream<Serializer.SerializedObject, CirrentSDK.CustomAFError> where Serializer : CirrentSDK.CustomDataStreamSerializer
+  #endif
+
+  public func cancel()
+  public func resume()
+  public func suspend()
+}
+@available(macOS 10.15, iOS 13, tvOS 13, watchOS 6, *)
+extension CirrentSDK.CustomDataStreamRequest {
+  final public func streamTask() -> CirrentSDK.DataStreamTask
+}
+
+#if compiler(>=5.3) && $RethrowsProtocol
+@available(macOS 10.15, iOS 13, tvOS 13, watchOS 6, *)
+public struct StreamOf<Element> : _Concurrency.AsyncSequence {
+  public typealias AsyncIterator = CirrentSDK.StreamOf<Element>.Iterator
+  public typealias BufferingPolicy = _Concurrency.AsyncStream<Element>.Continuation.BufferingPolicy
+  public func makeAsyncIterator() -> CirrentSDK.StreamOf<Element>.Iterator
+  public struct Iterator : _Concurrency.AsyncIteratorProtocol {
+    
+    #if compiler(>=5.3) && $AsyncAwait
+    public mutating func next() async -> Element?
+    #endif
+
+  }
+}
+#endif
+
+public struct CustomHTTPHeaders {
+  public init()
+  public init(_ headers: [CirrentSDK.CustomHTTPHeader])
+  public init(_ dictionary: [Swift.String : Swift.String])
+  public mutating func add(name: Swift.String, value: Swift.String)
+  public mutating func add(_ header: CirrentSDK.CustomHTTPHeader)
+  public mutating func update(name: Swift.String, value: Swift.String)
+  public mutating func update(_ header: CirrentSDK.CustomHTTPHeader)
+  public mutating func remove(name: Swift.String)
+  public mutating func sort()
+  public func sorted() -> CirrentSDK.CustomHTTPHeaders
+  public func value(for name: Swift.String) -> Swift.String?
+  public subscript(name: Swift.String) -> Swift.String? {
+    get
+    set
+  }
+  public var dictionary: [Swift.String : Swift.String] {
+    get
+  }
+}
+extension CirrentSDK.CustomHTTPHeaders : Swift.ExpressibleByDictionaryLiteral {
+  public init(dictionaryLiteral elements: (Swift.String, Swift.String)...)
+  public typealias Key = Swift.String
+  public typealias Value = Swift.String
+}
+extension CirrentSDK.CustomHTTPHeaders : Swift.ExpressibleByArrayLiteral {
+  public init(arrayLiteral elements: CirrentSDK.CustomHTTPHeader...)
+  public typealias ArrayLiteralElement = CirrentSDK.CustomHTTPHeader
+}
+extension CirrentSDK.CustomHTTPHeaders : Swift.Sequence {
+  public func makeIterator() -> Swift.IndexingIterator<[CirrentSDK.CustomHTTPHeader]>
+}
+extension CirrentSDK.CustomHTTPHeaders : Swift.Collection {
+  public var startIndex: Swift.Int {
+    get
+  }
+  public var endIndex: Swift.Int {
+    get
+  }
+  public subscript(position: Swift.Int) -> CirrentSDK.CustomHTTPHeader {
+    get
+  }
+  public func index(after i: Swift.Int) -> Swift.Int
+  public typealias Element = CirrentSDK.CustomHTTPHeader
+  public typealias Index = Swift.Int
+  public typealias Indices = Swift.DefaultIndices<CirrentSDK.CustomHTTPHeaders>
+  public typealias Iterator = Swift.IndexingIterator<[CirrentSDK.CustomHTTPHeader]>
+  public typealias SubSequence = Swift.Slice<CirrentSDK.CustomHTTPHeaders>
+}
+extension CirrentSDK.CustomHTTPHeaders : Swift.CustomStringConvertible {
+  public var description: Swift.String {
+    get
+  }
+}
+public struct CustomHTTPHeader : Swift.Hashable {
+  public let name: Swift.String
+  public let value: Swift.String
+  public init(name: Swift.String, value: Swift.String)
+  public func hash(into hasher: inout Swift.Hasher)
+  public static func == (a: CirrentSDK.CustomHTTPHeader, b: CirrentSDK.CustomHTTPHeader) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+extension CirrentSDK.CustomHTTPHeader : Swift.CustomStringConvertible {
+  public var description: Swift.String {
+    get
+  }
+}
+extension CirrentSDK.CustomHTTPHeader {
+  public static func accept(_ value: Swift.String) -> CirrentSDK.CustomHTTPHeader
+  public static func acceptCharset(_ value: Swift.String) -> CirrentSDK.CustomHTTPHeader
+  public static func acceptLanguage(_ value: Swift.String) -> CirrentSDK.CustomHTTPHeader
+  public static func acceptEncoding(_ value: Swift.String) -> CirrentSDK.CustomHTTPHeader
+  public static func authorization(username: Swift.String, password: Swift.String) -> CirrentSDK.CustomHTTPHeader
+  public static func authorization(bearerToken: Swift.String) -> CirrentSDK.CustomHTTPHeader
+  public static func authorization(_ value: Swift.String) -> CirrentSDK.CustomHTTPHeader
+  public static func contentDisposition(_ value: Swift.String) -> CirrentSDK.CustomHTTPHeader
+  public static func contentType(_ value: Swift.String) -> CirrentSDK.CustomHTTPHeader
+  public static func userAgent(_ value: Swift.String) -> CirrentSDK.CustomHTTPHeader
+}
+extension CirrentSDK.CustomHTTPHeaders {
+  public static let `default`: CirrentSDK.CustomHTTPHeaders
+}
+extension CirrentSDK.CustomHTTPHeader {
+  public static let defaultAcceptEncoding: CirrentSDK.CustomHTTPHeader
+  public static let defaultAcceptLanguage: CirrentSDK.CustomHTTPHeader
+  public static let defaultUserAgent: CirrentSDK.CustomHTTPHeader
+}
+extension Foundation.URLRequest {
+  public var headers: CirrentSDK.CustomHTTPHeaders {
+    get
+    set
+  }
+}
+extension Foundation.HTTPURLResponse {
+  public var headers: CirrentSDK.CustomHTTPHeaders {
+    get
+  }
+}
+extension Foundation.URLSessionConfiguration {
+  public var headers: CirrentSDK.CustomHTTPHeaders {
+    get
+    set
+  }
+}
+extension Foundation.URLSessionConfiguration : CirrentSDK.CustomAlamofireExtended {
+  public typealias ExtendedType = Foundation.URLSessionConfiguration
+}
+extension CirrentSDK.CustomAlamofireExtension where ExtendedType : Foundation.URLSessionConfiguration {
+  public static var `default`: Foundation.URLSessionConfiguration {
+    get
+  }
+  public static var ephemeral: Foundation.URLSessionConfiguration {
+    get
+  }
+}
+@_hasMissingDesignatedInitializers public class CustomRequest {
+  public enum State {
+    case initialized
+    case resumed
+    case suspended
+    case cancelled
+    case finished
+    public static func == (a: CirrentSDK.CustomRequest.State, b: CirrentSDK.CustomRequest.State) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+  final public let id: Foundation.UUID
+  final public let underlyingQueue: Dispatch.DispatchQueue
+  final public let serializationQueue: Dispatch.DispatchQueue
+  final public let eventMonitor: CirrentSDK.CustomEventMonitor?
+  final public let interceptor: CirrentSDK.CustomRequestInterceptor?
+  weak public var delegate: CirrentSDK.CustomRequestDelegate? {
+    get
+  }
+  public var state: CirrentSDK.CustomRequest.State {
+    get
+  }
+  public var isInitialized: Swift.Bool {
+    get
+  }
+  public var isResumed: Swift.Bool {
+    get
+  }
+  public var isSuspended: Swift.Bool {
+    get
+  }
+  public var isCancelled: Swift.Bool {
+    get
+  }
+  public var isFinished: Swift.Bool {
+    get
+  }
+  public typealias ProgressHandler = (Foundation.Progress) -> Swift.Void
+  final public let uploadProgress: Foundation.Progress
+  final public let downloadProgress: Foundation.Progress
+  public var redirectHandler: CirrentSDK.CustomRedirectHandler? {
+    get
+  }
+  public var cachedResponseHandler: CirrentSDK.CustomCachedResponseHandler? {
+    get
+  }
+  public var credential: Foundation.URLCredential? {
+    get
+  }
+  public var requests: [Foundation.URLRequest] {
+    get
+  }
+  public var firstRequest: Foundation.URLRequest? {
+    get
+  }
+  public var lastRequest: Foundation.URLRequest? {
+    get
+  }
+  public var request: Foundation.URLRequest? {
+    get
+  }
+  public var performedRequests: [Foundation.URLRequest] {
+    get
+  }
+  public var response: Foundation.HTTPURLResponse? {
+    get
+  }
+  public var tasks: [Foundation.URLSessionTask] {
+    get
+  }
+  public var firstTask: Foundation.URLSessionTask? {
+    get
+  }
+  public var lastTask: Foundation.URLSessionTask? {
+    get
+  }
+  public var task: Foundation.URLSessionTask? {
+    get
+  }
+  public var allMetrics: [Foundation.URLSessionTaskMetrics] {
+    get
+  }
+  public var firstMetrics: Foundation.URLSessionTaskMetrics? {
+    get
+  }
+  public var lastMetrics: Foundation.URLSessionTaskMetrics? {
+    get
+  }
+  public var metrics: Foundation.URLSessionTaskMetrics? {
+    get
+  }
+  public var retryCount: Swift.Int {
+    get
+  }
+  public var error: CirrentSDK.CustomAFError? {
+    get
+  }
+  @discardableResult
+  public func cancel() -> Self
+  @discardableResult
+  public func suspend() -> Self
+  @discardableResult
+  public func resume() -> Self
+  @discardableResult
+  public func authenticate(username: Swift.String, password: Swift.String, persistence: Foundation.URLCredential.Persistence = .forSession) -> Self
+  @discardableResult
+  public func authenticate(with credential: Foundation.URLCredential) -> Self
+  @discardableResult
+  public func downloadProgress(queue: Dispatch.DispatchQueue = .main, closure: @escaping CirrentSDK.CustomRequest.ProgressHandler) -> Self
+  @discardableResult
+  public func uploadProgress(queue: Dispatch.DispatchQueue = .main, closure: @escaping CirrentSDK.CustomRequest.ProgressHandler) -> Self
+  @discardableResult
+  public func redirect(using handler: CirrentSDK.CustomRedirectHandler) -> Self
+  @discardableResult
+  public func cacheResponse(using handler: CirrentSDK.CustomCachedResponseHandler) -> Self
+  @discardableResult
+  public func cURLDescription(on queue: Dispatch.DispatchQueue, calling handler: @escaping (Swift.String) -> Swift.Void) -> Self
+  @discardableResult
+  public func cURLDescription(calling handler: @escaping (Swift.String) -> Swift.Void) -> Self
+  @discardableResult
+  public func onURLRequestCreation(on queue: Dispatch.DispatchQueue = .main, perform handler: @escaping (Foundation.URLRequest) -> Swift.Void) -> Self
+  @discardableResult
+  public func onURLSessionTaskCreation(on queue: Dispatch.DispatchQueue = .main, perform handler: @escaping (Foundation.URLSessionTask) -> Swift.Void) -> Self
+  @objc deinit
+}
+extension CirrentSDK.CustomRequest : Swift.Equatable {
+  public static func == (lhs: CirrentSDK.CustomRequest, rhs: CirrentSDK.CustomRequest) -> Swift.Bool
+}
+extension CirrentSDK.CustomRequest : Swift.Hashable {
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+extension CirrentSDK.CustomRequest : Swift.CustomStringConvertible {
+  public var description: Swift.String {
+    get
+  }
+}
+extension CirrentSDK.CustomRequest {
+  public func cURLDescription() -> Swift.String
+}
+public protocol CustomRequestDelegate : AnyObject {
+  var sessionConfiguration: Foundation.URLSessionConfiguration { get }
+  var startImmediately: Swift.Bool { get }
+  func cleanup(after request: CirrentSDK.CustomRequest)
+  func retryResult(for request: CirrentSDK.CustomRequest, dueTo error: CirrentSDK.CustomAFError, completion: @escaping (CirrentSDK.CustomRetryResult) -> Swift.Void)
+  func retryRequest(_ request: CirrentSDK.CustomRequest, withDelay timeDelay: Foundation.TimeInterval?)
+}
+@_hasMissingDesignatedInitializers public class CustomDataRequest : CirrentSDK.CustomRequest {
+  final public let convertible: CirrentSDK.CustomURLRequestConvertible
+  public var data: Foundation.Data? {
+    get
+  }
+  @discardableResult
+  public func validate(_ validation: @escaping CirrentSDK.CustomDataRequest.Validation) -> Self
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers final public class CustomDataStreamRequest : CirrentSDK.CustomRequest {
+  public typealias Handler<Success, Failure> = (CirrentSDK.CustomDataStreamRequest.Stream<Success, Failure>) throws -> Swift.Void where Failure : Swift.Error
+  public struct Stream<Success, Failure> where Failure : Swift.Error {
+    public let event: CirrentSDK.CustomDataStreamRequest.Event<Success, Failure>
+    public let token: CirrentSDK.CustomDataStreamRequest.CancellationToken
+    public func cancel()
+  }
+  public enum Event<Success, Failure> where Failure : Swift.Error {
+    case stream(Swift.Result<Success, Failure>)
+    case complete(CirrentSDK.CustomDataStreamRequest.Completion)
+  }
+  public struct Completion {
+    public let request: Foundation.URLRequest?
+    public let response: Foundation.HTTPURLResponse?
+    public let metrics: Foundation.URLSessionTaskMetrics?
+    public let error: CirrentSDK.CustomAFError?
+  }
+  public struct CancellationToken {
+    public func cancel()
+  }
+  final public let convertible: CirrentSDK.CustomURLRequestConvertible
+  final public let automaticallyCancelOnStreamError: Swift.Bool
+  @discardableResult
+  final public func validate(_ validation: @escaping CirrentSDK.CustomDataStreamRequest.Validation) -> Self
+  final public func asInputStream(bufferSize: Swift.Int = 1024) -> Foundation.InputStream?
+  @objc deinit
+}
+extension CirrentSDK.CustomDataStreamRequest.Stream {
+  public var result: Swift.Result<Success, Failure>? {
+    get
+  }
+  public var value: Success? {
+    get
+  }
+  public var error: Failure? {
+    get
+  }
+  public var completion: CirrentSDK.CustomDataStreamRequest.Completion? {
+    get
+  }
+}
+@_hasMissingDesignatedInitializers public class CustomDownloadRequest : CirrentSDK.CustomRequest {
+  public struct CustomOptions : Swift.OptionSet {
+    public static let createIntermediateDirectories: CirrentSDK.CustomDownloadRequest.CustomOptions
+    public static let removePreviousFile: CirrentSDK.CustomDownloadRequest.CustomOptions
+    public let rawValue: Swift.Int
+    public init(rawValue: Swift.Int)
+    public typealias ArrayLiteralElement = CirrentSDK.CustomDownloadRequest.CustomOptions
+    public typealias Element = CirrentSDK.CustomDownloadRequest.CustomOptions
+    public typealias RawValue = Swift.Int
+  }
+  public typealias Destination = (_ temporaryURL: Foundation.URL, _ response: Foundation.HTTPURLResponse) -> (destinationURL: Foundation.URL, options: CirrentSDK.CustomDownloadRequest.CustomOptions)
+  public class func suggestedDownloadDestination(for directory: Foundation.FileManager.SearchPathDirectory = .documentDirectory, in domain: Foundation.FileManager.SearchPathDomainMask = .userDomainMask, options: CirrentSDK.CustomDownloadRequest.CustomOptions = []) -> CirrentSDK.CustomDownloadRequest.Destination
+  public enum CustomDownloadable {
+    case request(CirrentSDK.CustomURLRequestConvertible)
+    case resumeData(Foundation.Data)
+  }
+  public var resumeData: Foundation.Data? {
+    get
+  }
+  public var fileURL: Foundation.URL? {
+    get
+  }
+  final public let downloadable: CirrentSDK.CustomDownloadRequest.CustomDownloadable
+  public func task(forResumeData data: Foundation.Data, using session: Foundation.URLSession) -> Foundation.URLSessionTask
+  @discardableResult
+  override public func cancel() -> Self
+  @discardableResult
+  public func cancel(producingResumeData shouldProduceResumeData: Swift.Bool) -> Self
+  @discardableResult
+  public func cancel(byProducingResumeData completionHandler: @escaping (_ data: Foundation.Data?) -> Swift.Void) -> Self
+  @discardableResult
+  public func validate(_ validation: @escaping CirrentSDK.CustomDownloadRequest.Validation) -> Self
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers public class CustomUploadRequest : CirrentSDK.CustomDataRequest {
+  public enum CustomUploadable {
+    case data(Foundation.Data)
+    case file(Foundation.URL, shouldRemove: Swift.Bool)
+    case stream(Foundation.InputStream)
+  }
+  final public let upload: CirrentSDK.CustomUploadableConvertible
+  final public let fileManager: Foundation.FileManager
+  public var uploadable: CirrentSDK.CustomUploadRequest.CustomUploadable?
+  public func cleanup()
+  @objc deinit
+}
+public protocol CustomUploadableConvertible {
+  func createUploadable() throws -> CirrentSDK.CustomUploadRequest.CustomUploadable
+}
+extension CirrentSDK.CustomUploadRequest.CustomUploadable : CirrentSDK.CustomUploadableConvertible {
+  public func createUploadable() throws -> CirrentSDK.CustomUploadRequest.CustomUploadable
+}
+public protocol CustomUploadConvertible : CirrentSDK.CustomURLRequestConvertible, CirrentSDK.CustomUploadableConvertible {
+}
+public protocol CustomParameterEncoder {
+  func encode<Parameters>(_ parameters: Parameters?, into request: Foundation.URLRequest) throws -> Foundation.URLRequest where Parameters : Swift.Encodable
+}
+open class CustomJSONParameterEncoder : CirrentSDK.CustomParameterEncoder {
+  public static var `default`: CirrentSDK.CustomJSONParameterEncoder {
+    get
+  }
+  public static var prettyPrinted: CirrentSDK.CustomJSONParameterEncoder {
+    get
+  }
+  @available(macOS 10.13, iOS 11.0, tvOS 11.0, watchOS 4.0, *)
+  public static var sortedKeys: CirrentSDK.CustomJSONParameterEncoder {
+    get
+  }
+  final public let encoder: Foundation.JSONEncoder
+  public init(encoder: Foundation.JSONEncoder = JSONEncoder())
+  open func encode<Parameters>(_ parameters: Parameters?, into request: Foundation.URLRequest) throws -> Foundation.URLRequest where Parameters : Swift.Encodable
+  @objc deinit
+}
+open class CustomURLEncodedFormParameterEncoder : CirrentSDK.CustomParameterEncoder {
+  public enum CustomDestination {
+    case methodDependent
+    case queryString
+    case httpBody
+    public static func == (a: CirrentSDK.CustomURLEncodedFormParameterEncoder.CustomDestination, b: CirrentSDK.CustomURLEncodedFormParameterEncoder.CustomDestination) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+  public static var `default`: CirrentSDK.CustomURLEncodedFormParameterEncoder {
+    get
+  }
+  final public let encoder: CirrentSDK.CustomURLEncodedFormEncoder
+  final public let destination: CirrentSDK.CustomURLEncodedFormParameterEncoder.CustomDestination
+  public init(encoder: CirrentSDK.CustomURLEncodedFormEncoder = CustomURLEncodedFormEncoder(), destination: CirrentSDK.CustomURLEncodedFormParameterEncoder.CustomDestination = .methodDependent)
+  open func encode<Parameters>(_ parameters: Parameters?, into request: Foundation.URLRequest) throws -> Foundation.URLRequest where Parameters : Swift.Encodable
+  @objc deinit
+}
+public let CustomAF: CirrentSDK.CustomSession
+@objc open class CustomSessionDelegate : ObjectiveC.NSObject {
+  public init(fileManager: Foundation.FileManager = .default)
+  @objc deinit
+}
+extension CirrentSDK.CustomSessionDelegate : Foundation.URLSessionDelegate {
+  @objc dynamic open func urlSession(_ session: Foundation.URLSession, didBecomeInvalidWithError error: Swift.Error?)
+}
+extension CirrentSDK.CustomSessionDelegate : Foundation.URLSessionTaskDelegate {
+  @objc dynamic open func urlSession(_ session: Foundation.URLSession, task: Foundation.URLSessionTask, didReceive challenge: Foundation.URLAuthenticationChallenge, completionHandler: @escaping (Foundation.URLSession.AuthChallengeDisposition, Foundation.URLCredential?) -> Swift.Void)
+  @objc dynamic open func urlSession(_ session: Foundation.URLSession, task: Foundation.URLSessionTask, didSendBodyData bytesSent: Swift.Int64, totalBytesSent: Swift.Int64, totalBytesExpectedToSend: Swift.Int64)
+  @objc dynamic open func urlSession(_ session: Foundation.URLSession, task: Foundation.URLSessionTask, needNewBodyStream completionHandler: @escaping (Foundation.InputStream?) -> Swift.Void)
+  @objc dynamic open func urlSession(_ session: Foundation.URLSession, task: Foundation.URLSessionTask, willPerformHTTPRedirection response: Foundation.HTTPURLResponse, newRequest request: Foundation.URLRequest, completionHandler: @escaping (Foundation.URLRequest?) -> Swift.Void)
+  @objc dynamic open func urlSession(_ session: Foundation.URLSession, task: Foundation.URLSessionTask, didFinishCollecting metrics: Foundation.URLSessionTaskMetrics)
+  @objc dynamic open func urlSession(_ session: Foundation.URLSession, task: Foundation.URLSessionTask, didCompleteWithError error: Swift.Error?)
+  @available(macOS 10.13, iOS 11.0, tvOS 11.0, watchOS 4.0, *)
+  @objc dynamic open func urlSession(_ session: Foundation.URLSession, taskIsWaitingForConnectivity task: Foundation.URLSessionTask)
+}
+extension CirrentSDK.CustomSessionDelegate : Foundation.URLSessionDataDelegate {
+  @objc dynamic open func urlSession(_ session: Foundation.URLSession, dataTask: Foundation.URLSessionDataTask, didReceive data: Foundation.Data)
+  @objc dynamic open func urlSession(_ session: Foundation.URLSession, dataTask: Foundation.URLSessionDataTask, willCacheResponse proposedResponse: Foundation.CachedURLResponse, completionHandler: @escaping (Foundation.CachedURLResponse?) -> Swift.Void)
+}
+extension CirrentSDK.CustomSessionDelegate : Foundation.URLSessionDownloadDelegate {
+  @objc dynamic open func urlSession(_ session: Foundation.URLSession, downloadTask: Foundation.URLSessionDownloadTask, didResumeAtOffset fileOffset: Swift.Int64, expectedTotalBytes: Swift.Int64)
+  @objc dynamic open func urlSession(_ session: Foundation.URLSession, downloadTask: Foundation.URLSessionDownloadTask, didWriteData bytesWritten: Swift.Int64, totalBytesWritten: Swift.Int64, totalBytesExpectedToWrite: Swift.Int64)
+  @objc dynamic open func urlSession(_ session: Foundation.URLSession, downloadTask: Foundation.URLSessionDownloadTask, didFinishDownloadingTo location: Foundation.URL)
+}
+public struct CustomHTTPMethod : Swift.RawRepresentable, Swift.Equatable, Swift.Hashable {
+  public static let connect: CirrentSDK.CustomHTTPMethod
+  public static let delete: CirrentSDK.CustomHTTPMethod
+  public static let get: CirrentSDK.CustomHTTPMethod
+  public static let head: CirrentSDK.CustomHTTPMethod
+  public static let options: CirrentSDK.CustomHTTPMethod
+  public static let patch: CirrentSDK.CustomHTTPMethod
+  public static let post: CirrentSDK.CustomHTTPMethod
+  public static let put: CirrentSDK.CustomHTTPMethod
+  public static let trace: CirrentSDK.CustomHTTPMethod
+  public let rawValue: Swift.String
+  public init(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+}
+extension CirrentSDK.HMACAlgorithm.Hash : Swift.Equatable {}
+extension CirrentSDK.HMACAlgorithm.Hash : Swift.Hashable {}
+extension CirrentSDK.OnboardingType : Swift.Equatable {}
+extension CirrentSDK.OnboardingType : Swift.Hashable {}
+extension CirrentSDK.OnboardingType : Swift.RawRepresentable {}
+extension CirrentSDK.ErrorType : Swift.Equatable {}
+extension CirrentSDK.ErrorType : Swift.Hashable {}
+extension CirrentSDK.SoftApCredsSenderError : Swift.Equatable {}
+extension CirrentSDK.SoftApCredsSenderError : Swift.Hashable {}
+extension CirrentSDK.SoftApCredsSenderError : Swift.RawRepresentable {}
+extension CirrentSDK.BluetoothDeviceConnectionError : Swift.Equatable {}
+extension CirrentSDK.BluetoothDeviceConnectionError : Swift.Hashable {}
+extension CirrentSDK.BluetoothDeviceConnectionError : Swift.RawRepresentable {}
+extension CirrentSDK.BluetoothDeviceInfoError : Swift.Equatable {}
+extension CirrentSDK.BluetoothDeviceInfoError : Swift.Hashable {}
+extension CirrentSDK.BluetoothDeviceInfoError : Swift.RawRepresentable {}
+extension CirrentSDK.BluetoothIdentificationError : Swift.Equatable {}
+extension CirrentSDK.BluetoothIdentificationError : Swift.Hashable {}
+extension CirrentSDK.BluetoothIdentificationError : Swift.RawRepresentable {}
+extension CirrentSDK.BluetoothCredsSenderError : Swift.Equatable {}
+extension CirrentSDK.BluetoothCredsSenderError : Swift.Hashable {}
+extension CirrentSDK.BluetoothCredsSenderError : Swift.RawRepresentable {}
+extension CirrentSDK.StepResult : Swift.Equatable {}
+extension CirrentSDK.StepResult : Swift.Hashable {}
+extension CirrentSDK.StepResult : Swift.RawRepresentable {}
+extension CirrentSDK.CommunicationError : Swift.Equatable {}
+extension CirrentSDK.CommunicationError : Swift.Hashable {}
+extension CirrentSDK.CommunicationError : Swift.RawRepresentable {}
+extension CirrentSDK.CustomAuthenticationError : Swift.Equatable {}
+extension CirrentSDK.CustomAuthenticationError : Swift.Hashable {}
+extension CirrentSDK.CustomNetworkReachabilityManager.CustomNetworkReachabilityStatus.CustomConnectionType : Swift.Equatable {}
+extension CirrentSDK.CustomNetworkReachabilityManager.CustomNetworkReachabilityStatus.CustomConnectionType : Swift.Hashable {}
+extension CirrentSDK.CustomURLEncoding.CustomDestination : Swift.Equatable {}
+extension CirrentSDK.CustomURLEncoding.CustomDestination : Swift.Hashable {}
+extension CirrentSDK.CustomURLEncoding.CustomArrayEncoding : Swift.Equatable {}
+extension CirrentSDK.CustomURLEncoding.CustomArrayEncoding : Swift.Hashable {}
+extension CirrentSDK.CustomURLEncoding.CustomBoolEncoding : Swift.Equatable {}
+extension CirrentSDK.CustomURLEncoding.CustomBoolEncoding : Swift.Hashable {}
+extension CirrentSDK.CustomURLEncodedFormEncoder.CustomArrayEncoding : Swift.Equatable {}
+extension CirrentSDK.CustomURLEncodedFormEncoder.CustomArrayEncoding : Swift.Hashable {}
+extension CirrentSDK.CustomURLEncodedFormEncoder.CustomBoolEncoding : Swift.Equatable {}
+extension CirrentSDK.CustomURLEncodedFormEncoder.CustomBoolEncoding : Swift.Hashable {}
+extension CirrentSDK.CustomURLEncodedFormEncoder.CustomSpaceEncoding : Swift.Equatable {}
+extension CirrentSDK.CustomURLEncodedFormEncoder.CustomSpaceEncoding : Swift.Hashable {}
+extension CirrentSDK.CustomRequest.State : Swift.Equatable {}
+extension CirrentSDK.CustomRequest.State : Swift.Hashable {}
+extension CirrentSDK.CustomURLEncodedFormParameterEncoder.CustomDestination : Swift.Equatable {}
+extension CirrentSDK.CustomURLEncodedFormParameterEncoder.CustomDestination : Swift.Hashable {}
